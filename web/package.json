@@ -1,0 +1,22 @@
+{
+  "name": "xiaomo-web",
+  "version": "1.0.0",
+  "description": "blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https:github.com/xiaomoBlog/xiaomoBlogJava.git"
+  },
+  "keywords": [
+    "blog",
+    "angular",
+    "java",
+    "spring",
+    "npm"
+  ],
+  "author": "xiaomo",
+  "license": "MIT"
+}
