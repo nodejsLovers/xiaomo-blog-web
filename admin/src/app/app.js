@@ -1,7 +1,7 @@
 import angular from "angular";
+import "../style/app.css";
 import AppCtrl from "./controllers/AppCtrl";
 import { MODULE_NAME } from "./constants/module";
-import "../style/app.css";
 
 let app = () => {
     return {
