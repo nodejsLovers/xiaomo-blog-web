@@ -1,7 +1,7 @@
 {
-  "name": "angular-webpack-workflow",
+  "name": "xiaomo-admin",
   "version": "1.0.0",
-  "description": "A workflow for Angular made with Webpack",
+  "description": "A blog for Angular made with Webpack",
   "scripts": {
     "build": "rimraf dist && webpack --bail --progress --profile",
     "server": "webpack-dev-server --history-api-fallback --inline --progress",
@@ -11,16 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Foxandxss/angular-webpack-workflow.git"
+    "url": "https://github.com/xiaomoBlog/xiaomoBlogWeb.git"
   },
   "author": "Jesus Rodriguez",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Foxandxss/angular-webpack-workflow/issues"
+    "url": "https://github.com/xiaomoBlog/xiaomoBlogWeb/issues"
   },
-  "homepage": "https://github.com/Foxandxss/angular-webpack-workflow",
+  "homepage": "https://github.com/xiaomoBlog/xiaomoBlogWeb",
   "dependencies": {
-    "angular": "^1.5.0"
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3",
+    "ui-router": "^1.0.0-alpha.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.5.0",
