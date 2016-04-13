@@ -156,6 +156,7 @@ module.exports = function makeWebpackConfig () {
   if (!isTest) {
     // Reference: https://github.com/ampedandwired/html-webpack-plugin
     // Render index.html
+    // fixme 这里有闪烁问题
     config.plugins.push(
       new HtmlWebpackPlugin({
         template: './src/public/index.html',
