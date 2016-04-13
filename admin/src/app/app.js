@@ -1,5 +1,5 @@
 import angular from 'angular';
-
+import AppCtrl from './controllers/AppCtrl';
 import '../style/app.css';
 
 let app = () => {
@@ -10,11 +10,7 @@ let app = () => {
   }
 };
 
-class AppCtrl {
-  constructor() {
-    this.url = 'http://www.xiaomo.info';
-  }
-}
+
 
 const MODULE_NAME = 'app';
 
