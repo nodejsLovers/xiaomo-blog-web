@@ -13,11 +13,9 @@
     * @Copyright(©) 2015 by xiaomo.
     **/
 
-
-
 let App = () => {
     return {
-        template: require('../app.html'),
+        template: require('../templates/app.html'),
         controller: 'AppCtrl',
         controllerAs: 'app'
     }
