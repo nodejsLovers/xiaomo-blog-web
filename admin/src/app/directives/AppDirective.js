@@ -15,7 +15,7 @@
 
 
 
-let app = () => {
+let App = () => {
     return {
         template: require('../app.html'),
         controller: 'AppCtrl',
@@ -23,4 +23,4 @@ let app = () => {
     }
 };
 
-export default app;
+export default App;

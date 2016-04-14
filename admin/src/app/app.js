@@ -1,11 +1,11 @@
 import angular from "angular";
 import "../style/app.css";
 import AppCtrl from "./controllers/AppCtrl";
-import {MODULE_NAME} from "./constants/module";
-import app from "./directives/AppDirective";
+import {MODULE_NAME} from "./constants/Module";
+import App from "./directives/AppDirective";
 
 angular.module(MODULE_NAME, [])
-    .directive('app', app)
+    .directive('app', App)
     .controller('AppCtrl', AppCtrl);
 
 /**
