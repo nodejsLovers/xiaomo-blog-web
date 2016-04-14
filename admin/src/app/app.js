@@ -1,16 +1,8 @@
 import angular from "angular";
 import "../style/app.css";
 import AppCtrl from "./controllers/AppCtrl";
-import { MODULE_NAME } from "./constants/module";
-
-let app = () => {
-    return {
-        template: require('./app.html'),
-        controller: 'AppCtrl',
-        controllerAs: 'app'
-    }
-};
-
+import {MODULE_NAME} from "./constants/module";
+import app from "./directives/AppDirective";
 
 angular.module(MODULE_NAME, [])
     .directive('app', app)
