@@ -1,0 +1,12 @@
+<form method="post" role="form" ng-controller="BlogController">
+    	<input type="hidden" name="blog.id" ng-model="blog.id">
+    <div class="form-group">
+        <label for="title">标题</label>
+        <input type="text" class="form-control" name="blog.title" id="title" placeholder="Enter title" ng-model="blog.title" required>
+    </div>
+    <div class="form-group">
+        <label for="content">内容</label>
+        <textarea class="form-control" rows="5" id="content" name="blog.content" ng-model="blog.content" placeholder="Enter content" required></textarea>
+    </div>
+        <a class="btn btn-primary" ng-click="saveBlog()">提交</a>
+</form>
