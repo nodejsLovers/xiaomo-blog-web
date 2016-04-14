@@ -22,3 +22,5 @@
  */
 
 export const MODULE_NAME = 'app';
+
+export const CLOCK = 'clock';
