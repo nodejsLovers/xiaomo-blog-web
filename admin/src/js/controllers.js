@@ -15,8 +15,7 @@ bookListModule.controller('BookListCtrl', function($scope, $http, $state, $state
         currentPage: 1
     };
     $scope.setPagingData = function(data, page, pageSize) {
-        var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
-        $scope.books = pagedData;
+        $scope.books = data.slice((page - 1) * pageSize, page * pageSize);
         $scope.totalServerItems = data.length;
         if (!$scope.$$phase) {
             $scope.$apply();
