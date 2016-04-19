@@ -3,7 +3,7 @@
  * @type {angular.IModule}
  */
 var bookListModule = angular.module("BookListModule", []);
-bookListModule.controller('BookListCtrl', function($scope, $http, $state, $stateParams) {
+bookListModule.controller('BookListController', function($scope, $http, $state, $stateParams) {
     $scope.filterOptions = {
         filterText: "",
         useExternalFilter: true
@@ -112,13 +112,3 @@ bookListModule.controller('BookListCtrl', function($scope, $http, $state, $state
 });
 
 
-/**
- * 这里是书籍详情模块
- * @type {angular.IModule}
- */
-var bookDetailModule = angular.module("BookDetailModule", []);
-bookDetailModule.controller('BookDetailCtrl', function($scope, $http, $state, $stateParams) {
-    console.log($stateParams);
-    //请模仿上面的代码，用$http到后台获取数据，把这里的例子实现完整
-    
-});
