@@ -1,4 +1,4 @@
-var routerApp = angular.module('routerApp', ['ui.router', 'ngGrid', 'BookListModule', 'BookDetailModule']);
+var routerApp = angular.module('routerApp', ['ui.router', 'ngGrid', 'BlogListModule', 'BlogDetailModule']);
 /**
  * 由于整个应用都会和路由打交道，所以这里把$state和$stateParams这两个对象放到$rootScope上，方便其它地方引用和注入。
  * 这里的run方法只会在angular启动的时候运行一次。
@@ -30,30 +30,30 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                     templateUrl: 'tpls/home.html'
                 },
                 'main@index': {
-                    templateUrl: 'tpls/loginForm.html'
+                    templateUrl: 'tpls/login.html'
                 }
             }
         })
-        .state('booklist', {
-            url: '/{bookType:[0-9]{1,4}}',
+        .state('main', {
+            url: '/{menu:[0-9]{1,4}}',
             views: { //注意这里的写法，当一个页面上带有多个ui-view的时候如何进行命名和视图模板的加载动作
                 '': {
-                    templateUrl: 'tpls/bookList.html'
+                    templateUrl: 'tpls/blogList.html'
                 },
-                'booktype@booklist': {
-                    templateUrl: 'tpls/bookType.html'
+                'menu@booklist': {
+                    templateUrl: 'tpls/menu.html'
                 },
-                'bookgrid@booklist': {
-                    templateUrl: 'tpls/bookGrid.html'
+                'content@booklist': {
+                    templateUrl: 'tpls/content.html'
                 }
             }
         })
-        .state('addbook', {
+        .state('addBlog', {
             url: '/addbook',
-            templateUrl: 'tpls/addBookForm.html'
+            templateUrl: 'tpls/addBlog.html'
         })
-        .state('bookdetail', {
-            url: '/bookdetail/:bookId', //注意这里在路由中传参数的方式
-            templateUrl: 'tpls/bookDetail.html'
+        .state('blogDetail', {
+            url: '/blogDetail/:bookId', //注意这里在路由中传参数的方式
+            templateUrl: 'tpls/blogDetail.html'
         })
 });

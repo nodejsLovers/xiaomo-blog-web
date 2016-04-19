@@ -2,8 +2,8 @@
  * 这里是书籍列表模块
  * @type {angular.IModule}
  */
-var bookListModule = angular.module("BookListModule", []);
-bookListModule.controller('BookListController', function($scope, $http, $state, $stateParams) {
+var bookListModule = angular.module("BlogListModule", []);
+bookListModule.controller('BlogListController', function($scope, $http, $state, $stateParams) {
     $scope.filterOptions = {
         filterText: "",
         useExternalFilter: true
