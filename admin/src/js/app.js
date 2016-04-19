@@ -40,10 +40,10 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
                 '': {
                     templateUrl: 'tpls/blogList.html'
                 },
-                'menu@booklist': {
+                'menu@main': {
                     templateUrl: 'tpls/menu.html'
                 },
-                'content@booklist': {
+                'content@main': {
                     templateUrl: 'tpls/content.html'
                 }
             }
