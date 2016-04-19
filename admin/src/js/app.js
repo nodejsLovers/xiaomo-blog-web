@@ -1,4 +1,4 @@
-var routerApp = angular.module('routerApp', ['ui.router', 'ngGrid', 'BlogListModule', 'BlogDetailModule']);
+var myApp = angular.module('myApp', ['ui.router', 'ngGrid', 'myControllerModule', 'myServiceModule', 'myDirectiveModule', 'myFilterModule']);
 /**
  * 由于整个应用都会和路由打交道，所以这里把$state和$stateParams这两个对象放到$rootScope上，方便其它地方引用和注入。
  * 这里的run方法只会在angular启动的时候运行一次。
@@ -7,9 +7,10 @@ var routerApp = angular.module('routerApp', ['ui.router', 'ngGrid', 'BlogListMod
  * @param  {[type]} $stateParams
  * @return {[type]}
  */
-routerApp.run(function($rootScope, $state, $stateParams) {
+myApp.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+    $rootScope.$baseUrl = "http://api.xiaomo.info:8080";
 });
 
 /**
@@ -20,7 +21,7 @@ routerApp.run(function($rootScope, $state, $stateParams) {
  * @param  {[type]} $urlRouterProvider
  * @return {[type]}
  */
-routerApp.config(function($stateProvider, $urlRouterProvider) {
+myApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/index');
     $stateProvider
         .state('index', {
