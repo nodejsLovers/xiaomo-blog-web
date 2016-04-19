@@ -1,6 +1,9 @@
 angular.module("myServiceModule", [])
-    .service('getBlogListService', function ($scope, $http) {
-        $scope.test = {
-            xiaomo: '123'
-        }
+    .service('getBlogListService', function ($http) {
+        var value = {};
+        value.test = {
+           xiaomo:'xiaomo'
+    };
+
+        return value;
     });

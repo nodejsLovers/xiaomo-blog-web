@@ -3,12 +3,12 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('BlogListController', ["$scope", function ($scope, $http, getBlogListService) {
+    .controller('BlogListController', ["$scope", "$http", "getBlogListService", function ($scope, $http, getBlogListService) {
             $scope.result = getBlogListService.test;
             console.log($scope.result);
         }]
-    ).controller('BlogDetailController', ["$scope", function ($scope, $http, $state, $stateParams) {
-        console.log($stateParams);
-        //请模仿上面的代码，用$http到后台获取数据，把这里的例子实现完整
+    ).controller('BlogDetailController', ["$scope", "$http", "getBlogListService", function ($scope, $http, getBlogListService) {
+        $scope.result = getBlogListService.test;
+        console.log($scope.result);
     }]
 );

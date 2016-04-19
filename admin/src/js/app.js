@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router', 'ngGrid', 'myControllerModule', 'myServiceModule', 'myDirectiveModule', 'myFilterModule']);
+var myApp = angular.module('myApp', ['ui.router', 'myControllerModule', 'myServiceModule', 'myDirectiveModule', 'myFilterModule']);
 /**
  * 由于整个应用都会和路由打交道，所以这里把$state和$stateParams这两个对象放到$rootScope上，方便其它地方引用和注入。
  * 这里的run方法只会在angular启动的时候运行一次。
@@ -45,13 +45,15 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
                     templateUrl: 'tpls/menu.html'
                 },
                 'content@main': {
-                    templateUrl: 'tpls/content.html'
+                    templateUrl: 'tpls/content.html',
+                    controller:"BlogListController"
                 }
             }
         })
         .state('addBlog', {
             url: '/addbook',
-            templateUrl: 'tpls/addBlog.html'
+            templateUrl: 'tpls/addBlog.html',
+            controller:'BlogDetailController'
         })
         .state('blogDetail', {
             url: '/blogDetail/:bookId', //注意这里在路由中传参数的方式
