@@ -1,15 +1,37 @@
-<div >
+<div>
     <div class="row">
         <div class="col-md-12">
-        	<a ui-sref="addBlog" class="btn btn-primary">新增博客</a>
+            <a ui-sref="addBlog" class="btn btn-primary">新增博客</a>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div>
-                <div class="gridStyle" ng-grid="gridOptions">
-                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>标题</th>
+                        <th>简介</th>
+                        <th>作者</th>
+                        <th>内容</th>
+                        <thd>点击数</thd>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="blog in blogs|orderBy:'vote':true">
+                        <td>{{$index}}</td>
+                        <td>{{blog.title}}</td>
+                        <td>{{blog.summary}}</td>
+                        <td>{{blog.author}}</td>
+                        <td>{{blog.content | contentFilter}}</td>
+                        <td>{{blog.vote}}</td>
+                        <td>{{blog.title}}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 </div>

@@ -6,8 +6,8 @@ angular.module("myControllerModule", [])
     .controller('BlogListController', ["$scope", "getBlogListService", function ($scope, getBlogListService) {
             var promise = getBlogListService.getUserInfo();
             promise.then(function (data) {
-                $scope.result = data;
-                console.log($scope.result);
+                $scope.blogs = data.blogs.content;
+                console.log($scope.blogs);
             });
         }]
     ).controller('BlogDetailController', ["$scope", "$http", "getBlogListService", function ($scope, $http, getBlogListService) {
