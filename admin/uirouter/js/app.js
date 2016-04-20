@@ -30,16 +30,20 @@ myApp.run(function ($rootScope, $state, $stateParams) {
  * @return {[type]}
  */
 myApp.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/');
-    $urlRouterProvider.when("", "/");
+    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.when("", "/login");
     $stateProvider
-        .state('/', {
-            url: '/',
+        .state('login', {
+            url: '/login',
+            templateUrl: './templates/login.html'
+        })
+        .state('index', {
+            url: '/index',
             views: {
                 '': {
                     templateUrl: './templates/main.html'
                 },
-                'right@/':{
+                'right@index': {
                     templateUrl: './templates/right.html'
                 }
             }
