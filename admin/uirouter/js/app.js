@@ -44,8 +44,20 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
                     templateUrl: './templates/main.html'
                 },
                 'right@index': {
-                    templateUrl: './templates/right.html'
+                    templateUrl: './templates/menu/1.html'
                 }
             }
+        })
+        .state('index.1', {
+            url: '/1',
+            templateUrl: './templates/menu/1.html'
+        })
+        .state('index.2', {
+            url: '/2',
+            templateUrl: './templates/menu/2.html'
+        })
+        .state('index.3', {
+            url: '/3',
+            templateUrl: './templates/menu/3.html'
         })
 });
