@@ -3,12 +3,19 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('BlogListController', ["$scope", "getBlogListService", function ($scope, getBlogListService) {
+    .controller('BlogListController', ["$scope", "getBlogListService", function ($scope, getBlogListService, current) {
             var promise = getBlogListService.getUserInfo();
             promise.then(function (data) {
-                $scope.blogs = data.blogs.content;
+                $scope.blogs = data.blogs;
                 console.log($scope.blogs);
             });
+            function previous(current) {
+
+            }
+
+            function next(current) {
+
+            }
         }]
     ).controller('BlogDetailController', ["$scope", "$http", "getBlogListService", function ($scope, $http, getBlogListService) {
         $scope.result = getBlogListService.test;
