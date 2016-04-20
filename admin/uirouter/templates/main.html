@@ -1,0 +1,21 @@
+<style>
+    /*.main{*/
+
+        /*clear: both;*/
+    /*}*/
+    .left{
+        float: left;
+    }
+    .right{
+        overflow: hidden;
+    }
+</style>
+<div ng-include="'./templates/head.html'"></div>
+<div>
+    <div class="main">
+        <div ng-include="'./templates/left.html'" class="left"></div>
+        <div ui-view="right" class="right"></div>
+    </div>
+    <div ng-include="'./templates/footer.html'"></div>
+
+</div>
