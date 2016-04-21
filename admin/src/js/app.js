@@ -51,9 +51,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('addBlog', {
-            url: '/addbook',
+            url: '/addBlog',
             templateUrl: 'tpls/addBlog.html',
-            controller:'BlogDetailController'
+            controller:'BlogListController'
         })
         .state('blogDetail', {
             url: '/blogDetail/:bookId', //注意这里在路由中传参数的方式
