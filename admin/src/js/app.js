@@ -39,24 +39,24 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/{menu',
             views: { //注意这里的写法，当一个页面上带有多个ui-view的时候如何进行命名和视图模板的加载动作
                 '': {
-                    templateUrl: 'tpls/blogList.html'
+                    templateUrl: 'tpls/blog/blogList.html'
                 },
                 'menu@main': {
                     templateUrl: 'tpls/menu.html'
                 },
                 'content@main': {
-                    templateUrl: 'tpls/content.html',
+                    templateUrl: 'tpls/blog/content.html',
                     controller:"BlogListController"
                 }
             }
         })
         .state('addBlog', {
             url: '/addBlog',
-            templateUrl: 'tpls/addBlog.html',
+            templateUrl: 'tpls/blog/addBlog.html',
             controller:'BlogListController'
         })
         .state('blogDetail', {
-            url: '/blogDetail/:bookId', //注意这里在路由中传参数的方式
-            templateUrl: 'tpls/blogDetail.html'
+            url: '/blogDetail/:blogId', //注意这里在路由中传参数的方式
+            templateUrl: 'tpls/blog/blogDetail.html'
         })
 });
