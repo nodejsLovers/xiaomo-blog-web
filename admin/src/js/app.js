@@ -17,6 +17,10 @@ myApp.run(function ($rootScope, $state, $stateParams) {
  * 配置路由。
  * 注意这里采用的是ui-router这个路由，而不是ng原生的路由。
  * ng原生的路由不能支持嵌套视图，所以这里必须使用ui-router。
+ * 说明：state对应的是ui-view的值
+ *      url对应的是ui-serf的值
+ *      多视图用@
+ *      嵌套用parent.child
  * @param  {[type]} $stateProvider
  * @param  {[type]} $urlRouterProvider
  * @return {[type]}
