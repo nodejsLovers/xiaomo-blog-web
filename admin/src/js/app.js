@@ -32,7 +32,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/index',
             templateUrl: 'tpls/login.html'
         })
-        //如果想把一个界面分成左中右这种的几块，需要用多视图
         .state('main', {
             url: '/main',
            views:{
