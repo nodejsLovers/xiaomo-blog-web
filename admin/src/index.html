@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Book Store</title>
+    <title>控制台——小莫后台博客管理系统</title>
+    <link rel="icon" href="/src/image/favicon.ico">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.bootcss.com/ng-grid/2.0.11/ng-grid.css">
     <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
@@ -22,7 +23,9 @@
 </head>
 
 <body>
+<div class="header" ng-include="'./tpls/head.html'"></div>
 <div ui-view></div>
+<div ng-include="'./tpls/footer.html'"></div>
 </body>
 
 </html>
