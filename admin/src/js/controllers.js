@@ -3,18 +3,17 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('BlogListController', ["$scope", "getBlogListService", function ($scope, getBlogListService, current) {
+    .controller('BlogListController', ['$scope', 'getBlogListService', 'addBlogService', function ($scope, getBlogListService, addBlogService) {
             var promise = getBlogListService.getUserInfo();
             promise.then(function (data) {
                 $scope.blogs = data.blogs;
                 console.log($scope.blogs);
             });
-            function previous(current) {
-
-            }
-
-            function next(current) {
-
+            $scope.addBlog = function () {
+                $scope.blog.tagIds = [1, 2];
+                $scope.blog.blogType = 1;
+                console.log($scope.blog);
+                addBlogService.addBlog($scope.blog);
             }
         }]
     ).controller('BlogDetailController', ["$scope", "$http", "getBlogListService", function ($scope, $http, getBlogListService) {
