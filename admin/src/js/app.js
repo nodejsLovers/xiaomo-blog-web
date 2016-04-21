@@ -26,36 +26,19 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('index', {
             url: '/index',
-            views: {
-                '': {
-                    templateUrl: 'tpls/home.html'
-                },
-                'main@index': {
-                    templateUrl: 'tpls/login.html'
-                }
-            }
+            templateUrl: 'tpls/login.html'
         })
+        //如果想把一个界面分成左中右这种的几块，需要用多视图
         .state('main', {
             url: '/main',
-            views: { //注意这里的写法，当一个页面上带有多个ui-view的时候如何进行命名和视图模板的加载动作
-                '': {
-                    templateUrl: 'tpls/blog/blogList.html'
-                },
-                'menu@main': {
-                    templateUrl: 'tpls/menu.html'
-                },
-                'content@main': {
-                    templateUrl: 'tpls/blog/content.html',
-                    controller: "BlogListController"
-                },
-                'addBlog@main': {
-                    templateUrl: 'tpls/blog/addBlog.html',
-                    controller: 'BlogListController'
-                }
-            }
-        })
-        .state('blogDetail', {
-            url: '/blogDetail/:blogId', //注意这里在路由中传参数的方式
-            templateUrl: 'tpls/blog/blogDetail.html'
+           views:{
+               '':{
+                   templateUrl: 'tpls/home.html'
+               },
+               'content@main':{
+                   templateUrl: 'tpls/blog/blogList.html',
+                   controller:'BlogListController'
+               }
+           }
         })
 });

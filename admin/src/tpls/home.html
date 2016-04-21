@@ -1,3 +1,8 @@
 <div class="container">
-    <div ui-view="main"></div>
+    <div class="row">
+        <div ng-include="'./tpls/menu.html'" class="col-md-3"></div>
+        <div ui-view="content">
+            内容加载中.....
+        </div>
+    </div>
 </div>
