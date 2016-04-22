@@ -27,17 +27,15 @@
                             内容：
                         </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="最多64个字符" ng-model="blog.content">
-                        </div>
+                            <textarea class="form-control" rows="16" placeholder="最多640个字符" ng-model="blog.content"></textarea>
+                            </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             标签：
                         </label>
                         <div class="col-md-10">
-                            <select class="form-control" title="">
-                                <option value="1">计算机</option>
-                            </select>
+                                <button type="button" class="btn btn-default" style="margin-left: 10px;" ng-repeat="tag in tags.content">{{tag.name}}</button>
                         </div>
                     </div>
                     <div class="form-group">

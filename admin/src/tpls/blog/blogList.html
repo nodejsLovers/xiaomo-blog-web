@@ -1,6 +1,8 @@
 <div>
-    <div ng-show="showMsg()" class="alert alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div ng-class="{'alert-info':defaultClass,'alert-success':addClasss,'alert-warning':del,'alert-error':err}"
+         class="alert alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
         <strong>提示：</strong> {{msg}}
     </div>
     <div class="row">
@@ -34,12 +36,13 @@
                     </tbody>
                 </table>
 
-                    <div class="pager">
-                        <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()" first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
-                        <div>
-                            当前显示:{{blogs.number+1}}/{{blogs.totalPages}},共{{blogs.totalElements}}条记录,每页显示{{blogs.numberOfElements}}条数据
-                        </div>
+                <div class="pager">
+                    <pager page-count="pageCount" current-page="currentPage" on-page-change="onPageChange()"
+                           first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
+                    <div>
+                        当前显示:{{blogs.number+1}}/{{blogs.totalPages}},共{{blogs.totalElements}}条记录,每页显示{{blogs.numberOfElements}}条数据
                     </div>
+                </div>
             </div>
         </div>
     </div>
