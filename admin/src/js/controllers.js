@@ -4,7 +4,7 @@
  */
 angular.module("myControllerModule", [])
     .controller('BlogListController', ['$scope', '$location', 'getBlogListService', 'addBlogService', function ($scope, $location, getBlogListService, addBlogService) {
-            $scope.msg="欢迎来到博客列表页！！";
+            $scope.msg = "欢迎来到博客列表页！！";
             var promise = getBlogListService.getUserInfo($scope.currentPage);
             promise.then(function (data) {
                 $scope.blogs = data.blogs;
