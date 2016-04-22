@@ -27,15 +27,21 @@
                             内容：
                         </label>
                         <div class="col-md-10">
-                            <textarea class="form-control" rows="16" placeholder="最多640个字符" ng-model="blog.content"></textarea>
-                            </div>
+                            <textarea class="form-control" rows="16" placeholder="最多640个字符"
+                                      ng-model="blog.content"></textarea>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             标签：
                         </label>
                         <div class="col-md-10">
-                                <button type="button" class="btn btn-default" style="margin-left: 10px;" ng-repeat="tag in tags.content">{{tag.name}}</button>
+                            <button type="button" ng-class="{'btn-default':currentTag,'btn-success':currentTag}"
+                                    class="btn"
+                                    ng-click="operateTag(tag.id,currentTag)"
+                                    ng-repeat="tag in tags.content track by $index ">
+                                {{tag.name}}
+                            </button>
                         </div>
                     </div>
                     <div class="form-group">
@@ -48,7 +54,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <button ng-click="addBlog()">添加博客</button>
+                            <button ng-click="addBlog()" class="btn btn-info">添加博客</button>
+                            <button ng-click="showBlogList()" class="btn btn-default">取消</button>
                         </div>
                     </div>
                 </form>

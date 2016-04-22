@@ -3,9 +3,11 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('BlogListController', ['$scope', '$location', 'getBlogListService', 'addBlogService','getTagListService', function ($scope, $location, getBlogListService, addBlogService,getTagListService) {
-            $scope.msg = "欢迎来到博客列表页！！";
-            $scope.defaultClass = true;
+    .controller('BlogListController', ['$scope', '$location', 'getBlogListService', 'addBlogService', 'getTagListService', function ($scope, $location, getBlogListService, addBlogService, getTagListService) {
+            $scope.blogs = {};
+            $scope.commonInfo = {};
+            $scope.commonInfo.msg = "欢迎来到博客列表页！！";
+            $scope.blogs.tagIds = [];
             /* ===========================================================我是分割线===========================================================================*/
             /**
              * 默认载入博客信息
@@ -53,9 +55,21 @@ angular.module("myControllerModule", [])
             /**
              * 处理标签
              */
-            $scope.operateTag = function () {
-
+            $scope.operateTag = function (tid, currentTag) {
+                //该博客中己经有这个标签就把从数组中拿掉，没有就添加到数组中
+                for (var tagId in $scope.blogs.content.tagIds) {
+                    if (tid == tagId) {
+                        $scope.blog.content.tagIds.splice(tid);
+                    } else {
+                        $scope.blog.content.tagIds.push(tid);
+                    }
+                }
+                // 同步样式
+                $scope.currentTag = !currentTag;
             };
+        $scope.showBlogList=function () {
+            $location.path('/main');
+        };
             /* ===========================================================我是分割线===========================================================================*/
             /* ===========================================================我是分割线===========================================================================*/
             /* ===========================================================我是分割线===========================================================================*/
