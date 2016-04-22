@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="blog in blogs.content|orderBy:'vote':true">
-                        <td>{{$index}}</td>
+                        <td>{{$index+1}}</td>
                         <td>{{blog.title}}</td>
                         <td>{{blog.summary}}</td>
                         <td>{{blog.author}}</td>
