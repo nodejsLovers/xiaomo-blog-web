@@ -16,7 +16,6 @@ angular.module("myControllerModule", [])
              * 默认载入博客信息
              */
             var promise = getBlogListService.getBlogInfo($scope.currentPage);
-            var promise = getBlogListService.getBlogInfo($scope.currentPage);
             promise.then(function (data) {
                 $scope.blogs = data.blogs;
                 $scope.pageCount = $scope.blogs.totalPages;

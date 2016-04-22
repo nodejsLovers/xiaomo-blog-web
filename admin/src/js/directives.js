@@ -1,4 +1,7 @@
 angular.module("myDirectiveModule", [])
+    .constant('baseUrlConfig', {
+        baseUrl: 'http://api.xiaomo.info:8080'
+    })
     .constant('ngPaginationConfig', {
         visiblePageCount: 10,
         firstText: 'First',
@@ -115,4 +118,52 @@ angular.module("myDirectiveModule", [])
         '<li ng-click="pageChange(pageCount)" ng-if="showFirstLastText">{{lastText}}</li></ul>' +
         '<lable ng-if="showGoto">{{gotoText}}<input type="text" ng-keyup="keyupHanlder($event)"></label></div>'
     }
-}]);
+}]).directive('ensureUnique', ['$http', 'baseUrlConfig', function ($http, baseUrlConfig) {
+        return {
+            require: 'ngModel',
+            link: function (scope, ele, attrs, c) {
+                scope.$watch(attrs.ngModel, function (title) {
+                    if (!title) {
+                        return;
+                    }
+                    console.log(scope.blog.title);
+                    $http({
+                        method: 'GET',
+                        url: baseUrlConfig.baseUrl + '/admin/blog/findByTitle',
+                        params: {
+                            title: title
+                        }
+                    }).success(function (data) {
+                        if (data.code != 200) {//不重复
+                            c.$setValidity('unique', false);
+                        } else {
+                            c.$setValidity('unique', true);
+                        }
+                    }).error(function () {
+                        c.$setValidity('unique', true);
+                    })
+                })
+            }
+        }
+    }])
+    .directive('ngFocus', function () {
+        var FOCUS_CLASS = "ng-focused";
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ctrl) {
+                ctrl.$focused = false;
+                element.bind('focus', function (evt) {
+                    element.addClass(FOCUS_CLASS);
+                    scope.$apply(function () {
+                        ctrl.$focused = true;
+                    });
+                }).bind('blur', function (evt) {
+                    element.removeClass(FOCUS_CLASS);
+                    scope.$apply(function () {
+                        ctrl.$focused = false;
+                    });
+                });
+            }
+        };
+    });
