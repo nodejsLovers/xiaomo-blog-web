@@ -4,11 +4,22 @@
  */
 angular.module("myControllerModule", [])
     .controller('BlogListController', ['$scope', 'getBlogListService', 'addBlogService', function ($scope, getBlogListService, addBlogService) {
-            var promise = getBlogListService.getUserInfo();
+            var promise = getBlogListService.getUserInfo($scope.currentPage);
             promise.then(function (data) {
                 $scope.blogs = data.blogs;
+                $scope.pageCount = $scope.blogs.totalPages;
+                console.log(console.log($scope.currentPage));
                 console.log($scope.blogs);
             });
+            $scope.onPageChange = function () {
+                var promise = getBlogListService.getUserInfo($scope.currentPage);
+                promise.then(function (data) {
+                    $scope.blogs = data.blogs;
+                    $scope.pageCount = $scope.blogs.totalPages;
+                    console.log(console.log($scope.currentPage));
+                    console.log($scope.blogs);
+                });
+            };
             $scope.addBlog = function () {
                 $scope.blog.tagIds = [1, 2];
                 $scope.blog.blogType = 1;

@@ -6,7 +6,7 @@ angular.module("myServiceModule", [])
             $http({
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 url: $rootScope.$baseUrl + "/admin/blog/findAll",
-                data: {
+                params: {
                     start: current <= 0 ? 1 : current
                 },
                 method: 'GET'
