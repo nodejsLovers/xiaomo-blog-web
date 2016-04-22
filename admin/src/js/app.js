@@ -43,5 +43,9 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
                    controller:'BlogListController'
                }
            }
-        })
+        }).state('addBlog',{
+        url:'/addBlog',
+        templateUrl:'tpls/blog/addBlog.html',
+        controller:'BlogListController'
+    })
 });
