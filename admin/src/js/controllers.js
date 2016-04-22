@@ -3,7 +3,8 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('BlogListController', ['$scope', 'getBlogListService', 'addBlogService', function ($scope, getBlogListService, addBlogService) {
+    .controller('BlogListController', ['$scope', '$location', 'getBlogListService', 'addBlogService', function ($scope, $location, getBlogListService, addBlogService) {
+            $scope.msg="欢迎来到博客列表页！！";
             var promise = getBlogListService.getUserInfo($scope.currentPage);
             promise.then(function (data) {
                 $scope.blogs = data.blogs;
@@ -25,7 +26,12 @@ angular.module("myControllerModule", [])
                 $scope.blog.blogType = 1;
                 console.log($scope.blog);
                 addBlogService.addBlog($scope.blog);
-            }
+                $scope.showMsgFlag = true;
+                $location.path('/main');
+            };
+            $scope.showMsg = function () {
+                return true;
+            };
         }]
     ).controller('BlogDetailController', ["$scope", "$http", "getBlogListService", function ($scope, $http, getBlogListService) {
         $scope.result = getBlogListService.test;

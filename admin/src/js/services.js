@@ -38,7 +38,10 @@ angular.module("myServiceModule", [])
             }
         })
             .success(function () {
-                alert("添加成功！")
+                console.log("添加成功！");
+            })
+            .error(function () {
+                alert("添加失败！")
             })
     };
     return result;
