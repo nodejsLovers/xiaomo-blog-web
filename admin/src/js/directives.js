@@ -32,7 +32,7 @@ angular.module("myDirectiveModule", [])
                 } else {
                     scope.currentPage = 1;
                 }
-            }
+            };
 
             scope.keyUpHandler = function (e) {
                 var value = e.target.value;
@@ -56,14 +56,14 @@ angular.module("myDirectiveModule", [])
                         return false;
                     }
                 }
-            }
+            };
 
             function build() {
                 var low,
                     high,
                     v;
 
-                scope.pagenums = [];
+                scope.pageNums = [];
 
                 if (scope.pageCount === 0) {
                     return;
@@ -86,7 +86,7 @@ angular.module("myDirectiveModule", [])
                 }
 
                 for (; low <= high; low++) {
-                    scope.pagenums.push(low);
+                    scope.pageNums.push(low);
                 }
             }
 
