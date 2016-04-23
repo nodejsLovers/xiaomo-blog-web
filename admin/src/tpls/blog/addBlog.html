@@ -25,7 +25,7 @@
                         </label>
                         <div class="col-md-10">
                             <input type="text" name="title" class="form-control" placeholder="最多64个字符"
-                                   ng-model="blog.title" required ng-minlength="3" ng-maxlength="64">
+                                   ng-model="blog.title" required ng-minlength="3" ng-maxlength="64" ensure-unique="title">
                             <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
                             <!-- 标题错误信息 -->
                             <div class="error" ng-show="addBlogForm.title.$dirty && addBlogForm.title.$invalid">
