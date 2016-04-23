@@ -37,7 +37,6 @@ angular.module("myControllerModule", [])
                 var promise = getBlogListService.getBlogInfo($scope.currentPage);
                 promise.then(function (data) {
                     $scope.blogs = data.blogs;
-                    $scope.pageCount = $scope.blogs.totalPages;
                     console.log(console.log($scope.currentPage));
                     console.log($scope.blogs);
                 });
