@@ -19,7 +19,6 @@ angular.module("myControllerModule", [])
             promise.then(function (data) {
                 $scope.blogs = data.blogs;
                 $scope.pageCount = $scope.blogs.totalPages;
-                console.log($scope.blogs);
             });
             /**
              * 默认载入标签信息
@@ -27,7 +26,6 @@ angular.module("myControllerModule", [])
             var tagPromise = getTagListService.getTagInfo();
             tagPromise.then(function (data) {
                 $scope.tags = data.tags.content;
-                console.log($scope.tags);
             });
             /* ===========================================================我是分割线===========================================================================*/
             /**
@@ -37,7 +35,6 @@ angular.module("myControllerModule", [])
                 var promise = getBlogListService.getBlogInfo($scope.currentPage);
                 promise.then(function (data) {
                     $scope.blogs = data.blogs;
-                    console.log($scope.blogs);
                 });
             };
             /* ===========================================================我是分割线===========================================================================*/
@@ -47,7 +44,6 @@ angular.module("myControllerModule", [])
             $scope.addBlog = function () {
                 $scope.blog.tagIds = [1, 2];
                 $scope.blog.blogType = 1;
-                console.log($scope.blog);
                 addBlogService.addBlog($scope.blog);
                 $scope.addClasss = true;
                 $location.path('/main');
@@ -57,7 +53,6 @@ angular.module("myControllerModule", [])
              * 处理标签
              */
             $scope.operateTag = function (tid, currentTag) {
-                console.log(tid, currentTag);
                 //该博客中己经有这个标签就把从数组中拿掉，没有就添加到数组中
                 for (var tag in $scope.tags) {
                     for (var tagId in $scope.blog.tagIds) {
@@ -84,6 +79,5 @@ angular.module("myControllerModule", [])
         ]
     ).controller('BlogDetailController', ["$scope", "$http", "getBlogListService", function ($scope, $http, getBlogListService) {
         $scope.result = getBlogListService.test;
-        console.log($scope.result);
     }]
 );

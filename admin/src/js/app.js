@@ -30,11 +30,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {//登录
             url: '/login',
-            templateUrl: './src/tpls/login.html'
+            templateUrl: './src/tpls/common/login.html'
         })
         .state('main', {//主界面
             url: '/main',
-            templateUrl: './src/tpls/home.html'
+            templateUrl: './src/tpls/common/home.html'
         })
 
         .state('main.blog', {//博客
@@ -75,6 +75,4 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/systemSet',
             templateUrl: './src/tpls/systemSet/systemSet.html'
         })
-
-
 });
