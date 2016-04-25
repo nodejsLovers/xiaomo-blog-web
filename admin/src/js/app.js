@@ -34,18 +34,25 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('main', {
             url: '/main',
-           views:{
-               '':{
-                   templateUrl: 'tpls/home.html'
-               },
-               'content@main':{
-                   templateUrl: 'tpls/blog/blogList.html',
-                   controller:'BlogListController'
-               }
-           }
-        }).state('addBlog',{
-        url:'/addBlog',
-        templateUrl:'tpls/blog/addBlog.html',
-        controller:'BlogListController'
-    })
+            templateUrl: 'tpls/home.html'
+        })
+        .state('main.user', {
+            url: '/user',
+            templateUrl: 'tpls/user/userList.html',
+            controller:'BlogListController'
+        })
+        .state('main.goods', {
+            url: '/goods',
+            templateUrl: 'tpls/goods/goods.html'
+        })
+        .state('main.blog', {
+            url: '/blog',
+            templateUrl: 'tpls/blog/blogList.html',
+            controller:'BlogListController'
+        })
+        .state('main.addBlog', {
+            url: '/addBlog',
+            templateUrl: 'tpls/blog/addBlog.html',
+            controller: 'BlogListController'
+        })
 });
