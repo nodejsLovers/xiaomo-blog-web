@@ -30,7 +30,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {//登录
             url: '/login',
-            templateUrl: './src/tpls/common/login.html'
+            templateUrl: './login.html',
+            controller:'AdminController'
         })
         .state('main', {//主界面
             url: '/main',

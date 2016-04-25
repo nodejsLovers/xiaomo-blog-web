@@ -3,6 +3,34 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
+    .controller('AdminController',
+        [
+            '$scope',
+            '$http',
+            '$location',
+            'adminService',
+            function ($scope,
+                      $http,
+                      $location,
+                      adminService) {
+                $scope.login = function () {
+                    var promise = adminService.getUser($scope.userInfo.userName, $scope.userInfo.password);
+                    promise.then(function (data) {
+                        if (data.code !== 200) {
+                            alert(data.code);
+                            console.log(data);
+                        } else {
+                            $location.path('/main');
+                        }
+                    })
+                };
+                // if (!sessionStorage.getItem('auth_token')) {
+                //     $state.go('login')
+                // }
+                // $http.defaults.headers.common['auth_token'] = sessionStorage.getItem('auth_token');
+            }
+        ]
+    )
     .controller('BlogListController',
         [
             '$scope',
