@@ -45,7 +45,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('main.authority', {//权限
             url: '/authority',
-            templateUrl: './src/tpls/authority/authority.html'
+            templateUrl: './src/tpls/authority/authorityList.html',
+            controller:'AdminController'
         })
         .state('main.user', {//用户
             url: '/user',

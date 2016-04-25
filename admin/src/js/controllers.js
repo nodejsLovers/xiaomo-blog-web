@@ -3,18 +3,44 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('AdminController',
+    .controller('AdminController',//后台用户
         [
             '$scope',
             '$http',
             '$location',
             'adminService',
+            'getAdminUserService',
             function ($scope,
                       $http,
                       $location,
-                      adminService) {
+                      adminService,
+                      getAdminUserService) {
+                $scope.commonInfo = {};
+                $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
+                /**
+                 * 默认载入用户管理信息
+                 */
+                var adminPromise = getAdminUserService.operate($scope.currentPage);
+                adminPromise.then(function (data) {
+                    console.log(data);
+                    $scope.adminUsers = data.adminUsers;
+                    $scope.pageCount = $scope.adminUsers.totalPages;
+                });
+                /**
+                 * 用户管理信息翻页
+                 */
+                $scope.onAdminUserPageChange = function () {
+                    var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
+                    adminOnPagePromise.then(function (data) {
+                        $scope.adminUsers = data.adminUsers;
+                    });
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 登录
+                 */
                 $scope.login = function () {
-                    var promise = adminService.getUser($scope.userInfo.userName, $scope.userInfo.password);
+                    var promise = adminService.operate($scope.userInfo.userName, $scope.userInfo.password);
                     promise.then(function (data) {
                         if (data.code !== 200) {
                             alert(data.code);
@@ -24,10 +50,7 @@ angular.module("myControllerModule", [])
                         }
                     })
                 };
-                // if (!sessionStorage.getItem('auth_token')) {
-                //     $state.go('login')
-                // }
-                // $http.defaults.headers.common['auth_token'] = sessionStorage.getItem('auth_token');
+
             }
         ]
     )
@@ -54,7 +77,7 @@ angular.module("myControllerModule", [])
                 /**
                  * 默认载入博客信息
                  */
-                var promise = getBlogListService.getBlogInfo($scope.currentPage);
+                var promise = getBlogListService.operate($scope.currentPage);
                 promise.then(function (data) {
                     $scope.blogs = data.blogs;
                     $scope.pageCount = $scope.blogs.totalPages;
@@ -62,16 +85,16 @@ angular.module("myControllerModule", [])
                 /**
                  * 默认载入标签信息
                  */
-                var tagPromise = getTagListService.getTagInfo();
+                var tagPromise = getTagListService.operate();
                 tagPromise.then(function (data) {
                     $scope.tags = data.tags.content;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
-                 * 翻页
+                 * 博客翻页
                  */
                 $scope.onPageChange = function () {
-                    var promise = getBlogListService.getBlogInfo($scope.currentPage);
+                    var promise = getBlogListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         $scope.blogs = data.blogs;
                     });
@@ -107,7 +130,7 @@ angular.module("myControllerModule", [])
                 $scope.showBlogList = function () {
                     $location.path('/main');
                 };
-                /* ===========================================================我是分割线===========================================================================*/
+
                 /* ===========================================================我是分割线===========================================================================*/
                 /* ===========================================================我是分割线===========================================================================*/
                 /* ===========================================================我是分割线===========================================================================*/
