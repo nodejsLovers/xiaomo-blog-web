@@ -53,6 +53,53 @@ angular.module("myControllerModule", [])
 
             }
         ]
+    )    .controller('UserController',//用户
+        [
+            '$scope',
+            '$http',
+            '$location',
+            'userService',
+            function ($scope,
+                      $http,
+                      $location,
+                      userService) {
+                $scope.commonInfo = {};
+                $scope.commonInfo.msg = "欢迎来到用户列表页！！";
+                /**
+                 * 默认载入用户管理信息
+                 */
+                var userPromise = userService.operate($scope.currentPage);
+                userPromise.then(function (data) {
+                    $scope.users = data.users;
+                    $scope.pageCount = $scope.users.totalPages;
+                });
+                /**
+                 * 用户管理信息翻页
+                 */
+                $scope.onUserPageChange = function () {
+                    var userOnPagePromise = userService.operate($scope.currentPage);
+                    userOnPagePromise.then(function (data) {
+                        $scope.users = data.users;
+                    });
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 登录
+                 */
+                $scope.login = function () {
+                    var promise = adminService.operate($scope.userInfo.userName, $scope.userInfo.password);
+                    promise.then(function (data) {
+                        if (data.code !== 200) {
+                            alert(data.code);
+                            console.log(data);
+                        } else {
+                            $location.path('/main');
+                        }
+                    })
+                };
+
+            }
+        ]
     )
     .controller('BlogListController',
         [
@@ -130,12 +177,6 @@ angular.module("myControllerModule", [])
                 $scope.showBlogList = function () {
                     $location.path('/main');
                 };
-
-                /* ===========================================================我是分割线===========================================================================*/
-                /* ===========================================================我是分割线===========================================================================*/
-                /* ===========================================================我是分割线===========================================================================*/
-                /* ===========================================================我是分割线===========================================================================*/
-                /* ===========================================================我是分割线===========================================================================*/
                 console.log($scope);
             }
         ]

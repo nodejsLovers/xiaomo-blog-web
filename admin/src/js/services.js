@@ -109,16 +109,19 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-    .service('getUserListService',//前台用户列表
+    .service('userService',//前台用户列表
         ['$rootScope',
             '$http',
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function () {
+                result.operate = function (current) {
                     var deferred = $q.defer();
                     $http({
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                        params: {
+                            start: current <= 0 ? 1 : current
+                        },
                         url: $rootScope.$baseUrl + "/admin/user/findAll",
                         method: 'GET'
                     })
@@ -138,11 +141,14 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function () {
+                result.operate = function (current) {
                     var deferred = $q.defer();
                     $http({
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                         url: $rootScope.$baseUrl + "/admin/tag/findAll",
+                        params: {
+                            start: current <= 0 ? 1 : current
+                        },
                         method: 'GET'
                     })
                         .success(function (data) {
@@ -161,11 +167,14 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function () {
+                result.operate = function (current) {
                     var deferred = $q.defer();
                     $http({
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                         url: $rootScope.$baseUrl + "/admin/changeLog/findAll",
+                        params: {
+                            start: current <= 0 ? 1 : current
+                        },
                         method: 'GET'
                     })
                         .success(function (data) {
@@ -184,11 +193,14 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function () {
+                result.operate = function (current) {
                     var deferred = $q.defer();
                     $http({
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                         url: $rootScope.$baseUrl + "/admin/link/findAll",
+                        params: {
+                            start: current <= 0 ? 1 : current
+                        },
                         method: 'GET'
                     })
                         .success(function (data) {
@@ -207,11 +219,14 @@ angular.module("myServiceModule", [])
             '$q'
         ], function ($rootScope, $http, $q) {
             var result = {};
-            result.operate = function () {
+            result.operate = function (current) {
                 var deferred = $q.defer();
                 $http({
                     headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                     url: $rootScope.$baseUrl + "/admin/user/findAll",
+                    params: {
+                        start: current <= 0 ? 1 : current
+                    },
                     method: 'GET'
                 })
                     .success(function (data) {

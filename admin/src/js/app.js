@@ -56,12 +56,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('main.user', {//用户
             url: '/user',
             templateUrl: './src/tpls/user/userList.html',
-            controller: 'BlogListController'
+            controller: 'UserController'
         })
         .state('main.addUser', {//用户
             url: '/user',
             templateUrl: './src/tpls/user/addUser.html',
-            controller: 'BlogListController'
+            controller: 'UserController'
         })
         .state('main.addBlog', {//添加博客
             url: '/addBlog',
