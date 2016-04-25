@@ -8,17 +8,17 @@ angular.module("myControllerModule", [])
             '$scope',
             '$http',
             '$location',
-            'adminService',
+            'adminLoginService',
             'getAdminUserService',
             function ($scope,
                       $http,
                       $location,
-                      adminService,
+                      adminLoginService,
                       getAdminUserService) {
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
                 /**
-                 * 默认载入用户管理信息
+                 * 默认载入后台用户管理信息
                  */
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
@@ -27,7 +27,7 @@ angular.module("myControllerModule", [])
                     $scope.pageCount = $scope.adminUsers.totalPages;
                 });
                 /**
-                 * 用户管理信息翻页
+                 * 后台用户管理信息翻页
                  */
                 $scope.onAdminUserPageChange = function () {
                     var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
@@ -40,7 +40,7 @@ angular.module("myControllerModule", [])
                  * 登录
                  */
                 $scope.login = function () {
-                    var promise = adminService.operate($scope.userInfo.userName, $scope.userInfo.password);
+                    var promise = adminLoginService.operate($scope.userInfo.userName, $scope.userInfo.password);
                     promise.then(function (data) {
                         if (data.code !== 200) {
                             alert(data.code);
@@ -50,10 +50,10 @@ angular.module("myControllerModule", [])
                         }
                     })
                 };
-
             }
         ]
-    )    .controller('UserController',//用户
+    )
+    .controller('UserController',//用户
         [
             '$scope',
             '$http',
@@ -101,7 +101,7 @@ angular.module("myControllerModule", [])
             }
         ]
     )
-    .controller('BlogListController',
+    .controller('BlogController',
         [
             '$scope',
             '$location',
@@ -111,8 +111,7 @@ angular.module("myControllerModule", [])
             function ($scope,
                       $location,
                       getBlogListService,
-                      addBlogService,
-                      getTagListService) {
+                      addBlogService) {
                 $scope.blog = {};
                 $scope.tags = {};
                 $scope.tags.content = {};
@@ -128,13 +127,6 @@ angular.module("myControllerModule", [])
                 promise.then(function (data) {
                     $scope.blogs = data.blogs;
                     $scope.pageCount = $scope.blogs.totalPages;
-                });
-                /**
-                 * 默认载入标签信息
-                 */
-                var tagPromise = getTagListService.operate();
-                tagPromise.then(function (data) {
-                    $scope.tags = data.tags.content;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -178,6 +170,91 @@ angular.module("myControllerModule", [])
                     $location.path('/main');
                 };
                 console.log($scope);
+            }
+        ]
+    )
+    .controller('TagController',
+        [
+            '$scope',
+            'getTagListService',
+            function ($scope, getTagListService) {
+                $scope.commonInfo = {};
+                $scope.commonInfo.msg = "欢迎来到标签列表页！！";
+                /**
+                 * 默认载入标签信息
+                 */
+                var tagPromise = getTagListService.operate($scope.currentPage);
+                tagPromise.then(function (data) {
+                    $scope.tags = data.tags;
+                });
+                /**
+                 * 标签翻页
+                 */
+                $scope.onTagPageChange = function () {
+                    var promise = getTagListService.operate($scope.currentPage);
+                    promise.then(function (data) {
+                        $scope.tags = data.tags;
+                    });
+                };
+            }
+        ]
+    )
+    .controller('LinkController',
+        [
+            '$scope',
+            'linkListService',
+            function ($scope, linkListService) {
+                $scope.commonInfo = {};
+                $scope.commonInfo.msg = "欢迎来到友情链接列表页！！";
+                /**
+                 * 默认友情链接标签信息
+                 */
+                var linkPromise = linkListService.operate($scope.currentPage);
+                linkPromise.then(function (data) {
+                    $scope.links = data.links;
+                });
+                /**
+                 * 友情链接标签信息翻页
+                 */
+                $scope.onTagPageChange = function () {
+                    var promise = linkListService.operate($scope.currentPage);
+                    promise.then(function (data) {
+                        $scope.links = data.links;
+                    });
+                };
+            }
+        ]
+    )
+    .controller('ChangeLogController',
+        ['$scope',
+            'changeLogListService',
+            function ($scope, changeLogListService) {
+                /**
+                 * 默认更新日志标签信息
+                 */
+                $scope.commonInfo = {};
+                $scope.commonInfo.msg = "欢迎来到更新日志列表页！！";
+                var linkPromise = changeLogListService.operate($scope.currentPage);
+                linkPromise.then(function (data) {
+                    $scope.changeLogs = data.changeLogs;
+                });
+                /**
+                 * 更新日志翻页
+                 */
+                $scope.onTagPageChange = function () {
+                    var promise = changeLogListService.operate($scope.currentPage);
+                    promise.then(function (data) {
+                        $scope.changeLogs = data.changeLogs;
+                    });
+                };
+            }
+        ]
+    )
+    .controller('SystemSetController',
+        [
+            '$scope',
+            function ($scope, $location) {
+
             }
         ]
     );

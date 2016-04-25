@@ -71,7 +71,7 @@
                                     ng-class="{'btn-default':tag.currentTag,'btn-success':tag.currentTag}"
                                     name="tag"
                                     class="btn"
-                                    ng-repeat="tag in tags track by $index "
+                                    ng-repeat="tag in tags.content track by $index "
                                     ng-click="operateTag(tag.id,tag.currentTag)">
                                 {{tag.name}}
                             </button>

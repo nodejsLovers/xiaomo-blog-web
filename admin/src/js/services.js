@@ -1,5 +1,5 @@
 angular.module("myServiceModule", [])
-    .service('adminService',//后台登录管理
+    .service('adminLoginService',//后台登录管理
         [
             '$rootScope',
             '$http',
@@ -16,6 +16,32 @@ angular.module("myServiceModule", [])
                             password: password
                         },
                         method: 'POST'
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                        })
+                        .error(function () {
+                            deferred.reject();
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('getAdminUserService',//获取后台用户列表
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (current) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                        url: $rootScope.$baseUrl + "/admin/adminUser/findAll",
+                        params: {
+                            start: current <= 0 ? 1 : current
+                        },
+                        method: 'GET'
                     })
                         .success(function (data) {
                             deferred.resolve(data);
@@ -83,32 +109,6 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-    .service('getAdminUserService',//获取后台用户列表
-        ['$rootScope',
-            '$http',
-            '$q',
-            function ($rootScope, $http, $q) {
-                var result = {};
-                result.operate = function (current) {
-                    var deferred = $q.defer();
-                    $http({
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
-                        url: $rootScope.$baseUrl + "/admin/adminUser/findAll",
-                        params: {
-                            start: current <= 0 ? 1 : current
-                        },
-                        method: 'GET'
-                    })
-                        .success(function (data) {
-                            deferred.resolve(data);
-                        })
-                        .error(function () {
-                            deferred.reject();
-                        });
-                    return deferred.promise;
-                };
-                return result;
-            }])
     .service('userService',//前台用户列表
         ['$rootScope',
             '$http',
@@ -136,7 +136,8 @@ angular.module("myServiceModule", [])
                 return result;
             }])
     .service('getTagListService',//获取标签列表
-        ['$rootScope',
+        [
+            '$rootScope',
             '$http',
             '$q',
             function ($rootScope, $http, $q) {
