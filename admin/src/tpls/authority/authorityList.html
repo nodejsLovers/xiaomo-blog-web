@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a ui-sref="main.authority" class="btn btn-primary">新增管理员</a>
+            <a ui-sref="main.addAuthority" class="btn btn-primary">新增管理员</a>
         </div>
     </div>
     <div class="row">
@@ -28,7 +28,7 @@
                     <tr ng-repeat="adminUser in adminUsers.content|orderBy:'status':true">
                         <td>{{$index+1}}</td>
                         <td>{{adminUser.userName}}</td>
-                        <td>{{adminUser.status}}</td>
+                        <td>{{adminUser.status | transformStatusFilter}}</td>
                         <td>{{adminUser.operator}}</td>
                         <td>{{adminUser.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>{{adminUser.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>

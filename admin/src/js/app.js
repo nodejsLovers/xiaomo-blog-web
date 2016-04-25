@@ -48,9 +48,19 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/authority/authorityList.html',
             controller:'AdminController'
         })
+        .state('main.addAuthority', {//权限
+            url: '/authority',
+            templateUrl: './src/tpls/authority/AddAuthority.html',
+            controller:'AdminController'
+        })
         .state('main.user', {//用户
             url: '/user',
             templateUrl: './src/tpls/user/userList.html',
+            controller: 'BlogListController'
+        })
+        .state('main.addUser', {//用户
+            url: '/user',
+            templateUrl: './src/tpls/user/addUser.html',
             controller: 'BlogListController'
         })
         .state('main.addBlog', {//添加博客
@@ -63,14 +73,29 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/tag/tagList.html',
             controller: 'BlogListController'
         })
+        .state('main.addTag', {//标签
+            url: '/tag',
+            templateUrl: './src/tpls/tag/addTag.html',
+            controller: 'BlogListController'
+        })
         .state('main.changeLog', {//更新日志
             url: '/changeLog',
             templateUrl: './src/tpls/changeLog/changeLog.html',
             controller: 'BlogListController'
         })
+        .state('main.addChangeLog', {//更新日志
+            url: '/changeLog',
+            templateUrl: './src/tpls/changeLog/addChangeLog.html',
+            controller: 'BlogListController'
+        })
         .state('main.links', {//友情链接
             url: '/links',
             templateUrl: './src/tpls/links/linkList.html',
+            controller: 'BlogListController'
+        })
+        .state('main.addLink', {//友情链接
+            url: '/links',
+            templateUrl: './src/tpls/links/addLink.html',
             controller: 'BlogListController'
         })
         .state('main.systemSet', {//系统设置
