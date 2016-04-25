@@ -30,50 +30,50 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {//登录
             url: '/login',
-            templateUrl: 'tpls/login.html'
+            templateUrl: './src/tpls/login.html'
         })
         .state('main', {//主界面
             url: '/main',
-            templateUrl: 'tpls/home.html'
+            templateUrl: './src/tpls/home.html'
         })
 
         .state('main.blog', {//博客
             url: '/blog',
-            templateUrl: 'tpls/blog/blogList.html',
+            templateUrl: './src/tpls/blog/blogList.html',
             controller: 'BlogListController'
         })
         .state('main.authority', {//权限
             url: '/authority',
-            templateUrl: 'tpls/authority/authority.html'
+            templateUrl: './src/tpls/authority/authority.html'
         })
         .state('main.user', {//用户
             url: '/user',
-            templateUrl: 'tpls/user/userList.html',
+            templateUrl: './src/tpls/user/userList.html',
             controller: 'BlogListController'
         })
         .state('main.addBlog', {//添加博客
             url: '/addBlog',
-            templateUrl: 'tpls/blog/addBlog.html',
+            templateUrl: './src/tpls/blog/addBlog.html',
             controller: 'BlogListController'
         })
         .state('main.tag', {//标签
             url: '/tag',
-            templateUrl: 'tpls/tag/tagList.html',
+            templateUrl: './src/tpls/tag/tagList.html',
             controller: 'BlogListController'
         })
         .state('main.changeLog', {//更新日志
             url: '/changeLog',
-            templateUrl: 'tpls/changeLog/changeLog.html',
+            templateUrl: './src/tpls/changeLog/changeLog.html',
             controller: 'BlogListController'
         })
         .state('main.links', {//友情链接
             url: '/links',
-            templateUrl: 'tpls/links/linkList.html',
+            templateUrl: './src/tpls/links/linkList.html',
             controller: 'BlogListController'
         })
         .state('main.systemSet', {//系统设置
             url: '/systemSet',
-            templateUrl: 'tpls/systemSet/systemSet.html'
+            templateUrl: './src/tpls/systemSet/systemSet.html'
         })
 
 
