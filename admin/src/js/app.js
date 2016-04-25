@@ -26,33 +26,55 @@ myApp.run(function ($rootScope, $state, $stateParams) {
  * @return {[type]}
  */
 myApp.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/index');
+    $urlRouterProvider.otherwise('/login');
     $stateProvider
-        .state('index', {
-            url: '/index',
+        .state('login', {//登录
+            url: '/login',
             templateUrl: 'tpls/login.html'
         })
-        .state('main', {
+        .state('main', {//主界面
             url: '/main',
             templateUrl: 'tpls/home.html'
         })
-        .state('main.user', {
-            url: '/user',
-            templateUrl: 'tpls/user/userList.html',
-            controller:'BlogListController'
-        })
-        .state('main.goods', {
-            url: '/goods',
-            templateUrl: 'tpls/goods/goods.html'
-        })
-        .state('main.blog', {
+
+        .state('main.blog', {//博客
             url: '/blog',
             templateUrl: 'tpls/blog/blogList.html',
-            controller:'BlogListController'
+            controller: 'BlogListController'
         })
-        .state('main.addBlog', {
+        .state('main.authority', {//权限
+            url: '/authority',
+            templateUrl: 'tpls/authority/authority.html'
+        })
+        .state('main.user', {//用户
+            url: '/user',
+            templateUrl: 'tpls/user/userList.html',
+            controller: 'BlogListController'
+        })
+        .state('main.addBlog', {//添加博客
             url: '/addBlog',
             templateUrl: 'tpls/blog/addBlog.html',
             controller: 'BlogListController'
         })
+        .state('main.tag', {//标签
+            url: '/tag',
+            templateUrl: 'tpls/tag/tagList.html',
+            controller: 'BlogListController'
+        })
+        .state('main.changeLog', {//更新日志
+            url: '/changeLog',
+            templateUrl: 'tpls/changeLog/changeLog.html',
+            controller: 'BlogListController'
+        })
+        .state('main.links', {//友情链接
+            url: '/links',
+            templateUrl: 'tpls/links/linkList.html',
+            controller: 'BlogListController'
+        })
+        .state('main.systemSet', {//系统设置
+            url: '/systemSet',
+            templateUrl: 'tpls/systemSet/systemSet.html'
+        })
+
+
 });
