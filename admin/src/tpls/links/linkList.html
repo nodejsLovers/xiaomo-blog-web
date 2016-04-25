@@ -21,6 +21,7 @@
                         <th>链接地址</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
+                        <th colspan="2">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,10 @@
                         <td>{{link.url}}</td>
                         <td>{{link.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>{{link.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>
+                            <button class="btn btn-success">修改</button>
+                            <button class="btn btn-default">删除</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

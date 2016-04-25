@@ -42,8 +42,8 @@ angular.module("myControllerModule", [])
                 $scope.login = function () {
                     var promise = adminLoginService.operate($scope.userInfo.userName, $scope.userInfo.password);
                     promise.then(function (data) {
-                        if (data.code !== 200) {
-                            alert(data.code);
+                        if (data.status !== 200) {
+                            alert(data.status);
                             console.log(data);
                         } else {
                             $location.path('/main');

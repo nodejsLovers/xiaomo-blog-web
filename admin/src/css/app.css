@@ -17,3 +17,6 @@
 input.ng-valid {
     border: 1px solid green;
 }
+th,td{
+    text-align: center;
+}
