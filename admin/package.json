@@ -1,22 +1,31 @@
 {
   "name": "xiaomo-admin",
   "version": "1.0.0",
-  "description": "blog",
-  "main": "index.js",
+  "description": "A blog for Angular made with Webpack",
   "scripts": {
-    "test": "test"
+    "server": "webpack-dev-server --history-api-fallback --inline --progress",
+    "build": "rimraf dist && webpack --bail --progress --profile",
+    "test": "karma start",
+    "test-watch": "karma start --auto-watch --no-single-run",
+    "start": "npm run server"
   },
   "repository": {
     "type": "git",
-    "url": "https:github.com/xiaomoBlog/xiaomoBlogWeb.git"
+    "url": "https://github.com/xiaomoBlog/xiaomoBlogWeb.git"
   },
-  "keywords": [
-    "blog",
-    "angular",
-    "java",
-    "spring",
-    "npm"
-  ],
-  "author": "xiaomo",
-  "license": "MIT"
+  "author": "Jesus Rodriguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiaomoBlog/xiaomoBlogWeb/issues"
+  },
+  "homepage": "https://github.com/xiaomoBlog/xiaomoBlogWeb",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-animate": "^1.5.5",
+    "angular-ui-router": "^1.0.0-alpha.3",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3",
+    "ng-grid": "^2.0.1"
+  },
+  "devDependencies": {}
 }

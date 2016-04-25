@@ -1,0 +1,128 @@
+<style>
+    .error {
+        padding-top: 7px;
+        font-family: "微软雅黑 Light",serif;
+        font-size: 14px;
+        color: red;
+    }
+
+    input.ng-valid {
+        border: 1px solid green;
+    }
+</style>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">新增博客</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- fixme 要点1：给form起一个名字,并禁掉原生的验证  -->
+                <form class="form-horizontal" name="addBlogForm" role="form" novalidate>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            标题：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" name="title" class="form-control" placeholder="最多64个字符"
+                                   ng-model="blog.title" required ng-minlength="3" ng-maxlength="64" ensure-unique="title">
+                            <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
+                            <!-- 标题错误信息 -->
+                            <div class="error" ng-show="addBlogForm.title.$dirty && addBlogForm.title.$invalid">
+                                <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
+                                <small class="error" ng-show="addBlogForm.title.$error.required">请输入标题内容</small>
+                                <small class="error" ng-show="addBlogForm.title.$error.minlength">标题内容最少长度为3</small>
+                                <small class="error" ng-show="addBlogForm.title.$error.maxlength">标题最大长度为64</small>
+                                <small class="error" ng-show="addBlogForm.title.$error.unique">
+                                    这个标题己经被用过了，请换一个标题吧
+                                </small>
+                            </div>
+                            <!-- end -->
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            简介：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" name="summary" class="form-control" placeholder="最多64个字符"
+                                   ng-model="blog.summary" required ng-minlength="3" ng-maxlength="64">
+                            <!-- 简介错误信息 -->
+                            <div class="error" ng-show="addBlogForm.summary.$dirty && addBlogForm.summary.$invalid">
+                                <small class="error" ng-show="addBlogForm.summary.$error.required">请输入简介内容</small>
+                                <small class="error" ng-show="addBlogForm.summary.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error" ng-show="addBlogForm.summary.$error.maxlength">简介最大长度为64</small>
+                            </div>
+                            <!-- end -->
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            内容：
+                        </label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" rows="16" placeholder="最多640个字符" name="content"
+                                      ng-model="blog.content" required ng-minlength="3" ng-maxlength="640"></textarea>
+                            <!-- 内容错误信息 -->
+                            <div class="error" ng-show="addBlogForm.content.$dirty && addBlogForm.content.$invalid">
+                                <small class="error" ng-show="addBlogForm.content.$error.required">请输入简介内容</small>
+                                <small class="error" ng-show="addBlogForm.content.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error" ng-show="addBlogForm.content.$error.maxlength">简介最大长度为64</small>
+                            </div>
+                            <!-- end -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            标签：
+                        </label>
+                        <div class="col-md-10">
+                            <button type="button"
+                                    ng-class="{'btn-default':tag.currentTag,'btn-success':tag.currentTag}"
+                                    name="tag"
+                                    class="btn"
+                                    ng-repeat="tag in tags track by $index "
+                                    ng-click="operateTag(tag.id,tag.currentTag)">
+                                {{tag.name}}
+                            </button>
+                            <!-- 标签错误信息 -->
+                            <div class="error" ng-show="addBlogForm.tag.$dirty && addBlogForm.tag.$invalid">
+                                <small class="error" ng-show="addBlogForm.tag.$error.required">请输入简介内容</small>
+                                <small class="error" ng-show="addBlogForm.tag.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error" ng-show="addBlogForm.tag.$error.maxlength">简介最大长度为64</small>
+                            </div>
+                            <!-- end -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            作者：
+                        </label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" name="author" placeholder="最多8个字符"
+                                   ng-model="blog.author" required ng-minlength="1" ng-maxlength="8">
+                            <!-- 作者错误信息 -->
+                            <div class="error" ng-show="addBlogForm.author.$dirty && addBlogForm.author.$invalid">
+                                <small class="error" ng-show="addBlogForm.author.$error.required">请输入简介内容</small>
+                                <small class="error" ng-show="addBlogForm.author.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error" ng-show="addBlogForm.author.$error.maxlength">简介最大长度为64</small>
+                            </div>
+                            <!-- end -->
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
+                            <button ng-click="addBlog()" class="btn btn-info" ng-disabled="addBlogForm.$invalid">添加博客
+                            </button>
+                            <button ng-click="showBlogList()" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>控制台——小莫后台博客管理系统</title>
+    <link rel="icon" href="./src/image/favicon.ico">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/ng-grid/2.0.11/ng-grid.css">
+    <script src="https://cdn.bootcss.com/jquery/2.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.5.0/angular.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.5.0/angular-animate.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.5.0/angular-messages.js"></script>
+    <script src="https://cdn.bootcss.com/angular-ui-router/1.0.0-alpha0/angular-ui-router.js"></script>
+    <script src="https://cdn.bootcss.com/angular-ui-bootstrap/1.2.1/ui-bootstrap-tpls.js"></script>
+    <script src="https://cdn.bootcss.com/ng-grid/2.0.11/ng-grid.debug.js"></script>
+
+    <link rel="stylesheet" href="src/css/app.css">
+    <link rel="stylesheet" href="src/css/ng-pagination.css">
+    <script src="src/js/app.js"></script>
+    <script src="src/js/services.js"></script>
+    <script src="src/js/controllers.js"></script>
+    <script src="src/js/filters.js"></script>
+    <script src="src/js/directives.js"></script>
+</head>
+
+<body>
+<div class="header" ng-include="'./src/tpls/common/head.html'"></div>
+<div ui-view></div>
+<div ng-include="'./src/tpls/common/footer.html'"></div>
+</body>
+
+</html>
