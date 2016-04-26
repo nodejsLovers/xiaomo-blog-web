@@ -1,3 +1,11 @@
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#textarea-1").markDownEditor({});
+    });
+</script>
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="panel-title">新增博客</div>
@@ -52,7 +60,7 @@
                             内容：
                         </label>
                         <div class="col-md-10">
-                            <textarea class="form-control" rows="16" placeholder="最多640个字符" name="content"
+                            <textarea class="form-control" id="textarea-1"  rows="16" placeholder="最多640个字符" name="content"
                                       ng-model="blog.content" required ng-minlength="3" ng-maxlength="640"></textarea>
                             <!-- 内容错误信息 -->
                             <div class="error" ng-show="addBlogForm.content.$dirty && addBlogForm.content.$invalid">
