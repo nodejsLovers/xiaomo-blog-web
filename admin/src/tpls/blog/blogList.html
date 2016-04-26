@@ -22,6 +22,7 @@
                         <th>作者</th>
                         <th>内容</th>
                         <th>点击数</th>
+                        <th colspan="2">操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,6 +33,10 @@
                         <td>{{blog.author}}</td>
                         <td>{{blog.content | contentFilter}}</td>
                         <td>{{blog.vote}}</td>
+                        <td>
+                            <button class="btn btn-success">修改</button>
+                            <button class="btn btn-default">删除</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

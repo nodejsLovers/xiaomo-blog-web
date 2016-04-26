@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a ui-sref="main.addLink" class="btn btn-primary">新增链接纪录</a>
+            <a ui-sref="main.addAuthority" class="btn btn-primary">新增管理员</a>
         </div>
     </div>
     <div class="row">
@@ -17,20 +17,22 @@
                     <thead>
                     <tr>
                         <th>编号</th>
-                        <th>名字</th>
-                        <th>链接地址</th>
+                        <th>用户名</th>
+                        <th>状态</th>
+                        <th>操作者</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
                         <th colspan="2">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="link in links.content|orderBy:'createTime':true">
+                    <tr ng-repeat="adminUser in adminUsers.content|orderBy:'status':true">
                         <td>{{$index+1}}</td>
-                        <td>{{link.name}}</td>
-                        <td>{{link.url}}</td>
-                        <td>{{link.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
-                        <td>{{link.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>{{adminUser.userName}}</td>
+                        <td>{{adminUser.status | transformStatusFilter}}</td>
+                        <td>{{adminUser.operator}}</td>
+                        <td>{{adminUser.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>{{adminUser.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
                             <button class="btn btn-success">修改</button>
                             <button class="btn btn-default">删除</button>
@@ -40,10 +42,10 @@
                 </table>
 
                 <div class="pager">
-                    <pager page-count="pageCount" current-page="currentPage" on-page-change="onLinkPageChange()"
+                    <pager page-count="pageCount" current-page="currentPage" on-page-change="onAdminUserPageChange()"
                            first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
                     <div>
-                        当前显示:{{links.number+1}}/{{links.totalPages}},共{{links.totalElements}}条记录,每页显示{{links.numberOfElements}}条数据
+                        当前显示:{{adminUsers.number+1}}/{{adminUsers.totalPages}},共{{adminUsers.totalElements}}条记录,每页显示{{adminUsers.numberOfElements}}条数据
                     </div>
                 </div>
             </div>

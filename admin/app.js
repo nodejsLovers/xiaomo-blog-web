@@ -30,46 +30,74 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {//登录
             url: '/login',
-            templateUrl: './src/tpls/common/login.html'
+            templateUrl: './login.html',
+            controller:'AdminController'
         })
         .state('main', {//主界面
             url: '/main',
-            templateUrl: './src/tpls/common/home.html'
+            templateUrl: './src/tpls/common/home.html',
+            controller:'BasicInfoController'
         })
 
         .state('main.blog', {//博客
             url: '/blog',
             templateUrl: './src/tpls/blog/blogList.html',
-            controller: 'BlogListController'
+            controller: 'BlogController'
         })
         .state('main.authority', {//权限
             url: '/authority',
-            templateUrl: './src/tpls/authority/authority.html'
+            templateUrl: './src/tpls/authority/authorityList.html',
+            controller:'AdminController'
+        })
+        .state('main.addAuthority', {//权限
+            url: '/authority',
+            templateUrl: './src/tpls/authority/AddAuthority.html',
+            controller:'AdminController'
         })
         .state('main.user', {//用户
             url: '/user',
             templateUrl: './src/tpls/user/userList.html',
-            controller: 'BlogListController'
+            controller: 'UserController'
+        })
+        .state('main.addUser', {//用户
+            url: '/user',
+            templateUrl: './src/tpls/user/addUser.html',
+            controller: 'UserController'
         })
         .state('main.addBlog', {//添加博客
             url: '/addBlog',
             templateUrl: './src/tpls/blog/addBlog.html',
-            controller: 'BlogListController'
+            controller: 'BlogController'
         })
         .state('main.tag', {//标签
             url: '/tag',
             templateUrl: './src/tpls/tag/tagList.html',
-            controller: 'BlogListController'
+            controller: 'TagController'
+        })
+        .state('main.addTag', {//标签
+            url: '/tag',
+            templateUrl: './src/tpls/tag/addTag.html',
+            controller: 'TagController'
         })
         .state('main.changeLog', {//更新日志
             url: '/changeLog',
             templateUrl: './src/tpls/changeLog/changeLog.html',
-            controller: 'BlogListController'
+            controller: 'ChangeLogController'
+        })
+        .state('main.addChangeLog', {//更新日志
+            url: '/changeLog',
+            templateUrl: './src/tpls/changeLog/addChangeLog.html',
+            controller: 'ChangeLogController'
         })
         .state('main.links', {//友情链接
             url: '/links',
             templateUrl: './src/tpls/links/linkList.html',
-            controller: 'BlogListController'
+            controller: 'LinkController'
+        })
+        .state('main.addLink', {//友情链接
+            url: '/links',
+            templateUrl: './src/tpls/links/addLink.html',
+            controller: 'LinkController'
         })
         .state('main.systemSet', {//系统设置
             url: '/systemSet',

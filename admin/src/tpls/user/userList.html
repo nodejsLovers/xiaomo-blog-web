@@ -1,1 +1,64 @@
-用户
+<div>
+    <div ng-class="{'alert-info':defaultClass,'alert-success':addClasss,'alert-warning':del,'alert-error':err}"
+         class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <strong>提示：</strong> {{commonInfo.msg}}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a ui-sref="main.addUser" class="btn btn-primary">新增用户</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <table class="table table-bordered table-hover table-striped ">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>邮箱</th>
+                        <th>昵称</th>
+                        <th>电话</th>
+                        <th>地址</th>
+                        <th>性别</th>
+                        <th>图像</th>
+                        <th>验证码</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th colspan="2">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="user in users.content|orderBy:'createTime':true">
+                        <td>{{$index+1}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.nickName}}</td>
+                        <td>{{user.phone}}</td>
+                        <td>{{user.address}}</td>
+                        <td>{{user.gender | transformGenderFilter}}</td>
+                        <td><img src="{{user.imgUrl}}" alt="" style="width: 30px;height:30px;"></td>
+                        <td>{{user.validateCode}}</td>
+                        <td ng-class="">{{user.validateStatus |transformStatusFilter}}</td>
+                        <td>{{user.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>{{user.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>
+                            <button class="btn btn-success">修改</button>
+                            <button class="btn btn-default">删除</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="pager">
+                    <pager page-count="pageCount" current-page="currentPage" on-page-change="onUserPageChange()"
+                           first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
+                    <div>
+                        当前显示:{{users.number+1}}/{{users.totalPages}},共{{users.totalElements}}条记录,每页显示{{users.numberOfElements}}条数据
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

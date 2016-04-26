@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">小莫后台管理系统</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal" role="form" novalidate name="loginForm">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    用户名：
+                                </label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" name="userName" placeholder="帐号"
+                                           ng-model="userInfo.userName" required ng-minlength="3" ng-maxlength="15">
+                                    <!-- 内容错误信息 -->
+                                    <div class="error"
+                                         ng-show="loginForm.userName.$dirty && loginForm.userName.$invalid">
+                                        <small class="error" ng-show="loginForm.userName.$error.required">请输入帐号</small>
+                                        <small class="error" ng-show="loginForm.userName.$error.minlength">最小长度为3
+                                        </small>
+                                        <small class="error" ng-show="loginForm.userName.$error.maxlength">最大长度为15
+                                        </small>
+                                    </div>
+                                    <!-- end -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    密码：
+                                </label>
+                                <div class="col-md-10">
+                                    <input type="password" class="form-control" placeholder="只能是数字、字母、下划线"
+                                           ng-model="userInfo.password" name="password" required ng-minlength="3"
+                                           ng-maxlength="12">
+                                    <!-- 内容错误信息 -->
+                                    <div class="error"
+                                         ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+                                        <small class="error" ng-show="loginForm.password.$error.required">请输入密码</small>
+                                        <small class="error" ng-show="loginForm.password.$error.minlength">最小长度为3
+                                        </small>
+                                        <small class="error" ng-show="loginForm.password.$error.maxlength">最大长度为15
+                                        </small>
+                                    </div>
+                                    <!-- end -->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <a ng-click="login()" class="btn btn-success btn-lg"
+                                       ng-disabled="loginForm.$invalid">登录</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>

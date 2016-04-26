@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-更新日志
-</body>
-</html>
+<div>
+    <div ng-class="{'alert-info':defaultClass,'alert-success':addClasss,'alert-warning':del,'alert-error':err}"
+         class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <strong>提示：</strong> {{commonInfo.msg}}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <a ui-sref="main.addChangeLog" class="btn btn-primary">新增更新纪录</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <table class="table table-bordered table-hover table-striped ">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名字</th>
+                        <th>创建时间</th>
+                        <th>更新时间</th>
+                        <th colspan="2">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="changeLog in changeLogs.content|orderBy:'createTime':true">
+                        <td>{{$index+1}}</td>
+                        <td>{{changeLog.name}}</td>
+                        <td>{{changeLog.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>{{changeLog.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>
+                            <button class="btn btn-success">修改</button>
+                            <button class="btn btn-default">删除</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="pager">
+                    <pager page-count="pageCount" current-page="currentPage" on-page-change="onChangeLogPageChange()"
+                           first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
+                    <div>
+                        当前显示:{{changeLogs.number+1}}/{{changeLogs.totalPages}},共{{changeLogs.totalElements}}条记录,每页显示{{changeLogs.numberOfElements}}条数据
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
