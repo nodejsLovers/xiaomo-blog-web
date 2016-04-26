@@ -22,7 +22,6 @@ angular.module("myControllerModule", [])
                  */
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
-                    console.log(data);
                     $scope.adminUsers = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                 });
@@ -44,7 +43,6 @@ angular.module("myControllerModule", [])
                     promise.then(function (data) {
                         if (data.status !== 200) {
                             alert(data.status);
-                            console.log(data);
                         } else {
                             $location.path('/main');
                         }
@@ -91,7 +89,6 @@ angular.module("myControllerModule", [])
                     promise.then(function (data) {
                         if (data.code !== 200) {
                             alert(data.code);
-                            console.log(data);
                         } else {
                             $location.path('/main');
                         }
@@ -136,7 +133,6 @@ angular.module("myControllerModule", [])
                  */
                 var tagPromise = getTagListService.operate($scope.currentPage);
                 tagPromise.then(function (data) {
-                    console.log(data.tags);
                     $scope.tags = data.tags;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
@@ -167,7 +163,6 @@ angular.module("myControllerModule", [])
                 $scope.showBlogList = function () {
                     $location.path('/main');
                 };
-                console.log($scope);
             }
         ]
     )
@@ -183,7 +178,6 @@ angular.module("myControllerModule", [])
                  */
                 var tagPromise = getTagListService.operate($scope.currentPage);
                 tagPromise.then(function (data) {
-                    console.log(data.tags);
                     $scope.tags = data.tags;
                 });
                 /**
