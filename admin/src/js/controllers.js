@@ -111,7 +111,9 @@ angular.module("myControllerModule", [])
             function ($scope,
                       $location,
                       getBlogListService,
-                      addBlogService) {
+                      addBlogService,
+                      getTagListService
+) {
                 $scope.blog = {};
                 $scope.tags = {};
                 $scope.tags.content = {};
@@ -127,6 +129,15 @@ angular.module("myControllerModule", [])
                 promise.then(function (data) {
                     $scope.blogs = data.blogs;
                     $scope.pageCount = $scope.blogs.totalPages;
+                });
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 默认载入标签信息
+                 */
+                var tagPromise = getTagListService.operate($scope.currentPage);
+                tagPromise.then(function (data) {
+                    console.log(data.tags);
+                    $scope.tags = data.tags;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -151,21 +162,8 @@ angular.module("myControllerModule", [])
                 };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
-                 * 处理标签
+                 * 处理跳转
                  */
-                $scope.operateTag = function (tid, currentTag) {
-                    //该博客中己经有这个标签就把从数组中拿掉，没有就添加到数组中
-                    for (var tag in $scope.tags) {
-                        for (var tagId in $scope.blog.tagIds) {
-                            if (tagId == tid) {
-                                $scope.blog.tagIds.splice(tid);
-                            } else {
-                                $scope.blog.tagIds.push(tid);
-                            }
-                            $scope.tags.currentTag = !currentTag;
-                        }
-                    }
-                };
                 $scope.showBlogList = function () {
                     $location.path('/main');
                 };
@@ -185,6 +183,7 @@ angular.module("myControllerModule", [])
                  */
                 var tagPromise = getTagListService.operate($scope.currentPage);
                 tagPromise.then(function (data) {
+                    console.log(data.tags);
                     $scope.tags = data.tags;
                 });
                 /**
