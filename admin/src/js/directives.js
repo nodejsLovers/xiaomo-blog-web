@@ -122,32 +122,37 @@ angular.module("myDirectiveModule", [])
     .directive('ensureUnique',
         [
             '$http',
+            '$timeout',
             'baseUrlConfig',
-            function ($http, baseUrlConfig) {
+            function ($http, $timeout, baseUrlConfig) {
                 return {
                     require: 'ngModel',
                     link: function (scope, ele, attrs, c) {
                         scope.$watch(attrs.ngModel, function (title) {
-                            if (!title) {
-                                return;
-                            }
-                            console.log(scope.blog.title);
-                            $http({
-                                method: 'GET',
-                                url: baseUrlConfig.baseUrl + '/admin/blog/findByTitle',
-                                params: {
-                                    title: title
+                            $timeout(function () {
+                                if (!title) {
+                                    return;
                                 }
-                            }).success(function (data) {
-                                if (data.code != 200) {//不重复
-                                    c.$setValidity('unique', false);
-                                } else {
-                                    c.$setValidity('unique', true);
-                                }
-                            }).error(function () {
-                                c.$setValidity('unique', true);
-                            })
-                        })
+                                console.log(scope.blog.title);
+                                $http({
+                                    method: 'GET',
+                                    url: baseUrlConfig.baseUrl + '/admin/blog/findByTitle',
+                                    params: {
+                                        title: title
+                                    }
+                                }).success(function (data) {
+                                    if (data.status != 200) {//不重复
+                                        console.log("当前状态:" + data.status);
+                                        c.$setValidity('unique', true);
+                                    } else {
+                                        c.$setValidity('unique', false);
+                                    }
+                                }).error(function () {
+                                    alert("error");
+                                })
+                            }, 1000)
+                        });
+
                     }
                 }
             }])
