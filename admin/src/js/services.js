@@ -214,7 +214,7 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-    .service('systemSetService',
+    .service('basicInfoService',
         ['$rootScope',
             '$http',
             '$q'

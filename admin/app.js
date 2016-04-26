@@ -36,7 +36,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('main', {//主界面
             url: '/main',
             templateUrl: './src/tpls/common/home.html',
-            controller:'SystemSetController'
+            controller:'BasicInfoController'
         })
 
         .state('main.blog', {//博客

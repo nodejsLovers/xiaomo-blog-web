@@ -250,14 +250,14 @@ angular.module("myControllerModule", [])
             }
         ]
     )
-    .controller('SystemSetController',
+    .controller('BasicInfoController',
         [
             '$scope',
-            'systemSetService',
-            function ($scope, systemSetService) {
+            'basicInfoService',
+            function ($scope, basicInfoService) {
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "服务系统信息！！";
-                var systemPromise = systemSetService.operate();
+                var systemPromise = basicInfoService.operate();
                 systemPromise.then(function (data) {
                     $scope.systems = data.systems;
                 });
