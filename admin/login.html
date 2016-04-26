@@ -16,8 +16,6 @@
                                     用户名：
                                 </label>
                                 <div class="col-md-10">
-                                    <input type="text" class="form-control" name="userName" placeholder="帐号"
-                                           ng-model="userInfo.userName" required ng-minlength="3" ng-maxlength="15">
                                     <!-- 内容错误信息 -->
                                     <div class="error"
                                          ng-show="loginForm.userName.$dirty && loginForm.userName.$invalid">
@@ -28,6 +26,8 @@
                                         </small>
                                     </div>
                                     <!-- end -->
+                                    <input type="text" class="form-control" name="userName" placeholder="帐号"
+                                           ng-model="userInfo.userName" required ng-minlength="3" ng-maxlength="15">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -35,9 +35,6 @@
                                     密码：
                                 </label>
                                 <div class="col-md-10">
-                                    <input type="password" class="form-control" placeholder="只能是数字、字母、下划线"
-                                           ng-model="userInfo.password" name="password" required ng-minlength="3"
-                                           ng-maxlength="12">
                                     <!-- 内容错误信息 -->
                                     <div class="error"
                                          ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
@@ -48,6 +45,9 @@
                                         </small>
                                     </div>
                                     <!-- end -->
+                                    <input type="password" class="form-control" placeholder="只能是数字、字母、下划线"
+                                           ng-model="userInfo.password" name="password" required ng-minlength="3"
+                                           ng-maxlength="12">
                                 </div>
                             </div>
                             <div class="form-group">
