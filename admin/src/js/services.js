@@ -218,16 +218,13 @@ angular.module("myServiceModule", [])
         ['$rootScope',
             '$http',
             '$q'
-        ], function ($rootScope, $http, $q) {
+            , function ($rootScope, $http, $q) {
             var result = {};
-            result.operate = function (current) {
+            result.operate = function () {
                 var deferred = $q.defer();
                 $http({
                     headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
-                    url: $rootScope.$baseUrl + "/admin/user/findAll",
-                    params: {
-                        start: current <= 0 ? 1 : current
-                    },
+                    url: "http://localhost:8889" + "/admin/system/getSystem",
                     method: 'GET'
                 })
                     .success(function (data) {
@@ -239,6 +236,8 @@ angular.module("myServiceModule", [])
                 return deferred.promise;
             };
             return result;
-        });
+        }
+        ]
+    );
 
 

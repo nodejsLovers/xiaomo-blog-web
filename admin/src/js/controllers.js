@@ -253,8 +253,14 @@ angular.module("myControllerModule", [])
     .controller('SystemSetController',
         [
             '$scope',
-            function ($scope, $location) {
-
+            'systemSetService',
+            function ($scope, systemSetService) {
+                $scope.commonInfo = {};
+                $scope.commonInfo.msg = "服务系统信息！！";
+                var systemPromise = systemSetService.operate();
+                systemPromise.then(function (data) {
+                    $scope.systems = data.systems;
+                });
             }
         ]
     );

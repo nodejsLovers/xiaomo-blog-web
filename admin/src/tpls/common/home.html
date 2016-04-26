@@ -9,6 +9,54 @@
         <a ui-sref="main.systemSet" class="list-group-item">系统设置</a>
     </div>
     <div ui-view class="col-md-10">
-        小莫...
+        <div>
+            <div ng-class="{'alert-info':defaultClass,'alert-success':addClasss,'alert-warning':del,'alert-error':err}"
+                 class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <strong>提示：</strong> {{commonInfo.msg}}
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <table class="table table-bordered table-hover table-striped ">
+                            <tr>
+                                <td>服务提供商</td>
+                                <td>{{systems.javaVendor}}</td>
+                            </tr>
+                            <tr>
+                                <td>服务提供商地址</td>
+                                <td>{{systems.javaVendorUrl}}</td>
+                            </tr>
+                            <tr>
+                                <td>操作系统版本</td>
+                                <td>{{systems.osVersion}}</td>
+                            </tr>
+                            <tr>
+                                <td>JAVA版本</td>
+                                <td>{{systems.javaVersion}}</td>
+                            </tr>
+                            <tr>
+                                <td>java安装目录</td>
+                                <td>{{systems.javaHome}}</td>
+                            </tr>
+                            <tr>
+                                <td>操作系统名称</td>
+                                <td>{{systems.osName}}</td>
+                            </tr>
+                            <tr>
+                                <td>用户帐号</td>
+                                <td>{{systems.userName}}</td>
+                            </tr>
+                            <tr>
+                                <td>用户目录</td>
+                                <td>{{systems.userDir}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
     </div>
 </div>

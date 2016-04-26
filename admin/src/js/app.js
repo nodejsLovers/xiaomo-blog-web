@@ -35,7 +35,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('main', {//主界面
             url: '/main',
-            templateUrl: './src/tpls/common/home.html'
+            templateUrl: './src/tpls/common/home.html',
+            controller:'SystemSetController'
         })
 
         .state('main.blog', {//博客
@@ -100,7 +101,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('main.systemSet', {//系统设置
             url: '/systemSet',
-            templateUrl: './src/tpls/systemSet/systemSet.html',
-            controller: 'SystemSetController'
+            templateUrl: './src/tpls/systemSet/systemSet.html'
         })
 });
