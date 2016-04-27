@@ -53,23 +53,24 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-    .service('deleteAdminUserService',//删除管理员账户
+    .service('deleteAdminService',//删除管理员账户
         ['$rootScope',
             '$http',
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (adminUserId) {
+                result.operate = function (adminId) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        url: $rootScope.$baseUrl + "/admin/adminUser/deleteBlogById",
+                        url: $rootScope.$baseUrl + "/admin/adminUser/deleteById",
                         method: 'GET',
                         dataType: 'json',
                         params: {
-                            id: adminUserId
+                            id: adminId,
+                            operator:'xiaomo'
                         }
                     })
                         .success(function (data) {

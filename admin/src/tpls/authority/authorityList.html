@@ -35,7 +35,7 @@
                         <td>{{adminUser.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
                             <button class="btn btn-success">修改</button>
-                            <button class="btn btn-default">删除</button>
+                            <button class="btn btn-default" ng-click="deleteAdmin(adminUser.id)">删除</button>
                         </td>
                     </tr>
                     </tbody>

@@ -6,12 +6,10 @@ angular.module("myControllerModule", [])
     .controller('AdminController',//后台用户
         [
             '$scope',
-            '$http',
             '$location',
             'adminLoginService',
             'getAdminUserService',
             function ($scope,
-                      $http,
                       $location,
                       adminLoginService,
                       getAdminUserService) {
@@ -27,6 +25,22 @@ angular.module("myControllerModule", [])
                     $scope.adminUsers = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                 });
+                /* ===========================================================我是分割线===========================================================================*/
+                // /**
+                //  * 删除后台用户
+                //  */
+                // $scope.deleteAdmin = function (adminUserId) {
+                //     var deletePromise = deleteAdminService.operate(adminUserId);
+                //     deletePromise.then(function (data) {
+                //         if (data.status == 200) {
+                //             var promise = getAdminUserService.operate($scope.currentPage);
+                //             promise.then(function (data) {
+                //                 $scope.adminUsers = data.adminUsers;
+                //                 $scope.pageCount = $scope.adminUsers.totalPages;
+                //             });
+                //         }
+                //     });
+                // };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 后台用户管理信息翻页
@@ -58,11 +72,9 @@ angular.module("myControllerModule", [])
     .controller('UserController',//用户
         [
             '$scope',
-            '$http',
             '$location',
             'userService',
             function ($scope,
-                      $http,
                       $location,
                       userService) {
                 /* ===========================================================我是分割线===========================================================================*/
@@ -181,8 +193,11 @@ angular.module("myControllerModule", [])
     .controller('TagController',
         [
             '$scope',
+            'deleteTagService',
             'getTagListService',
-            function ($scope, getTagListService) {
+            function ($scope,
+                      deleteTagService,
+                      getTagListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到标签列表页！！";
@@ -202,9 +217,25 @@ angular.module("myControllerModule", [])
                     var promise = getTagListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         $scope.tags = data.tags;
+                        $scope.pageCount = $scope.tags.totalPages;
                     });
                 };
                 /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 删除标签
+                 */
+                $scope.deleteTag = function (tagId) {
+                    var deletePromise = deleteTagService.operate(tagId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getTagListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.tags = data.tags;
+                                $scope.pageCount = $scope.tags.totalPages;
+                            });
+                        }
+                    });
+                };
             }
         ]
     )
@@ -239,7 +270,8 @@ angular.module("myControllerModule", [])
         ]
     )
     .controller('ChangeLogController',
-        ['$scope',
+        [
+            '$scope',
             'changeLogListService',
             function ($scope, changeLogListService) {
                 /* ===========================================================我是分割线===========================================================================*/
