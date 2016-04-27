@@ -17,6 +17,9 @@
 input.ng-valid {
     border: 1px solid green;
 }
-th,td{
+
+th, td {
     text-align: center;
+    height: 30px !important;
+    line-height: 30px !important;
 }

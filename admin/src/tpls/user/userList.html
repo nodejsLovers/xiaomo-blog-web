@@ -40,7 +40,10 @@
                         <td>{{user.gender | transformGenderFilter}}</td>
                         <td><img src="{{user.imgUrl}}" alt="" style="width: 30px;height:30px;"></td>
                         <td>{{user.validateCode}}</td>
-                        <td ng-class="">{{user.validateStatus |transformStatusFilter}}</td>
+                        <td class="alert"
+                            ng-class="{'alert-success':user.validateStatus==1,'alert-danger':user.validateStatus==2}">
+                            {{user.validateStatus |transformStatusFilter}}
+                        </td>
                         <td>{{user.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>{{user.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>

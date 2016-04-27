@@ -6,18 +6,19 @@ angular.module("myControllerModule", [])
     .controller('AdminController',//后台用户
         [
             '$scope',
-            '$http',
             '$location',
+            'deleteAdminService',
             'adminLoginService',
             'getAdminUserService',
             function ($scope,
-                      $http,
                       $location,
+                      deleteAdminService,
                       adminLoginService,
                       getAdminUserService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
+                $scope.commonInfo.isActive = false;
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 默认载入后台用户管理信息
@@ -27,6 +28,22 @@ angular.module("myControllerModule", [])
                     $scope.adminUsers = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                 });
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 删除后台用户
+                 */
+                $scope.deleteAdmin = function (adminUserId) {
+                    var deletePromise = deleteAdminService.operate(adminUserId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getAdminUserService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.adminUsers = data.adminUsers;
+                                $scope.pageCount = $scope.adminUsers.totalPages;
+                            });
+                        }
+                    });
+                };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 后台用户管理信息翻页
@@ -58,11 +75,9 @@ angular.module("myControllerModule", [])
     .controller('UserController',//用户
         [
             '$scope',
-            '$http',
             '$location',
             'userService',
             function ($scope,
-                      $http,
                       $location,
                       userService) {
                 /* ===========================================================我是分割线===========================================================================*/
@@ -97,11 +112,13 @@ angular.module("myControllerModule", [])
             '$location',
             'getBlogListService',
             'addBlogService',
+            'deleteBlogService',
             'getTagListService',
             function ($scope,
                       $location,
                       getBlogListService,
                       addBlogService,
+                      deleteBlogService,
                       getTagListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.blog = {};
@@ -149,6 +166,22 @@ angular.module("myControllerModule", [])
                     $scope.addClasss = true;
                     $location.path('/main');
                 };
+                /**
+                 * 删除博客
+                 */
+                $scope.deleteBlog = function (blogId) {
+                    var deletePromise = deleteBlogService.operate(blogId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getBlogListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.blogs = data.blogs;
+                                $scope.pageCount = $scope.blogs.totalPages;
+                            });
+                        }
+                    });
+                };
+
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 处理跳转
@@ -163,8 +196,11 @@ angular.module("myControllerModule", [])
     .controller('TagController',
         [
             '$scope',
+            'deleteTagService',
             'getTagListService',
-            function ($scope, getTagListService) {
+            function ($scope,
+                      deleteTagService,
+                      getTagListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到标签列表页！！";
@@ -184,17 +220,36 @@ angular.module("myControllerModule", [])
                     var promise = getTagListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         $scope.tags = data.tags;
+                        $scope.pageCount = $scope.tags.totalPages;
                     });
                 };
                 /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 删除标签
+                 */
+                $scope.deleteTag = function (tagId) {
+                    var deletePromise = deleteTagService.operate(tagId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getTagListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.tags = data.tags;
+                                $scope.pageCount = $scope.tags.totalPages;
+                            });
+                        }
+                    });
+                };
             }
         ]
     )
     .controller('LinkController',
         [
             '$scope',
+            'deleteLinkService',
             'linkListService',
-            function ($scope, linkListService) {
+            function ($scope,
+                      deleteLinkService,
+                      linkListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到友情链接列表页！！";
@@ -205,6 +260,7 @@ angular.module("myControllerModule", [])
                 var linkPromise = linkListService.operate($scope.currentPage);
                 linkPromise.then(function (data) {
                     $scope.links = data.links;
+                    $scope.pageCount = $scope.links.totalPages;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -214,16 +270,31 @@ angular.module("myControllerModule", [])
                     var promise = linkListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         $scope.links = data.links;
+                        $scope.pageCount = $scope.links.totalPages;
                     });
+                };
+                $scope.deleteLink = function (linkId) {
+                    var deletePromise = deleteLinkService.operate(linkId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = linkListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.links = data.links;
+                                $scope.pageCount = $scope.links.totalPages;
+                            });
+                        }
+                    })
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
         ]
     )
     .controller('ChangeLogController',
-        ['$scope',
+        [
+            '$scope',
+            'deleteChangeLogService',
             'changeLogListService',
-            function ($scope, changeLogListService) {
+            function ($scope, deleteChangeLogService, changeLogListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 默认更新日志标签信息
@@ -234,6 +305,7 @@ angular.module("myControllerModule", [])
                 var linkPromise = changeLogListService.operate($scope.currentPage);
                 linkPromise.then(function (data) {
                     $scope.changeLogs = data.changeLogs;
+                    $scope.pageCount = $scope.changeLogs.totalPages;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -243,9 +315,22 @@ angular.module("myControllerModule", [])
                     var promise = changeLogListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         $scope.changeLogs = data.changeLogs;
+                        $scope.pageCount = $scope.changeLogs.totalPages;
                     });
                 };
                 /* ===========================================================我是分割线===========================================================================*/
+                $scope.deleteChangeLog = function (changeLogId) {
+                    var deletePromise = deleteChangeLogService.operate(changeLogId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = changeLogListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.changeLogs = data.changeLogs;
+                                $scope.pageCount = $scope.changeLogs.totalPages;
+                            });
+                        }
+                    })
+                }
             }
         ]
     )

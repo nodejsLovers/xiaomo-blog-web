@@ -38,10 +38,14 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/common/home.html',
             controller:'BasicInfoController'
         })
-
-        .state('main.blog', {//博客
+        .state('main.blog', {//博客列表
             url: '/blog',
             templateUrl: './src/tpls/blog/blogList.html',
+            controller: 'BlogController'
+        })
+        .state('main.addBlog', {//添加博客
+            url: '/addBlog',
+            templateUrl: './src/tpls/blog/addBlog.html',
             controller: 'BlogController'
         })
         .state('main.authority', {//权限
@@ -54,47 +58,42 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/authority/AddAuthority.html',
             controller:'AdminController'
         })
-        .state('main.user', {//用户
+        .state('main.user', {//用户列表
             url: '/user',
             templateUrl: './src/tpls/user/userList.html',
             controller: 'UserController'
         })
-        .state('main.addUser', {//用户
+        .state('main.addUser', {//添加用户
             url: '/user',
             templateUrl: './src/tpls/user/addUser.html',
             controller: 'UserController'
         })
-        .state('main.addBlog', {//添加博客
-            url: '/addBlog',
-            templateUrl: './src/tpls/blog/addBlog.html',
-            controller: 'BlogController'
-        })
-        .state('main.tag', {//标签
+        .state('main.tag', {//标签列表
             url: '/tag',
             templateUrl: './src/tpls/tag/tagList.html',
             controller: 'TagController'
         })
-        .state('main.addTag', {//标签
+        .state('main.addTag', {//添加标签
             url: '/tag',
             templateUrl: './src/tpls/tag/addTag.html',
             controller: 'TagController'
         })
-        .state('main.changeLog', {//更新日志
+        .state('main.changeLog', {//更新日志列表
             url: '/changeLog',
             templateUrl: './src/tpls/changeLog/changeLog.html',
             controller: 'ChangeLogController'
         })
-        .state('main.addChangeLog', {//更新日志
+        .state('main.addChangeLog', {//添加更新日志
             url: '/changeLog',
             templateUrl: './src/tpls/changeLog/addChangeLog.html',
             controller: 'ChangeLogController'
         })
-        .state('main.links', {//友情链接
+        .state('main.links', {//友情链接列表
             url: '/links',
             templateUrl: './src/tpls/links/linkList.html',
             controller: 'LinkController'
         })
-        .state('main.addLink', {//友情链接
+        .state('main.addLink', {//添加友情链接
             url: '/links',
             templateUrl: './src/tpls/links/addLink.html',
             controller: 'LinkController'
