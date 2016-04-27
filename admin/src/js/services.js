@@ -53,6 +53,37 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('deleteAdminUserService',//删除管理员账户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (adminUserId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/adminUser/deleteBlogById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: adminUserId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("删除成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("删除失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('getBlogListService',//博客列表
         [
             '$rootScope',
@@ -166,6 +197,37 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('deleteUserService',//删除用户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (userId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/user/deleteById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: userId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("删除成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("删除失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('getTagListService',//获取标签列表
         [
             '$rootScope',
@@ -188,6 +250,37 @@ angular.module("myServiceModule", [])
                         })
                         .error(function () {
                             deferred.reject();
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('deleteTagService',//删除友情连接
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (tagId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/tag/delete",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: tagId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("删除成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("删除失败！")
                         });
                     return deferred.promise;
                 };
@@ -219,6 +312,37 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('deleteChangeLogService',//删除更新日志
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (changeLogId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/changeLogId/deleteById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: changeLogId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("删除成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("删除失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('linkListService',//友情链接
         ['$rootScope',
             '$http',
@@ -240,6 +364,37 @@ angular.module("myServiceModule", [])
                         })
                         .error(function () {
                             deferred.reject();
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('deleteLinkService',//删除友情连接
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (linkId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/link/delete",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: linkId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("删除成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("删除失败！")
                         });
                     return deferred.promise;
                 };
