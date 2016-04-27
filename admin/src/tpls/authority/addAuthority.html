@@ -1,1 +1,71 @@
-<div>添加权限</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">新增管理员</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- fixme 要点1：给form起一个名字,并禁掉原生的验证  -->
+                <form class="form-horizontal" name="addAdminUserForm" role="form" novalidate>
+                    <!-- 用户名 -->
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            帐号：
+                        </label>
+                        <div class="col-md-10">
+                            <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
+                            <!-- 错误信息 -->
+                            <div class="error"
+                                 ng-show="addAdminUserForm.userName.$dirty && addAdminUserForm.userName.$invalid">
+                                <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
+                                <small class="error" ng-show="addAdminUserForm.userName.$error.required">请输入用户名</small>
+                                <small class="error" ng-show="addAdminUserForm.userName.$error.minlength">用户名最少长度为3
+                                </small>
+                                <small class="error" ng-show="addAdminUserForm.userName.$error.maxlength">用户名最大长度为64
+                                </small>
+                                <small class="error" ng-show="addAdminUserForm.userName.$error.unique">
+                                    这个用户名己经用过了，请换一个吧
+                                </small>
+                            </div>
+                            <!-- end -->
+                            <input type="text" name="userName" class="form-control" placeholder="最多12个字符"
+                                   ng-model="adminUser.userName" required ng-minlength="3" ng-maxlength="12"
+                                   ensure-unique="userName">
+                        </div>
+                    </div>
+                    <!-- 密码 -->
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            密 码：
+                        </label>
+                        <div class="col-md-10">
+                            <!-- 错误信息 -->
+                            <div class="error"
+                                 ng-show="addAdminUserForm.password.$dirty && addAdminUserForm.password.$invalid">
+                                <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
+                                <small class="error" ng-show="addAdminUserForm.password.$error.required">请输入密码</small>
+                                <small class="error" ng-show="addAdminUserForm.password.$error.minlength">密码最少长度为3
+                                </small>
+                                <small class="error" ng-show="addAdminUserForm.password.$error.maxlength">密码最大长度为64
+                                </small>
+                            </div>
+                            <!-- end -->
+                            <input type="password" name="password" class="form-control" placeholder="最多12个字符"
+                                   ng-model="adminUser.password" required ng-minlength="3" ng-maxlength="12"
+                                   ng-init="adminUser.password=123456">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
+                            <button ng-click="addAdminUser()" class="btn btn-info"
+                                    ng-disabled="addAdminUserForm.$invalid">添加管理员账户
+                            </button>
+                            <button ng-click="showAdminUserList()" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
