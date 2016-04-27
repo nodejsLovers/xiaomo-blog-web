@@ -7,15 +7,18 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$location',
+            'deleteAdminService',
             'adminLoginService',
             'getAdminUserService',
             function ($scope,
                       $location,
+                      deleteAdminService,
                       adminLoginService,
                       getAdminUserService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
+                $scope.commonInfo.isActive = false;
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 默认载入后台用户管理信息
@@ -26,21 +29,21 @@ angular.module("myControllerModule", [])
                     $scope.pageCount = $scope.adminUsers.totalPages;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
-                // /**
-                //  * 删除后台用户
-                //  */
-                // $scope.deleteAdmin = function (adminUserId) {
-                //     var deletePromise = deleteAdminService.operate(adminUserId);
-                //     deletePromise.then(function (data) {
-                //         if (data.status == 200) {
-                //             var promise = getAdminUserService.operate($scope.currentPage);
-                //             promise.then(function (data) {
-                //                 $scope.adminUsers = data.adminUsers;
-                //                 $scope.pageCount = $scope.adminUsers.totalPages;
-                //             });
-                //         }
-                //     });
-                // };
+                /**
+                 * 删除后台用户
+                 */
+                $scope.deleteAdmin = function (adminUserId) {
+                    var deletePromise = deleteAdminService.operate(adminUserId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getAdminUserService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.adminUsers = data.adminUsers;
+                                $scope.pageCount = $scope.adminUsers.totalPages;
+                            });
+                        }
+                    });
+                };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 后台用户管理信息翻页
