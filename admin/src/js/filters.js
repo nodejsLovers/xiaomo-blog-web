@@ -28,7 +28,7 @@ angular.module("myFilterModule", [])
         } else if (content == 2) {
             return '异常';
         } else {
-            return '未知';
+            return '默认';
         }
     }
 });
