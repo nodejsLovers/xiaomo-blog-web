@@ -109,6 +109,37 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('deleteBlogService',//删除博客
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (blogId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/blog/deleteBlogById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: blogId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("删除成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("删除失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('userService',//前台用户列表
         ['$rootScope',
             '$http',

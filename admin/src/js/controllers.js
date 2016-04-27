@@ -97,11 +97,13 @@ angular.module("myControllerModule", [])
             '$location',
             'getBlogListService',
             'addBlogService',
+            'deleteBlogService',
             'getTagListService',
             function ($scope,
                       $location,
                       getBlogListService,
                       addBlogService,
+                      deleteBlogService,
                       getTagListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.blog = {};
@@ -149,6 +151,22 @@ angular.module("myControllerModule", [])
                     $scope.addClasss = true;
                     $location.path('/main');
                 };
+                /**
+                 * 删除博客
+                 */
+                $scope.deleteBlog = function (blogId) {
+                    var deletePromise = deleteBlogService.operate(blogId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getBlogListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.blogs = data.blogs;
+                                $scope.pageCount = $scope.blogs.totalPages;
+                            });
+                        }
+                    });
+                };
+
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 处理跳转
