@@ -10,11 +10,13 @@ angular.module("myControllerModule", [])
             'deleteAdminService',
             'adminLoginService',
             'getAdminUserService',
+            'addAdminService',
             function ($scope,
                       $location,
                       deleteAdminService,
                       adminLoginService,
-                      getAdminUserService) {
+                      getAdminUserService,
+                      addAdminService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
@@ -55,9 +57,10 @@ angular.module("myControllerModule", [])
                 /**
                  * 增加后台用户
                  */
-                $scope.addAdminUser = function (adminUserId) {
-                    var deletePromise = deleteAdminService.operate(adminUserId);
-                    deletePromise.then(function (data) {
+                $scope.addAdminUser = function (userName,password,authLevel) {
+                    console.log(authLevel);
+                    var addPromise = addAdminService.operate(userName,password,authLevel);
+                    addPromise.then(function (data) {
                         if (data.status == 200) {
                             var promise = getAdminUserService.operate($scope.currentPage);
                             promise.then(function (data) {

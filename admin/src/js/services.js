@@ -53,6 +53,40 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('addAdminService',//添加管理员账户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (userName,password,authLevel) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/adminUser/add",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            operator: 'xiaomo',
+                            userName:userName,
+                            password:password,
+                            authLevel:authLevel
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("添加成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("添加失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteAdminService',//删除管理员账户
         ['$rootScope',
             '$http',
