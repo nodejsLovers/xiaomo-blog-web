@@ -273,7 +273,7 @@ angular.module("myControllerModule", [])
                 $scope.deleteLink = function (linkId) {
                     var deletePromise = deleteLinkService.operate(linkId);
                     deletePromise.then(function (data) {
-                        if(data.status==200){
+                        if (data.status == 200) {
                             var promise = linkListService.operate($scope.currentPage);
                             promise.then(function (data) {
                                 $scope.links = data.links;
@@ -289,8 +289,9 @@ angular.module("myControllerModule", [])
     .controller('ChangeLogController',
         [
             '$scope',
+            'deleteChangeLogService',
             'changeLogListService',
-            function ($scope, changeLogListService) {
+            function ($scope, deleteChangeLogService, changeLogListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 默认更新日志标签信息
@@ -301,6 +302,7 @@ angular.module("myControllerModule", [])
                 var linkPromise = changeLogListService.operate($scope.currentPage);
                 linkPromise.then(function (data) {
                     $scope.changeLogs = data.changeLogs;
+                    $scope.pageCount = $scope.changeLogs.totalPages;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -310,9 +312,22 @@ angular.module("myControllerModule", [])
                     var promise = changeLogListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         $scope.changeLogs = data.changeLogs;
+                        $scope.pageCount = $scope.changeLogs.totalPages;
                     });
                 };
                 /* ===========================================================我是分割线===========================================================================*/
+                $scope.deleteChangeLog = function (changeLogId) {
+                    var deletePromise = deleteChangeLogService.operate(changeLogId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = changeLogListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.changeLogs = data.changeLogs;
+                                $scope.pageCount = $scope.changeLogs.totalPages;
+                            });
+                        }
+                    })
+                }
             }
         ]
     )

@@ -325,7 +325,7 @@ angular.module("myServiceModule", [])
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        url: $rootScope.$baseUrl + "/admin/changeLogId/deleteById",
+                        url: $rootScope.$baseUrl + "/admin/changeLog/deleteById",
                         method: 'GET',
                         dataType: 'json',
                         params: {
