@@ -242,8 +242,11 @@ angular.module("myControllerModule", [])
     .controller('LinkController',
         [
             '$scope',
+            'deleteLinkService',
             'linkListService',
-            function ($scope, linkListService) {
+            function ($scope,
+                      deleteLinkService,
+                      linkListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到友情链接列表页！！";
@@ -254,6 +257,7 @@ angular.module("myControllerModule", [])
                 var linkPromise = linkListService.operate($scope.currentPage);
                 linkPromise.then(function (data) {
                     $scope.links = data.links;
+                    $scope.pageCount = $scope.links.totalPages;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -263,7 +267,20 @@ angular.module("myControllerModule", [])
                     var promise = linkListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         $scope.links = data.links;
+                        $scope.pageCount = $scope.links.totalPages;
                     });
+                };
+                $scope.deleteLink = function (linkId) {
+                    var deletePromise = deleteLinkService.operate(linkId);
+                    deletePromise.then(function (data) {
+                        if(data.status==200){
+                            var promise = linkListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.links = data.links;
+                                $scope.pageCount = $scope.links.totalPages;
+                            });
+                        }
+                    })
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
