@@ -18,7 +18,6 @@ angular.module("myControllerModule", [])
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
-                $scope.commonInfo.isActive = false;
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 默认载入后台用户管理信息
@@ -28,22 +27,6 @@ angular.module("myControllerModule", [])
                     $scope.adminUsers = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                 });
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 删除后台用户
-                 */
-                $scope.deleteAdmin = function (adminUserId) {
-                    var deletePromise = deleteAdminService.operate(adminUserId);
-                    deletePromise.then(function (data) {
-                        if (data.status == 200) {
-                            var promise = getAdminUserService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                $scope.adminUsers = data.adminUsers;
-                                $scope.pageCount = $scope.adminUsers.totalPages;
-                            });
-                        }
-                    });
-                };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 后台用户管理信息翻页
@@ -67,6 +50,45 @@ angular.module("myControllerModule", [])
                             $location.path('/main');
                         }
                     })
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 增加后台用户
+                 */
+                $scope.addAdminUser = function (adminUserId) {
+                    var deletePromise = deleteAdminService.operate(adminUserId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getAdminUserService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.adminUsers = data.adminUsers;
+                                $scope.pageCount = $scope.adminUsers.totalPages;
+                            });
+                        }
+                    });
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 删除后台用户
+                 */
+                $scope.deleteAdmin = function (adminUserId) {
+                    var deletePromise = deleteAdminService.operate(adminUserId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getAdminUserService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.adminUsers = data.adminUsers;
+                                $scope.pageCount = $scope.adminUsers.totalPages;
+                            });
+                        }
+                    });
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 处理跳转
+                 */
+                $scope.showAdminUserList = function () {
+                    $location.path('/main/authority');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
@@ -101,6 +123,13 @@ angular.module("myControllerModule", [])
                     userOnPagePromise.then(function (data) {
                         $scope.users = data.users;
                     });
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 处理跳转
+                 */
+                $scope.showUserList = function () {
+                    $location.path('/main/user');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
@@ -164,8 +193,9 @@ angular.module("myControllerModule", [])
                     $scope.blog.blogType = 1;
                     addBlogService.addBlog($scope.blog);
                     $scope.addClasss = true;
-                    $location.path('/main');
+                    $location.path('/main/blog');
                 };
+                /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 删除博客
                  */
@@ -181,13 +211,12 @@ angular.module("myControllerModule", [])
                         }
                     });
                 };
-
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 处理跳转
                  */
                 $scope.showBlogList = function () {
-                    $location.path('/main');
+                    $location.path('/main/blog');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
@@ -196,9 +225,11 @@ angular.module("myControllerModule", [])
     .controller('TagController',
         [
             '$scope',
+            '$location',
             'deleteTagService',
             'getTagListService',
             function ($scope,
+                      $location,
                       deleteTagService,
                       getTagListService) {
                 /* ===========================================================我是分割线===========================================================================*/
@@ -239,15 +270,25 @@ angular.module("myControllerModule", [])
                         }
                     });
                 };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 处理跳转
+                 */
+                $scope.showTagList = function () {
+                    $location.path('/main/blog');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
             }
         ]
     )
     .controller('LinkController',
         [
             '$scope',
+            '$location',
             'deleteLinkService',
             'linkListService',
             function ($scope,
+                      $location,
                       deleteLinkService,
                       linkListService) {
                 /* ===========================================================我是分割线===========================================================================*/
@@ -286,15 +327,26 @@ angular.module("myControllerModule", [])
                     })
                 };
                 /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 处理跳转
+                 */
+                $scope.showLinkList = function () {
+                    $location.path('/main/link');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
             }
         ]
     )
     .controller('ChangeLogController',
         [
             '$scope',
+            '$location',
             'deleteChangeLogService',
             'changeLogListService',
-            function ($scope, deleteChangeLogService, changeLogListService) {
+            function ($scope,
+                      $location,
+                      deleteChangeLogService,
+                      changeLogListService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 默认更新日志标签信息
@@ -330,15 +382,26 @@ angular.module("myControllerModule", [])
                             });
                         }
                     })
-                }
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 处理跳转
+                 */
+                $scope.showChangeLogList = function () {
+                    $location.path('/main/changeLog');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
             }
         ]
     )
     .controller('BasicInfoController',
         [
             '$scope',
+            '$location',
             'basicInfoService',
-            function ($scope, basicInfoService) {
+            function ($scope,
+                      $location,
+                      basicInfoService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "服务系统信息！！";
