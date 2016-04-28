@@ -8,8 +8,8 @@ angular.module("myAnimateModule", [])
                 element.css({
                         opacity: 0.4,
                         position: "relative",
-                        top: "1px",
-                        left: "1px"
+                        // top: "1px",
+                        // left: "1px"
                     })
                     .animate({
                         top: 0,

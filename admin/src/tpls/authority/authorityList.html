@@ -26,7 +26,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="adminUser in adminUsers.content|orderBy:'status':true">
+                    <tr ng-repeat="adminUser in adminUsers.content|orderBy:'status':true" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{adminUser.userName}}</td>
                         <td class="alert"
