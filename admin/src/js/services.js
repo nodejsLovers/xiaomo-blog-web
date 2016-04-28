@@ -59,7 +59,7 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (userName,password,authLevel) {
+                result.operate = function (userName, password, authLevel) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -70,9 +70,9 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             operator: 'xiaomo',
-                            userName:userName,
-                            password:password,
-                            authLevel:authLevel.id
+                            userName: userName,
+                            password: password,
+                            authLevel: authLevel.id
                         }
                     })
                         .success(function (data) {
@@ -104,7 +104,7 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             id: adminId,
-                            operator:'xiaomo'
+                            operator: 'xiaomo'
                         }
                     })
                         .success(function (data) {
@@ -114,6 +114,37 @@ angular.module("myServiceModule", [])
                         .error(function () {
                             deferred.reject();
                             alert("删除失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('findAdminUserService',//根据id查找管理员账户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (adminId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/adminUser/findById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: adminId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("查找成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("查找失败！")
                         });
                     return deferred.promise;
                 };
