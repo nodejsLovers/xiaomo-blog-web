@@ -20,6 +20,8 @@ angular.module("myControllerModule", [])
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
+                $scope.adminUser = {};
+                $scope.adminUser.authLevels = [{'id': 1, 'name': '超级管理员'}, {'id': 2, 'name': '普通管理员'}];
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 默认载入后台用户管理信息
@@ -57,9 +59,9 @@ angular.module("myControllerModule", [])
                 /**
                  * 增加后台用户
                  */
-                $scope.addAdminUser = function (userName,password,authLevel) {
+                $scope.addAdminUser = function (userName, password, authLevel) {
                     console.log(authLevel);
-                    var addPromise = addAdminService.operate(userName,password,authLevel);
+                    var addPromise = addAdminService.operate(userName, password, authLevel);
                     addPromise.then(function (data) {
                         if (data.status == 200) {
                             var promise = getAdminUserService.operate($scope.currentPage);

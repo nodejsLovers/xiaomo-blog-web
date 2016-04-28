@@ -72,7 +72,7 @@ angular.module("myServiceModule", [])
                             operator: 'xiaomo',
                             userName:userName,
                             password:password,
-                            authLevel:authLevel
+                            authLevel:authLevel.id
                         }
                     })
                         .success(function (data) {

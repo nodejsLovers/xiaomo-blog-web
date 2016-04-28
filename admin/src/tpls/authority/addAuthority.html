@@ -61,11 +61,10 @@
                             权限：
                         </label>
                         <div class="col-md-10">
-                            <select title="权限" ng-init="adminUser.authLevel=0">
-                                <option value="0">请选择</option>
-                                <option value="1">超级管理员</option>
-                                <option value="2">普通管理员</option>
+                            <select title="权限" ng-model="adminUser.authLevel" ng-options="authLevel.name for authLevel in adminUser.authLevels">
+                                <option value="">-- 请选择 --</option>
                             </select>
+                            {{authLevel}}
                         </div>
                     </div>
                     <div class="form-group">
