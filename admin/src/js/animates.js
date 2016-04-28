@@ -6,10 +6,10 @@ angular.module("myAnimateModule", [])
         return {
             enter: function (element, done) {
                 element.css({
-                        opacity: 0.5,
+                        opacity: 0.4,
                         position: "relative",
-                        top: "10px",
-                        left: "20px"
+                        top: "1px",
+                        left: "1px"
                     })
                     .animate({
                         top: 0,
