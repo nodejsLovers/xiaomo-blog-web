@@ -30,7 +30,7 @@
                             <!-- end -->
                             <input type="text" name="userName" class="form-control" placeholder="最多12个字符"
                                    ng-model="adminUser.userName" required ng-minlength="3" ng-maxlength="12"
-                            >
+                                   ensure-admin-user-unique="userName">
                         </div>
                     </div>
                     <!-- 密码 -->
