@@ -54,7 +54,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller:'AdminController'
         })
         .state('main.addAuthority', {//权限
-            url: '/authority',
+            url: '/addAuthority',
             templateUrl: './src/tpls/authority/AddAuthority.html',
             controller:'AdminController'
         })
@@ -64,7 +64,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'UserController'
         })
         .state('main.addUser', {//添加用户
-            url: '/user',
+            url: '/addUser',
             templateUrl: './src/tpls/user/addUser.html',
             controller: 'UserController'
         })
@@ -74,7 +74,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'TagController'
         })
         .state('main.addTag', {//添加标签
-            url: '/tag',
+            url: '/addTag',
             templateUrl: './src/tpls/tag/addTag.html',
             controller: 'TagController'
         })
@@ -84,7 +84,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'ChangeLogController'
         })
         .state('main.addChangeLog', {//添加更新日志
-            url: '/changeLog',
+            url: '/addChangeLog',
             templateUrl: './src/tpls/changeLog/addChangeLog.html',
             controller: 'ChangeLogController'
         })
@@ -94,7 +94,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'LinkController'
         })
         .state('main.addLink', {//添加友情链接
-            url: '/links',
+            url: '/addLink',
             templateUrl: './src/tpls/links/addLink.html',
             controller: 'LinkController'
         })

@@ -11,24 +11,35 @@ angular.module("myFilterModule", [])
         return currentId !== pointId;
     };
 }).filter('transformGenderFilter', function () {//转换男女显示
-    return function (content) {
-        if (content == 1) {
-            return "男";
-        } else if (content == 2) {
-            return '女';
-        } else {
-            return '保密';
-        }
+        return function (content) {
+            if (content == 1) {
+                return "男";
+            } else if (content == 2) {
+                return '女';
+            } else {
+                return '保密';
+            }
 
-    }
-}).filter('transformStatusFilter', function () {//转换帐号显示状态
+        }
+    })
+    .filter('transformStatusFilter', function () {//转换帐号显示状态
+        return function (content) {
+            if (content == 1) {
+                return "正常";
+            } else if (content == 2) {
+                return '异常';
+            } else {
+                return '默认';
+            }
+        }
+    }).filter('transformAdminLevelFilter', function () {//转换后台帐号显示状态
     return function (content) {
         if (content == 1) {
-            return "正常";
+            return "超级管理员";
         } else if (content == 2) {
-            return '异常';
+            return '普通管理员';
         } else {
-            return '默认';
+            return '临时游客';
         }
     }
 });
