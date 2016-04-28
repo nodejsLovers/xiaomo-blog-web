@@ -66,6 +66,7 @@ angular.module("myControllerModule", [])
                             promise.then(function (data) {
                                 $scope.adminUsers = data.adminUsers;
                                 $scope.pageCount = $scope.adminUsers.totalPages;
+                                $location.path('/main/authority');
                             });
                         }
                     });
