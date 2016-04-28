@@ -30,7 +30,7 @@
                             <!-- end -->
                             <input type="text" name="userName" class="form-control" placeholder="最多12个字符"
                                    ng-model="adminUser.userName" required ng-minlength="3" ng-maxlength="12"
-                                   >
+                            >
                         </div>
                     </div>
                     <!-- 密码 -->
@@ -61,10 +61,11 @@
                             权限：
                         </label>
                         <div class="col-md-10">
-                            <select title="权限" ng-model="adminUser.authLevel" ng-options="authLevel.name for authLevel in adminUser.authLevels">
+                            <select title="权限" ng-model="adminUser.authLevel"
+                                    ng-options="authLevel.name for authLevel in adminUser.authLevels">
                                 <option value="">-- 请选择 --</option>
                             </select>
-                            {{authLevel}}
+                            {{adminUser.authLevel}}
                         </div>
                     </div>
                     <div class="form-group">

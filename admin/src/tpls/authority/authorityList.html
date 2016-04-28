@@ -18,7 +18,7 @@
                     <tr>
                         <th>编号</th>
                         <th>用户名</th>
-                        <th>状态</th>
+                        <th>等级</th>
                         <th>操作者</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
@@ -30,8 +30,8 @@
                         <td>{{$index+1}}</td>
                         <td>{{adminUser.userName}}</td>
                         <td class="alert"
-                            ng-class="{'alert-success':adminUser.status==1,'alert-danger':adminUser.status==2}">
-                            {{adminUser.status | transformStatusFilter}}
+                            ng-class="{'alert-success':adminUser.status==1,'alert-danger':adminUser.status==0,'alert-default':adminUser.status==0}">
+                            {{adminUser.status | transformAdminLevelFilter}}
                         </td>
                         <td>{{adminUser.operator}}</td>
                         <td>{{adminUser.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
