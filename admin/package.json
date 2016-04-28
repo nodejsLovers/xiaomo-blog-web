@@ -22,10 +22,8 @@
   "dependencies": {
     "angular": "^1.5.5",
     "angular-animate": "^1.5.5",
-    "angular-ui-router": "^1.0.0-alpha.3",
-    "bootstrap": "^3.3.6",
-    "jquery": "^2.2.3",
-    "ng-grid": "^2.0.1"
+    "angular-ui-router": "^1.0.0-alpha0",
+    "bootstrap": "^3.3.6"
   },
   "devDependencies": {}
 }
