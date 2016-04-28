@@ -22,12 +22,12 @@
                         <div class="col-md-10">
                             <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
                             <!-- 标题错误信息 -->
-                            <div class="error" ng-show="addBlogForm.title.$dirty && addBlogForm.title.$invalid">
+                            <div class="error fadeIn" ng-show="addBlogForm.title.$dirty && addBlogForm.title.$invalid">
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="addBlogForm.title.$error.required">请输入标题内容</small>
-                                <small class="error" ng-show="addBlogForm.title.$error.minlength">标题内容最少长度为3</small>
-                                <small class="error" ng-show="addBlogForm.title.$error.maxlength">标题最大长度为64</small>
-                                <small class="error" ng-show="addBlogForm.title.$error.unique">
+                                <small class="error fadeIn" ng-show="addBlogForm.title.$error.required">请输入标题内容</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.title.$error.minlength">标题内容最少长度为3</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.title.$error.maxlength">标题最大长度为64</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.title.$error.unique">
                                     这个标题己经被用过了，请换一个标题吧
                                 </small>
                             </div>
@@ -44,10 +44,10 @@
                         </label>
                         <div class="col-md-10">
                             <!-- 简介错误信息 -->
-                            <div class="error" ng-show="addBlogForm.summary.$dirty && addBlogForm.summary.$invalid">
-                                <small class="error" ng-show="addBlogForm.summary.$error.required">请输入简介内容</small>
-                                <small class="error" ng-show="addBlogForm.summary.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error" ng-show="addBlogForm.summary.$error.maxlength">简介最大长度为64</small>
+                            <div class="error fadeIn" ng-show="addBlogForm.summary.$dirty && addBlogForm.summary.$invalid">
+                                <small class="error fadeIn" ng-show="addBlogForm.summary.$error.required">请输入简介内容</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.summary.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.summary.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
                             <input type="text" name="summary" class="form-control" placeholder="最多64个字符"
@@ -61,10 +61,10 @@
                         </label>
                         <div class="col-md-10">
                             <!-- 内容错误信息 -->
-                            <div class="error" ng-show="addBlogForm.content.$dirty && addBlogForm.content.$invalid">
-                                <small class="error" ng-show="addBlogForm.content.$error.required">请输入简介内容</small>
-                                <small class="error" ng-show="addBlogForm.content.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error" ng-show="addBlogForm.content.$error.maxlength">简介最大长度为64</small>
+                            <div class="error fadeIn" ng-show="addBlogForm.content.$dirty && addBlogForm.content.$invalid">
+                                <small class="error fadeIn" ng-show="addBlogForm.content.$error.required">请输入简介内容</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.content.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.content.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
                             <textarea class="form-control" id="textarea-1"  rows="16" placeholder="最多640个字符" name="content"
@@ -77,10 +77,10 @@
                         </label>
                         <div class="col-md-10">
                             <!-- 标签错误信息 -->
-                            <div class="error" ng-show="addBlogForm.tag.$dirty && addBlogForm.tag.$invalid">
-                                <small class="error" ng-show="addBlogForm.tag.$error.required">请输入简介内容</small>
-                                <small class="error" ng-show="addBlogForm.tag.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error" ng-show="addBlogForm.tag.$error.maxlength">简介最大长度为64</small>
+                            <div class="error fadeIn" ng-show="addBlogForm.tag.$dirty && addBlogForm.tag.$invalid">
+                                <small class="error fadeIn" ng-show="addBlogForm.tag.$error.required">请输入简介内容</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.tag.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.tag.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
                             <button type="button"
@@ -98,10 +98,10 @@
                         </label>
                         <div class="col-md-10">
                             <!-- 作者错误信息 -->
-                            <div class="error" ng-show="addBlogForm.author.$dirty && addBlogForm.author.$invalid">
-                                <small class="error" ng-show="addBlogForm.author.$error.required">请输入简介内容</small>
-                                <small class="error" ng-show="addBlogForm.author.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error" ng-show="addBlogForm.author.$error.maxlength">简介最大长度为64</small>
+                            <div class="error fadeIn" ng-show="addBlogForm.author.$dirty && addBlogForm.author.$invalid">
+                                <small class="error fadeIn" ng-show="addBlogForm.author.$error.required">请输入简介内容</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.author.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error fadeIn" ng-show="addBlogForm.author.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
                             <input type="text" class="form-control" name="author" placeholder="最多8个字符"
