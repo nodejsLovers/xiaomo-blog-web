@@ -12,7 +12,8 @@ angular.module("myDirectiveModule", [])
         showFirstLastText: true,
         gotoText: 'Goto Page',
         showGoto: false
-    }).directive("pager", ['ngPaginationConfig', function (ngPaginationConfig) {
+    })
+    .directive("pager", ['ngPaginationConfig', function (ngPaginationConfig) {
         return {
             link: function (scope, element, attrs) {
                 var visiblePageCount = angular.isDefined(attrs.visiblePageCount) ? attrs.visiblePageCount : ngPaginationConfig.visiblePageCount;
