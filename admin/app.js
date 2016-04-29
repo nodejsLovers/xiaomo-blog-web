@@ -22,6 +22,13 @@ myApp.config(function ($httpProvider) {
 });
 
 /**
+ * 装饰器(类似于Spring的aop)
+ */
+// myApp.config(function ($provide) {
+//     $provide.decorator('adminLoginService', githubDecorator);
+// });
+
+/**
  * 配置路由。
  * 注意这里采用的是ui-router这个路由，而不是ng原生的路由。
  * ng原生的路由不能支持嵌套视图，所以这里必须使用ui-router。
