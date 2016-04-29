@@ -55,7 +55,7 @@ angular.module("myControllerModule", [])
                         if (data.status !== 200) {
                             alert(data.status);
                         } else {
-                            $location.path('/main/toUpdateAuthority');
+                            $location.path('/main');
                         }
                     })
                 };
