@@ -7,15 +7,19 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$location',
+            '$state',
             'deleteAdminService',
             'adminLoginService',
             'getAdminUserService',
+            'findAdminUserService',
             'addAdminService',
             function ($scope,
                       $location,
+                      $state,
                       deleteAdminService,
                       adminLoginService,
                       getAdminUserService,
+                      findAdminUserService,
                       addAdminService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
@@ -88,6 +92,16 @@ angular.module("myControllerModule", [])
                             });
                         }
                     });
+                };
+                $scope.toUpdateAdmin = function (adminUserId) {
+                    var findAdminUserPromise = findAdminUserService.operate(adminUserId);
+                    findAdminUserPromise.then(function (data) {
+                        if (data.status == 200) {
+                            $scope.adminUser = data.adminUser;
+                            console.log($scope.adminUser);
+                            $state.go('main.toUpdateAuthority', $scope.adminUser);
+                        }
+                    })
                 };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**

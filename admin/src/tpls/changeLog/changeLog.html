@@ -24,7 +24,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="changeLog in changeLogs.content|orderBy:'createTime':true">
+                    <tr ng-repeat="changeLog in changeLogs.content|orderBy:'createTime':true" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{changeLog.name}}</td>
                         <td>{{changeLog.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>

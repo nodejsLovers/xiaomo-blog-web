@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router', 'myControllerModule', 'myServiceModule', 'myDirectiveModule', 'myFilterModule']);
+var myApp = angular.module('myApp', ['ui.router', 'ngAnimate', 'myControllerModule', 'myServiceModule', 'myDirectiveModule', 'myFilterModule', 'myAnimateModule']);
 /**
  * 由于整个应用都会和路由打交道，所以这里把$state和$stateParams这两个对象放到$rootScope上，方便其它地方引用和注入。
  * 这里的run方法只会在angular启动的时候运行一次。
@@ -11,6 +11,14 @@ myApp.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
     $rootScope.$baseUrl = "http://api.xiaomo.info:8080";
+});
+
+
+/**
+ * 配置拦截器
+ */
+myApp.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('myInterceptor');
 });
 
 /**
@@ -31,12 +39,12 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('login', {//登录
             url: '/login',
             templateUrl: './login.html',
-            controller:'AdminController'
+            controller: 'AdminController'
         })
         .state('main', {//主界面
             url: '/main',
             templateUrl: './src/tpls/common/home.html',
-            controller:'BasicInfoController'
+            controller: 'BasicInfoController'
         })
         .state('main.blog', {//博客列表
             url: '/blog',
@@ -51,12 +59,17 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('main.authority', {//权限
             url: '/authority',
             templateUrl: './src/tpls/authority/authorityList.html',
-            controller:'AdminController'
+            controller: 'AdminController'
         })
         .state('main.addAuthority', {//权限
             url: '/addAuthority',
             templateUrl: './src/tpls/authority/AddAuthority.html',
-            controller:'AdminController'
+            controller: 'AdminController'
+        })
+        .state('main.toUpdateAuthority', {//权限
+            url: '/toUpdateAuthority',
+            templateUrl: './src/tpls/authority/authorityEdit.html',
+            controller: 'AdminController'
         })
         .state('main.user', {//用户列表
             url: '/user',

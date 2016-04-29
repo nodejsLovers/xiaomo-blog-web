@@ -24,7 +24,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="tag in tags.content|orderBy:'createTime':true">
+                    <tr ng-repeat="tag in tags.content|orderBy:'createTime':true" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{tag.name}}</td>
                         <td>{{tag.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>

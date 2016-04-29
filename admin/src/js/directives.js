@@ -156,6 +156,43 @@ angular.module("myDirectiveModule", [])
                     }
                 }
             }])
+    .directive('ensureAdminUserUnique',
+        [
+            '$http',
+            '$timeout',
+            'baseUrlConfig',
+            function ($http, $timeout, baseUrlConfig) {
+                return {
+                    require: 'ngModel',
+                    link: function (scope, ele, attrs, c) {
+                        scope.$watch(attrs.ngModel, function (userName) {
+                            $timeout(function () {
+                                if (!userName) {
+                                    return;
+                                }
+                                console.log(scope.adminUser.userName);
+                                $http({
+                                    method: 'GET',
+                                    url: baseUrlConfig.baseUrl + '/admin/adminUser/findByName',
+                                    params: {
+                                        userName: userName
+                                    }
+                                }).success(function (data) {
+                                    if (data.status != 200) {//不重复
+                                        console.log("当前状态:" + data.status);
+                                        c.$setValidity('unique', true);
+                                    } else {
+                                        c.$setValidity('unique', false);
+                                    }
+                                }).error(function () {
+                                    alert("error");
+                                })
+                            }, 2000)
+                        });
+
+                    }
+                }
+            }])
     .directive('ngFocus', function () {
         var FOCUS_CLASS = "ng-focused";
         return {
