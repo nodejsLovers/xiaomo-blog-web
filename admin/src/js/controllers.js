@@ -3,48 +3,60 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('AdminController',//后台用户
+    .controller('adminListController', ['$scope',
+        '$location',
+        '$state',
+        'getAdminUserService',
+        function ($scope, $location, $state, getAdminUserService) {
+            $scope.commonInfo = {};
+            $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
+            /* ===========================================================我是分割线===========================================================================*/
+            /**
+             * 默认载入后台用户管理信息
+             */
+            var adminPromise = getAdminUserService.operate($scope.currentPage);
+            adminPromise.then(function (data) {
+                $scope.adminUsers = data.adminUsers;
+                $scope.pageCount = $scope.adminUsers.totalPages;
+            });
+            /* ===========================================================我是分割线===========================================================================*/
+            /**
+             * 后台用户管理信息翻页
+             */
+            $scope.onAdminUserPageChange = function () {
+                var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
+                adminOnPagePromise.then(function (data) {
+                    $scope.adminUsers = data.adminUsers;
+                });
+            };
+            /**
+             * 删除后台用户
+             */
+            $scope.deleteAdmin = function (adminUserId) {
+                var deletePromise = deleteAdminService.operate(adminUserId);
+                deletePromise.then(function (data) {
+                    if (data.status == 200) {
+                        var promise = getAdminUserService.operate($scope.currentPage);
+                        promise.then(function (data) {
+                            $scope.adminUsers = data.adminUsers;
+                            $scope.pageCount = $scope.adminUsers.totalPages;
+                        });
+                    }
+                });
+            };
+            /* ===========================================================我是分割线===========================================================================*/
+        }])
+    .controller('AdminLoginController',//后台用户
         [
             '$scope',
-            '$location',
             '$state',
-            'deleteAdminService',
             'adminLoginService',
-            'getAdminUserService',
-            'findAdminUserService',
-            'addAdminService',
             function ($scope,
-                      $location,
                       $state,
-                      deleteAdminService,
-                      adminLoginService,
-                      getAdminUserService,
-                      findAdminUserService,
-                      addAdminService) {
+                      adminLoginService) {
                 /* ===========================================================我是分割线===========================================================================*/
-                $scope.commonInfo = {};
-                $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
                 $scope.adminUser = {};
                 $scope.adminUser.authLevels = [{'id': 1, 'name': '超级管理员'}, {'id': 2, 'name': '普通管理员'}];
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 默认载入后台用户管理信息
-                 */
-                var adminPromise = getAdminUserService.operate($scope.currentPage);
-                adminPromise.then(function (data) {
-                    $scope.adminUsers = data.adminUsers;
-                    $scope.pageCount = $scope.adminUsers.totalPages;
-                });
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 后台用户管理信息翻页
-                 */
-                $scope.onAdminUserPageChange = function () {
-                    var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
-                    adminOnPagePromise.then(function (data) {
-                        $scope.adminUsers = data.adminUsers;
-                    });
-                };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 登录
@@ -59,7 +71,15 @@ angular.module("myControllerModule", [])
                         }
                     })
                 };
-                /* ===========================================================我是分割线===========================================================================*/
+            }
+        ]
+    )
+    .controller('addAdminUserController',
+        [
+            '$scope',
+            '$state',
+            'addAdminService',
+            function ($scope, $state, addAdminService) {
                 /**
                  * 增加后台用户
                  */
@@ -77,47 +97,36 @@ angular.module("myControllerModule", [])
                         }
                     });
                 };
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 删除后台用户
-                 */
-                $scope.deleteAdmin = function (adminUserId) {
-                    var deletePromise = deleteAdminService.operate(adminUserId);
-                    deletePromise.then(function (data) {
-                        if (data.status == 200) {
-                            var promise = getAdminUserService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                $scope.adminUsers = data.adminUsers;
-                                $scope.pageCount = $scope.adminUsers.totalPages;
-                            });
-                        }
-                    });
-                };
+            }])
+    .controller('adminEditController',
+        [
+            '$scope',
+            '$state',
+            'findAdminUserService',
+            function ($scope, $state, findAdminUserService) {
                 /**
                  * 编辑后台用户
                  * @param adminUserId
                  */
-                $scope.editAdmin = function (adminUserId) {
-                    var findAdminUserPromise = findAdminUserService.operate(adminUserId);
-                    findAdminUserPromise.then(function (data) {
-                        if (data.status == 200) {
-                            $scope.adminUser = data.adminUser;
-                            console.log($scope.adminUser);
-                            $state.go('main.editAuthority', $scope.adminUser);
-                        }
-                    })
-                };
+                $scope.adminUser = {};
+                $scope.adminUser.authLevels = [{'id': 1, 'name': '超级管理员'}, {'id': 2, 'name': '普通管理员'}];
+                var findAdminUserPromise = findAdminUserService.operate($state.params.id);
+                findAdminUserPromise.then(function (data) {
+                    if (data.status == 200) {
+                        $scope.adminUser = data.adminUser;
+                        console.log($scope.adminUser);
+                    }
+                });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 处理跳转
                  */
                 $scope.showAdminUserList = function () {
-                    $location.path('/main/authority');
+                    $state.go('main.authority');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
-        ]
-    )
+        ])
     .controller('UserController',//用户
         [
             '$scope',

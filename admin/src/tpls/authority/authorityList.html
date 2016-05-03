@@ -37,7 +37,8 @@
                         <td>{{adminUser.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>{{adminUser.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
-                            <button class="btn btn-success" ng-click="editAdmin(adminUser.id)">修改</button>
+                            <button class="btn btn-success" ui-sref="main.editAuthority({id:adminUser.id})">修改
+                            </button>
                             <button class="btn btn-default" ng-click="deleteAdmin(adminUser.id)">删除</button>
                         </td>
                     </tr>

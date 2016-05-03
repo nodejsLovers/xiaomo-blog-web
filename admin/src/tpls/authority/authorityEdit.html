@@ -64,11 +64,10 @@
                             权限：
                         </label>
                         <div class="col-md-10">
-                            <select title="权限" ng-model="adminUser.authLevel"
+                            <select title="权限" ng-model="adminUser.authLevel" ng-value="adminUser.authLevel"
                                     ng-options="authLevel.name for authLevel in adminUser.authLevels">
                                 <option value="{{adminUser.authLevel}}">-- 请选择 --</option>
                             </select>
-                            {{adminUser.authLevel}}
                         </div>
                     </div>
                     <div class="form-group">

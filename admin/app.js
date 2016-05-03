@@ -46,7 +46,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('login', {//登录
             url: '/login',
             templateUrl: './login.html',
-            controller: 'AdminController'
+            controller: 'AdminLoginController'
         })
         .state('main', {//主界面
             url: '/main',
@@ -63,20 +63,20 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/blog/addBlog.html',
             controller: 'BlogController'
         })
-        .state('main.authority', {//权限
+        .state('main.authority', {//权限列表
             url: '/authority',
             templateUrl: './src/tpls/authority/authorityList.html',
-            controller: 'AdminController'
+            controller: 'adminListController'
         })
-        .state('main.addAuthority', {//权限
+        .state('main.addAuthority', {//添加权限
             url: '/addAuthority',
             templateUrl: './src/tpls/authority/AddAuthority.html',
-            controller: 'AdminController'
+            controller: 'addAdminUserController'
         })
-        .state('main.editAuthority', {//权限
-            url: '/editAuthority',
+        .state('main.editAuthority', {//编辑权限
+            url: '/editAuthority/:id',
             templateUrl: './src/tpls/authority/authorityEdit.html',
-            controller: 'AdminController'
+            controller: 'adminEditController'
         })
         .state('main.user', {//用户列表
             url: '/user',
