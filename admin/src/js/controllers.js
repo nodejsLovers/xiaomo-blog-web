@@ -296,15 +296,26 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$state',
-            'findBlogService',
-            function ($scope, $state, findBlogService) {
-                var findBlogPromise = findBlogService.operate($state.params.id);
-                findBlogPromise.then(function (data) {
-                    if (data.status == 200) {
-                        $scope.blog = data.blog;
-                        console.log($scope.blog);
-                    }
-                });
+            'addUserService',
+            'userListService',
+            function ($scope, $state, addUserService, userListService) {
+                /**
+                 * 增加前台用户
+                 */
+                $scope.addUser = function (email, nickName, phone, address, gender) {
+                    console.log(email);
+                    var addPromise = addUserService.operate(email, nickName, phone, address, gender);
+                    addPromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = userListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.users = data.users;
+                                $scope.pageCount = $scope.users.totalPages;
+                                $state.go('main.user');
+                            });
+                        }
+                    });
+                };
                 /**
                  * 处理跳转
                  */

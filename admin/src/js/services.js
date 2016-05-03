@@ -190,7 +190,7 @@ angular.module("myServiceModule", [])
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                         url: $rootScope.$baseUrl + "/admin/blog/findById",
                         params: {
-                            id:blogId
+                            id: blogId
                         },
                         method: 'GET'
                     })
@@ -290,32 +290,71 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('addUserService',//添加用户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (email, nickName, phone, address, gender) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/user/addUser",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            email: email,
+                            nickName: nickName,
+                            phone: phone,
+                            address: address,
+                            gender: gender
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("添加成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("添加失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteUserService',//删除用户
         ['$rootScope',
             '$http',
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (userId) {
+                result.operate = function (user) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        url: $rootScope.$baseUrl + "/admin/user/deleteById",
-                        method: 'GET',
+                        url: $rootScope.$baseUrl + "/admin/user/addUser",
+                        method: 'POST',
                         dataType: 'json',
                         params: {
-                            id: userId
+                            email: user.email,
+                            nickName: user.nickName,
+                            phone: user.phone,
+                            address: user.address,
+                            gender: user.gender
                         }
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("删除成功！");
+                            console.log("添加成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("删除失败！")
+                            alert("添加失败！")
                         });
                     return deferred.promise;
                 };
