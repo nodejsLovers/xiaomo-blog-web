@@ -50,8 +50,9 @@
                                 <small class="error " ng-show="addBlogForm.summary.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
-                            <input type="text" name="summary" class="form-control" placeholder="最多64个字符"
-                                   ng-model="blog.summary" required ng-minlength="3" ng-maxlength="64">
+                            <textarea cols="3" name="summary" class="form-control" placeholder="最多64个字符"
+                                      ng-model="blog.summary" required ng-minlength="3" ng-maxlength="64"
+                                      title=""></textarea>
                         </div>
 
                     </div>
@@ -67,7 +68,8 @@
                                 <small class="error " ng-show="addBlogForm.content.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
-                            <textarea class="form-control" id="textarea-1"  rows="16" placeholder="最多640个字符" name="content"
+                            <textarea class="form-control" id="textarea-1" rows="16" placeholder="最多640个字符"
+                                      name="content"
                                       ng-model="blog.content" required ng-minlength="3" ng-maxlength="640"></textarea>
                         </div>
                     </div>
@@ -84,7 +86,6 @@
                             </div>
                             <!-- end -->
                             <button type="button"
-                                    ng-class="{'btn-default':tag.currentTag,'btn-success':tag.currentTag}"
                                     name="tag"
                                     class="btn"
                                     ng-repeat="tag in tags.content track by $index ">

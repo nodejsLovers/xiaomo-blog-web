@@ -142,14 +142,10 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             'getBlogListService',
-            'addBlogService',
             'deleteBlogService',
-            'getTagListService',
             function ($scope,
                       getBlogListService,
-                      addBlogService,
-                      deleteBlogService,
-                      getTagListService) {
+                      deleteBlogService) {
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到博客列表页！！";
                 /* ===========================================================我是分割线===========================================================================*/
@@ -160,14 +156,6 @@ angular.module("myControllerModule", [])
                 promise.then(function (data) {
                     $scope.blogs = data.blogs;
                     $scope.pageCount = $scope.blogs.totalPages;
-                });
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 默认载入标签信息
-                 */
-                var tagPromise = getTagListService.operate($scope.currentPage);
-                tagPromise.then(function (data) {
-                    $scope.tags = data.tags;
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -203,7 +191,18 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$state',
-            function ($scope, $state) {
+            'addBlogService',
+            'getTagListService',
+            function ($scope, $state, addBlogService,getTagListService) {
+                /**
+                 * 默认载入标签信息
+                 */
+                var tagPromise = getTagListService.operate($scope.currentPage);
+                tagPromise.then(function (data) {
+                    $scope.tags = data.tags;
+                    console.log($scope.tags);
+                });
+                /* ===========================================================我是分割线===========================================================================*/
                 /**
                  * 添加博客
                  */
