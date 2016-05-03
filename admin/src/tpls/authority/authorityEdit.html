@@ -30,6 +30,7 @@
                             </div>
                             <!-- end -->
                             <input type="text" name="userName" class="form-control" placeholder="最多12个字符"
+                                   value="{{adminUser.userName}}"
                                    ng-model="adminUser.userName" required ng-minlength="3" ng-maxlength="12"
                                    ensure-admin-user-unique="userName">
                         </div>
@@ -53,6 +54,7 @@
                             </div>
                             <!-- end -->
                             <input type="password" name="password" class="form-control" placeholder="最多12个字符"
+                                   value="{{adminUser.password}}"
                                    ng-model="adminUser.password" required ng-minlength="3" ng-maxlength="12">
                         </div>
                     </div>
@@ -64,7 +66,7 @@
                         <div class="col-md-10">
                             <select title="权限" ng-model="adminUser.authLevel"
                                     ng-options="authLevel.name for authLevel in adminUser.authLevels">
-                                <option value="">-- 请选择 --</option>
+                                <option value="{{adminUser.authLevel}}">-- 请选择 --</option>
                             </select>
                             {{adminUser.authLevel}}
                         </div>

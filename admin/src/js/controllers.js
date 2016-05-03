@@ -93,13 +93,17 @@ angular.module("myControllerModule", [])
                         }
                     });
                 };
-                $scope.toUpdateAdmin = function (adminUserId) {
+                /**
+                 * 编辑后台用户
+                 * @param adminUserId
+                 */
+                $scope.editAdmin = function (adminUserId) {
                     var findAdminUserPromise = findAdminUserService.operate(adminUserId);
                     findAdminUserPromise.then(function (data) {
                         if (data.status == 200) {
                             $scope.adminUser = data.adminUser;
                             console.log($scope.adminUser);
-                            $state.go('main.toUpdateAuthority', $scope.adminUser);
+                            $state.go('main.editAuthority', $scope.adminUser);
                         }
                     })
                 };

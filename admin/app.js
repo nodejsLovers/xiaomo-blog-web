@@ -73,8 +73,8 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/authority/AddAuthority.html',
             controller: 'AdminController'
         })
-        .state('main.toUpdateAuthority', {//权限
-            url: '/toUpdateAuthority',
+        .state('main.editAuthority', {//权限
+            url: '/editAuthority',
             templateUrl: './src/tpls/authority/authorityEdit.html',
             controller: 'AdminController'
         })
