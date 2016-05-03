@@ -325,6 +325,37 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('findUserService',//查找指定用户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (id) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/user/findById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: id
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("查找成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("查找失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteUserService',//删除用户
         ['$rootScope',
             '$http',

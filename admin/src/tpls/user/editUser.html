@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- fixme 要点1：给form起一个名字,并禁掉原生的验证  -->
-                <form class="form-horizontal" name="addUserForm" role="form" novalidate>
+                <form class="form-horizontal" name="editUserForm" role="form" novalidate>
                     <!-- 用户名 -->
                     <div class="form-group">
                         <label class="col-md-2 control-label">
@@ -16,22 +16,22 @@
                             <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
                             <!-- 错误信息 -->
                             <div class="error"
-                                 ng-show="addUserForm.email.$dirty && addUserForm.email.$invalid">
+                                 ng-show="editUserForm.email.$dirty && editUserForm.email.$invalid">
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="addUserForm.email.$error.required">请输入邮箱
+                                <small class="error" ng-show="editUserForm.email.$error.required">请输入邮箱
                                 </small>
-                                <small class="error" ng-show="addUserForm.email.$error.minlength">邮箱最少长度为3
+                                <small class="error" ng-show="editUserForm.email.$error.minlength">邮箱最少长度为3
                                 </small>
-                                <small class="error" ng-show="addUserForm.email.$error.maxlength">邮箱最大长度为18
+                                <small class="error" ng-show="editUserForm.email.$error.maxlength">邮箱最大长度为18
                                 </small>
-                                <small class="error" ng-show="addUserForm.email.$error.unique">
+                                <small class="error" ng-show="editUserForm.email.$error.unique">
                                     这个邮箱己经用过了，请换一个吧
                                 </small>
                             </div>
                             <!-- end -->
                             <input type="email" name="email" class="form-control" placeholder="最多18个字符"
                                    ng-model="user.email" required ng-minlength="3" ng-maxlength="18"
-                                   ensure-admin-user-unique="email">
+                            >
                         </div>
                     </div>
 
@@ -43,19 +43,19 @@
                             <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
                             <!-- 错误信息 -->
                             <div class="error"
-                                 ng-show="addUserForm.nickName.$dirty && addUserForm.nickName.$invalid">
+                                 ng-show="editUserForm.nickName.$dirty && editUserForm.nickName.$invalid">
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="addUserForm.nickName.$error.required">请输入昵称
+                                <small class="error" ng-show="editUserForm.nickName.$error.required">请输入昵称
                                 </small>
-                                <small class="error" ng-show="addUserForm.nickName.$error.minlength">昵称最少长度为3
+                                <small class="error" ng-show="editUserForm.nickName.$error.minlength">昵称最少长度为3
                                 </small>
-                                <small class="error" ng-show="addUserForm.nickName.$error.maxlength">昵称最大长度为12
+                                <small class="error" ng-show="editUserForm.nickName.$error.maxlength">昵称最大长度为12
                                 </small>
                             </div>
                             <!-- end -->
                             <input type="text" name="nickName" class="form-control" placeholder="最多12个字符"
                                    ng-model="user.nickName" required ng-minlength="3" ng-maxlength="12"
-                                   e>
+                                   >
                         </div>
                     </div>
 
@@ -67,13 +67,13 @@
                             <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
                             <!-- 错误信息 -->
                             <div class="error"
-                                 ng-show="addUserForm.phone.$dirty && addUserForm.phone.$invalid">
+                                 ng-show="editUserForm.phone.$dirty && editUserForm.phone.$invalid">
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="addUserForm.phone.$error.required">请输入用户名
+                                <small class="error" ng-show="editUserForm.phone.$error.required">请输入用户名
                                 </small>
-                                <small class="error" ng-show="addUserForm.phone.$error.minlength">用户名最少长度为3
+                                <small class="error" ng-show="editUserForm.phone.$error.minlength">用户名最少长度为3
                                 </small>
-                                <small class="error" ng-show="addUserForm.phone.$error.maxlength">用户名最大长度为12
+                                <small class="error" ng-show="editUserForm.phone.$error.maxlength">用户名最大长度为12
                                 </small>
                             </div>
                             <!-- end -->
@@ -91,13 +91,13 @@
                             <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
                             <!-- 错误信息 -->
                             <div class="error"
-                                 ng-show="addUserForm.address.$dirty && addUserForm.address.$invalid">
+                                 ng-show="editUserForm.address.$dirty && editUserForm.address.$invalid">
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="addUserForm.address.$error.required">请输入地址
+                                <small class="error" ng-show="editUserForm.address.$error.required">请输入地址
                                 </small>
-                                <small class="error" ng-show="addUserForm.address.$error.minlength">地址最少长度为3
+                                <small class="error" ng-show="editUserForm.address.$error.minlength">地址最少长度为3
                                 </small>
-                                <small class="error" ng-show="addUserForm.address.$error.maxlength">地址最大长度为64
+                                <small class="error" ng-show="editUserForm.address.$error.maxlength">地址最大长度为64
                                 </small>
                             </div>
                             <!-- end -->
@@ -114,15 +114,15 @@
                         <div class="col-md-10">
                             男
                             <input type="radio" name="gender"
-                                   ng-model="user.gender"
+                                   ng-model="user.gender" value="1"
                                    title="男">
                             女
                             <input type="radio" name="gender"
-                                   ng-model="user.gender"
+                                   ng-model="user.gender" value="2"
                                    title="女">
                             保密
                             <input type="radio" name="gender"
-                                   ng-model="user.gender"
+                                   ng-model="user.gender" value="0"
                                    title="保密">
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                             <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
                             <button ng-click=""
                                     class="btn btn-info"
-                                    ng-disabled="addUserForm.$invalid">添加用户
+                                    ng-disabled="editUserForm.$invalid">保存用户
                             </button>
                             <button ng-click="showUserList()" class="btn btn-default">取消</button>
                         </div>

@@ -101,7 +101,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('main.editUser', {//编辑用户
             url: '/editUser/:id',
             templateUrl: './src/tpls/user/editUser.html',
-            controller: 'UserAddController'
+            controller: 'UserEditController'
         })
         /* ===========================================================标签===========================================================================*/
         .state('main.tag', {//标签列表

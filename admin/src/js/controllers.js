@@ -328,13 +328,13 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$state',
-            'findBlogService',
-            function ($scope, $state, findBlogService) {
-                var findBlogPromise = findBlogService.operate($state.params.id);
+            'findUserService',
+            function ($scope, $state, findUserService) {
+                var findBlogPromise = findUserService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
                     if (data.status == 200) {
-                        $scope.blog = data.blog;
-                        console.log($scope.blog);
+                        $scope.user = data.user;
+                        console.log($scope.user);
                     }
                 });
                 /**
