@@ -56,12 +56,17 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('main.blog', {//博客列表
             url: '/blog',
             templateUrl: './src/tpls/blog/blogList.html',
-            controller: 'BlogController'
+            controller: 'BlogListController'
         })
         .state('main.addBlog', {//添加博客
             url: '/addBlog',
             templateUrl: './src/tpls/blog/addBlog.html',
-            controller: 'BlogController'
+            controller: 'BlogAddController'
+        })
+        .state('main.editBlog', {//添加博客
+            url: '/editBlog',
+            templateUrl: './src/tpls/blog/editBlog.html',
+            controller: 'BlogEditController'
         })
         .state('main.authority', {//权限列表
             url: '/authority',

@@ -138,6 +138,99 @@ angular.module("myControllerModule", [])
                 /* ===========================================================我是分割线===========================================================================*/
             }
         ])
+    .controller('BlogListController',
+        [
+            '$scope',
+            'getBlogListService',
+            'addBlogService',
+            'deleteBlogService',
+            'getTagListService',
+            function ($scope,
+                      getBlogListService,
+                      addBlogService,
+                      deleteBlogService,
+                      getTagListService) {
+                $scope.commonInfo = {};
+                $scope.commonInfo.msg = "欢迎来到博客列表页！！";
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 默认载入博客信息
+                 */
+                var promise = getBlogListService.operate($scope.currentPage);
+                promise.then(function (data) {
+                    $scope.blogs = data.blogs;
+                    $scope.pageCount = $scope.blogs.totalPages;
+                });
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 默认载入标签信息
+                 */
+                var tagPromise = getTagListService.operate($scope.currentPage);
+                tagPromise.then(function (data) {
+                    $scope.tags = data.tags;
+                });
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 博客翻页
+                 */
+                $scope.onPageChange = function () {
+                    var promise = getBlogListService.operate($scope.currentPage);
+                    promise.then(function (data) {
+                        $scope.blogs = data.blogs;
+                    });
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+
+                /**
+                 * 删除博客
+                 */
+                $scope.deleteBlog = function (blogId) {
+                    var deletePromise = deleteBlogService.operate(blogId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = getBlogListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.blogs = data.blogs;
+                                $scope.pageCount = $scope.blogs.totalPages;
+                            });
+                        }
+                    });
+                };
+            }
+        ]
+    )
+    .controller("BlogAddController",
+        [
+            '$scope',
+            '$state',
+            function ($scope, $state) {
+                /**
+                 * 添加博客
+                 */
+                $scope.addBlog = function () {
+                    $scope.blog.tagIds = [1, 2];
+                    $scope.blog.blogType = 1;
+                    addBlogService.addBlog($scope.blog);
+                    $state.go('main.blog');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 处理跳转
+                 */
+                $scope.showBlogList = function () {
+                    $state.go('main.blog');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+            }])
+    .controller("BlogEditController", ['$scope', '$state', function ($scope, $state) {
+        /**
+         * 处理跳转
+         */
+        $scope.showUserList = function () {
+            $state.go('main.user');
+        };
+        /* ===========================================================我是分割线===========================================================================*/
+    }])
     .controller('UserController',//前台用户列表
         [
             '$scope',
@@ -167,102 +260,6 @@ angular.module("myControllerModule", [])
                 };
                 /* ===========================================================我是分割线===========================================================================*/
 
-            }
-        ]
-    )
-    .controller("EditBlogController", ['$scope', '$state', function ($scope, $state) {
-        /**
-         * 处理跳转
-         */
-        $scope.showUserList = function () {
-            $state.go('main.user');
-        };
-        /* ===========================================================我是分割线===========================================================================*/
-    }])
-    .controller('BlogController',
-        [
-            '$scope',
-            '$location',
-            'getBlogListService',
-            'addBlogService',
-            'deleteBlogService',
-            'getTagListService',
-            function ($scope,
-                      $location,
-                      getBlogListService,
-                      addBlogService,
-                      deleteBlogService,
-                      getTagListService) {
-                /* ===========================================================我是分割线===========================================================================*/
-                $scope.blog = {};
-                $scope.tags = {};
-                $scope.tags.content = {};
-                $scope.commonInfo = {};
-                $scope.commonInfo.msg = "欢迎来到博客列表页！！";
-                $scope.blog.tagIds = [];
-                $scope.tags.content.currentTag = false;
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 默认载入博客信息
-                 */
-                var promise = getBlogListService.operate($scope.currentPage);
-                promise.then(function (data) {
-                    $scope.blogs = data.blogs;
-                    $scope.pageCount = $scope.blogs.totalPages;
-                });
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 默认载入标签信息
-                 */
-                var tagPromise = getTagListService.operate($scope.currentPage);
-                tagPromise.then(function (data) {
-                    $scope.tags = data.tags;
-                });
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 博客翻页
-                 */
-                $scope.onPageChange = function () {
-                    var promise = getBlogListService.operate($scope.currentPage);
-                    promise.then(function (data) {
-                        $scope.blogs = data.blogs;
-                    });
-                };
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 添加博客
-                 */
-                $scope.addBlog = function () {
-                    $scope.blog.tagIds = [1, 2];
-                    $scope.blog.blogType = 1;
-                    addBlogService.addBlog($scope.blog);
-                    $scope.addClasss = true;
-                    $location.path('/main/blog');
-                };
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 删除博客
-                 */
-                $scope.deleteBlog = function (blogId) {
-                    var deletePromise = deleteBlogService.operate(blogId);
-                    deletePromise.then(function (data) {
-                        if (data.status == 200) {
-                            var promise = getBlogListService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                $scope.blogs = data.blogs;
-                                $scope.pageCount = $scope.blogs.totalPages;
-                            });
-                        }
-                    });
-                };
-                /* ===========================================================我是分割线===========================================================================*/
-                /**
-                 * 处理跳转
-                 */
-                $scope.showBlogList = function () {
-                    $location.path('/main/blog');
-                };
-                /* ===========================================================我是分割线===========================================================================*/
             }
         ]
     )
