@@ -242,11 +242,13 @@ angular.module("myControllerModule", [])
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }])
-    .controller('UserController',//前台用户列表
+    .controller('UserListController',//前台用户列表
         [
             '$scope',
-            'userService',
-            function ($scope, userService) {
+            '$state',
+            'userListService',
+            'deleteUserService',
+            function ($scope, $state, userListService, deleteUserService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到用户列表页！！";
@@ -254,7 +256,7 @@ angular.module("myControllerModule", [])
                 /**
                  * 默认载入用户管理信息
                  */
-                var userPromise = userService.operate($scope.currentPage);
+                var userPromise = userListService.operate($scope.currentPage);
                 userPromise.then(function (data) {
                     $scope.users = data.users;
                     $scope.pageCount = $scope.users.totalPages;
@@ -269,12 +271,70 @@ angular.module("myControllerModule", [])
                         $scope.users = data.users;
                     });
                 };
+                /**
+                 * 删除用户
+                 * @param userId
+                 */
+                $scope.deleteUser = function (userId) {
+                    var deletePromise = deleteUserService.operate(userId);
+                    deletePromise.then(function (data) {
+                        if (data.status == 200) {
+                            var promise = userListService.operate($scope.currentPage);
+                            promise.then(function (data) {
+                                $scope.users = data.users;
+                                $scope.pageCount = $scope.users.totalPages;
+                            });
+                        }
+                    });
+                };
                 /* ===========================================================我是分割线===========================================================================*/
 
             }
         ]
     )
-    .controller('TagController',
+    .controller("UserAddController",//新增用户
+        [
+            '$scope',
+            '$state',
+            'findBlogService',
+            function ($scope, $state, findBlogService) {
+                var findBlogPromise = findBlogService.operate($state.params.id);
+                findBlogPromise.then(function (data) {
+                    if (data.status == 200) {
+                        $scope.blog = data.blog;
+                        console.log($scope.blog);
+                    }
+                });
+                /**
+                 * 处理跳转
+                 */
+                $scope.showUserList = function () {
+                    $state.go('main.user');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+            }])
+    .controller("UserEditController",//编辑用户
+        [
+            '$scope',
+            '$state',
+            'findBlogService',
+            function ($scope, $state, findBlogService) {
+                var findBlogPromise = findBlogService.operate($state.params.id);
+                findBlogPromise.then(function (data) {
+                    if (data.status == 200) {
+                        $scope.blog = data.blog;
+                        console.log($scope.blog);
+                    }
+                });
+                /**
+                 * 处理跳转
+                 */
+                $scope.showUserList = function () {
+                    $state.go('main.user');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+            }])
+    .controller('TagListController',//标签列表
         [
             '$scope',
             '$location',

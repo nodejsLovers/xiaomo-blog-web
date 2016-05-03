@@ -38,7 +38,7 @@
                         <td>{{user.phone}}</td>
                         <td>{{user.address}}</td>
                         <td>{{user.gender | transformGenderFilter}}</td>
-                        <td><img src="{{user.imgUrl}}" alt="" style="width: 30px;height:30px;"></td>
+                        <!--<td><img src="{{user.imgUrl}}" alt="" style="width: 30px;height:30px;"></td>-->
                         <td>{{user.validateCode}}</td>
                         <td class="alert"
                             ng-class="{'alert-success':user.validateStatus==1,'alert-danger':user.validateStatus==2}">
@@ -47,8 +47,8 @@
                         <td>{{user.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>{{user.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
-                            <button class="btn btn-success">修改</button>
-                            <button class="btn btn-default">删除</button>
+                            <button class="btn btn-success" ui-sref="main.editUser({id:user.id})">修改</button>
+                            <button class="btn btn-default" ng-click="deleteUser(user.id)">删除</button>
                         </td>
                     </tr>
                     </tbody>

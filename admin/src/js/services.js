@@ -264,7 +264,7 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-    .service('userService',//前台用户列表
+    .service('userListService',//前台用户列表
         ['$rootScope',
             '$http',
             '$q',
