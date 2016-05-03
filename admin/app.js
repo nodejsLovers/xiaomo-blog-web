@@ -64,7 +64,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'BlogAddController'
         })
         .state('main.editBlog', {//添加博客
-            url: '/editBlog',
+            url: '/editBlog/:id',
             templateUrl: './src/tpls/blog/editBlog.html',
             controller: 'BlogEditController'
         })

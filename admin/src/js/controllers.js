@@ -187,13 +187,13 @@ angular.module("myControllerModule", [])
             }
         ]
     )
-    .controller("BlogAddController",
+    .controller("BlogAddController",//添加博客
         [
             '$scope',
             '$state',
             'addBlogService',
             'getTagListService',
-            function ($scope, $state, addBlogService,getTagListService) {
+            function ($scope, $state, addBlogService, getTagListService) {
                 /**
                  * 默认载入标签信息
                  */
@@ -221,15 +221,27 @@ angular.module("myControllerModule", [])
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }])
-    .controller("BlogEditController", ['$scope', '$state', function ($scope, $state) {
-        /**
-         * 处理跳转
-         */
-        $scope.showUserList = function () {
-            $state.go('main.user');
-        };
-        /* ===========================================================我是分割线===========================================================================*/
-    }])
+    .controller("BlogEditController",//编辑博客
+        [
+            '$scope',
+            '$state',
+            'findBlogService',
+            function ($scope, $state, findBlogService) {
+                var findBlogPromise = findBlogService.operate($state.params.id);
+                findBlogPromise.then(function (data) {
+                    if (data.status == 200) {
+                        $scope.blog = data.blog;
+                        console.log($scope.blog);
+                    }
+                });
+                /**
+                 * 处理跳转
+                 */
+                $scope.showUserList = function () {
+                    $state.go('main.user');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
+            }])
     .controller('UserController',//前台用户列表
         [
             '$scope',

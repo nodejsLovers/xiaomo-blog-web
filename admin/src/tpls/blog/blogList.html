@@ -34,7 +34,7 @@
                         <td>{{blog.content | contentFilter}}</td>
                         <td class="alert" ng-class="{'alert-success':blog.vote>10}">{{blog.vote}}</td>
                         <td>
-                            <button class="btn btn-success">修改</button>
+                            <button class="btn btn-success" ui-sref="main.editBlog({id:blog.id})">修改</button>
                             <button class="btn btn-default" ng-click="deleteBlog(blog.id)">删除</button>
                         </td>
                     </tr>

@@ -177,6 +177,33 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('findBlogService',//博客记录
+        [
+            '$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (blogId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                        url: $rootScope.$baseUrl + "/admin/blog/findById",
+                        params: {
+                            id:blogId
+                        },
+                        method: 'GET'
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                        })
+                        .error(function () {
+                            deferred.reject();
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('addBlogService',//添加博客
         ['$rootScope',
             '$http',
