@@ -237,8 +237,8 @@ angular.module("myControllerModule", [])
                 /**
                  * 处理跳转
                  */
-                $scope.showUserList = function () {
-                    $state.go('main.user');
+                $scope.showBlogList = function () {
+                    $state.go('main.blog');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }])
