@@ -85,12 +85,17 @@
                                 <small class="error " ng-show="addBlogForm.tag.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
-                            <button type="button"
-                                    name="tag"
-                                    class="btn"
-                                    ng-repeat="tag in tags.content track by $index ">
-                                {{tag.name}}
-                            </button>
+                            <div ng-repeat="tag in tags.content track by $index ">
+                                    <input type="checkbox"
+                                           title="标签"
+                                           class="btn"
+                                           id="{{tag.id}}"
+                                           name="{{tag.name}}"
+                                           ng-checked="isSelected(tag.id)"
+                                           ng-click="updateSelection($event,tag.id)"
+                                           ng-model="tag">
+                                    {{tag.name}}
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
