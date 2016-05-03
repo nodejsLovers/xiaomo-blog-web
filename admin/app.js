@@ -66,17 +66,17 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
         .state('main.authority', {//权限列表
             url: '/authority',
             templateUrl: './src/tpls/authority/authorityList.html',
-            controller: 'adminListController'
+            controller: 'AdminListController'
         })
         .state('main.addAuthority', {//添加权限
             url: '/addAuthority',
             templateUrl: './src/tpls/authority/AddAuthority.html',
-            controller: 'addAdminUserController'
+            controller: 'AdminAddController'
         })
         .state('main.editAuthority', {//编辑权限
             url: '/editAuthority/:id',
             templateUrl: './src/tpls/authority/authorityEdit.html',
-            controller: 'adminEditController'
+            controller: 'AdminEditController'
         })
         .state('main.user', {//用户列表
             url: '/user',

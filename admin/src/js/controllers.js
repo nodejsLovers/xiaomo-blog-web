@@ -3,7 +3,7 @@
  * @type {angular.IModule}
  */
 angular.module("myControllerModule", [])
-    .controller('adminListController',
+    .controller('AdminListController',
         [
             '$scope',
             '$state',
@@ -77,7 +77,7 @@ angular.module("myControllerModule", [])
             }
         ]
     )
-    .controller('addAdminUserController',//添加用户
+    .controller('AdminAddController',//添加后台用户
         [
             '$scope',
             '$state',
@@ -95,13 +95,21 @@ angular.module("myControllerModule", [])
                             promise.then(function (data) {
                                 $scope.adminUsers = data.adminUsers;
                                 $scope.pageCount = $scope.adminUsers.totalPages;
-                                $location.path('/main/authority');
+                                $state.go('main.authority');
                             });
                         }
                     });
                 };
+                /* ===========================================================我是分割线===========================================================================*/
+                /**
+                 * 处理跳转
+                 */
+                $scope.showAdminUserList = function () {
+                    $state.go('main.authority');
+                };
+                /* ===========================================================我是分割线===========================================================================*/
             }])
-    .controller('adminEditController',//编辑后台用户
+    .controller('AdminEditController',//编辑后台用户
         [
             '$scope',
             '$state',
@@ -130,7 +138,7 @@ angular.module("myControllerModule", [])
                 /* ===========================================================我是分割线===========================================================================*/
             }
         ])
-    .controller('UserController',//用户
+    .controller('UserController',//前台用户列表
         [
             '$scope',
             'userService',
