@@ -220,7 +220,6 @@ angular.module("myServiceModule", [])
                             summary: blog.summary,
                             content: blog.content,
                             nickName: blog.author,
-                            blogType: blog.blogType,
                             tagIds: blog.tagIds
                         }
                     })
