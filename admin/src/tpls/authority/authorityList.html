@@ -27,7 +27,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="adminUser in adminUsers|orderBy:'status':true" class="animated fadeInRight">
+                    <tr ng-repeat="adminUser in adminUsers" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{adminUser.id}}</td>
                         <td>{{adminUser.userName}}</td>
@@ -36,12 +36,12 @@
                             {{adminUser.authLevel | transformAdminLevelFilter}}
                         </td>
                         <td>{{adminUser.operator}}</td>
-                        <td>{{adminUser.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
-                        <td>{{adminUser.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>{{adminUser.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{adminUser.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                         <td>
                             <button class="btn btn-success" ui-sref="main.editAuthority({id:adminUser.id})">修改
                             </button>
-                            <button class="btn btn-default" ng-click="deleteAdmin(adminUser.id)">删除</button>
+                            <button class="btn btn-default" ng-click="deleteAdmin($index)">删除</button>
                         </td>
                     </tr>
                     </tbody>

@@ -20,6 +20,8 @@ angular.module("myControllerModule", [])
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
                     $scope.adminUsers = data.adminUsers.content;
+                    //在这里对adminUsers的数据进行排序。排完后再赋值。。排序我就不写了哈。
+
                     $scope.pageInfo = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                     console.log($scope.adminUsers);
@@ -40,19 +42,17 @@ angular.module("myControllerModule", [])
                 /**
                  * 删除后台用户
                  */
-                $scope.deleteAdmin = function (adminUserId) {
-                    var deletePromise = deleteAdminService.operate(adminUserId);
+                $scope.deleteAdmin = function ($index) {
+                    var currentData = $scope.adminUsers[$index];
+                    console.log(currentData);
+                    var deletePromise = deleteAdminService.operate(currentData.id);
                     deletePromise.then(function (data) {
                         if (data.status == 200) {
-                            var promise = getAdminUserService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                $scope.adminUsers = data.adminUsers.content;
-                                $scope.pageInfo = data.adminUsers;
-                                $scope.pageCount = $scope.adminUsers.totalPages;
-                            });
+                            $scope.adminUsers.splice($index, 1);
                         }
                     });
                 };
+
                 /* ===========================================================我是分割线===========================================================================*/
             }])
     .controller('AdminLoginController',//后台用户登录
