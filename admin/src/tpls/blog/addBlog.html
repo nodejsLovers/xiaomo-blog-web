@@ -88,12 +88,12 @@
                             <div ng-repeat="tag in tags.content track by $index ">
                                     <input type="checkbox"
                                            title="标签"
-                                           class="btn"
+                                           class="btn "
                                            id="{{tag.id}}"
                                            name="{{tag.name}}"
                                            ng-checked="isSelected(tag.id)"
                                            ng-click="updateSelection($event,tag.id)"
-                                           ng-model="tag">
+                                           ng-model="tags">
                                     {{tag.name}}
                             </div>
                         </div>

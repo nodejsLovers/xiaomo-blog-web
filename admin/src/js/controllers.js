@@ -70,7 +70,7 @@ angular.module("myControllerModule", [])
                         if (data.status !== 200) {
                             alert(data.status);
                         } else {
-                            $location.path('/main');
+                            $state.go('main');
                         }
                     })
                 };
@@ -203,14 +203,46 @@ angular.module("myControllerModule", [])
                     console.log($scope.tags);
                 });
                 /* ===========================================================我是分割线===========================================================================*/
+                $scope.selected = [];
+                $scope.selectedTags = [];
+
+                var updateSelected = function (action, id, name) {
+                    if (action == 'add' && $scope.selected.indexOf(id) == -1) {
+                        $scope.selected.push(id);
+                        $scope.selectedTags.push(name);
+                    }
+                    if (action == 'remove' && $scope.selected.indexOf(id) != -1) {
+                        var idx = $scope.selected.indexOf(id);
+                        $scope.selected.splice(idx, 1);
+                        $scope.selectedTags.splice(idx, 1);
+                    }
+                    console.log($scope.selected);
+                };
+
+                $scope.updateSelection = function ($event, id) {
+                    var checkbox = $event.target;
+                    var action = (checkbox.checked ? 'add' : 'remove');
+                    updateSelected(action, id, checkbox.name);
+                };
+
+                $scope.isSelected = function (id) {
+                    return $scope.selected.indexOf(id) >= 0;
+                };
                 /**
                  * 添加博客
                  */
                 $scope.addBlog = function () {
-                    $scope.blog.tagIds = [1, 2];
-                    $scope.blog.blogType = 1;
-                    addBlogService.addBlog($scope.blog);
-                    $state.go('main.blog');
+                    $scope.blog.tagIds = $scope.selected;
+                    console.log($scope.blog);
+                    var promise = addBlogService.operate($scope.blog);
+                    promise.then(function (data) {
+                        if (data.status == 200) {
+                            $state.go('main.blog');
+                        } else {
+                            alert(data.status);
+                        }
+                    });
+
                 };
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -348,11 +380,11 @@ angular.module("myControllerModule", [])
     .controller('TagListController',//标签列表
         [
             '$scope',
-            '$location',
+            '$state',
             'deleteTagService',
             'getTagListService',
             function ($scope,
-                      $location,
+                      $state,
                       deleteTagService,
                       getTagListService) {
                 /* ===========================================================我是分割线===========================================================================*/
@@ -398,7 +430,7 @@ angular.module("myControllerModule", [])
                  * 处理跳转
                  */
                 $scope.showTagList = function () {
-                    $location.path('/main/blog');
+                    $state.go('main.tag');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
@@ -407,11 +439,11 @@ angular.module("myControllerModule", [])
     .controller('LinkController',
         [
             '$scope',
-            '$location',
+            '$state',
             'deleteLinkService',
             'linkListService',
             function ($scope,
-                      $location,
+                      $state,
                       deleteLinkService,
                       linkListService) {
                 /* ===========================================================我是分割线===========================================================================*/
@@ -454,7 +486,7 @@ angular.module("myControllerModule", [])
                  * 处理跳转
                  */
                 $scope.showLinkList = function () {
-                    $location.path('/main/link');
+                    $state.go('main.link');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
@@ -463,11 +495,11 @@ angular.module("myControllerModule", [])
     .controller('ChangeLogController',
         [
             '$scope',
-            '$location',
+            '$state',
             'deleteChangeLogService',
             'changeLogListService',
             function ($scope,
-                      $location,
+                      $state,
                       deleteChangeLogService,
                       changeLogListService) {
                 /* ===========================================================我是分割线===========================================================================*/
@@ -511,7 +543,7 @@ angular.module("myControllerModule", [])
                  * 处理跳转
                  */
                 $scope.showChangeLogList = function () {
-                    $location.path('/main/changeLog');
+                    $state.go('main.changeLog');
                 };
                 /* ===========================================================我是分割线===========================================================================*/
             }
@@ -520,10 +552,10 @@ angular.module("myControllerModule", [])
     .controller('BasicInfoController',
         [
             '$scope',
-            '$location',
+            '$state',
             'basicInfoService',
             function ($scope,
-                      $location,
+                      $state,
                       basicInfoService) {
                 /* ===========================================================我是分割线===========================================================================*/
                 $scope.commonInfo = {};
