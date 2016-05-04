@@ -26,7 +26,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="adminUser in adminUsers.content|orderBy:'status':true" class="animated fadeInRight">
+                    <tr ng-repeat="adminUser in adminUsers|orderBy:'status':true" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{adminUser.userName}}</td>
                         <td class="alert"
@@ -49,7 +49,7 @@
                     <pager page-count="pageCount" current-page="currentPage" on-page-change="onAdminUserPageChange()"
                            first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
                     <div>
-                        当前显示:{{adminUsers.number+1}}/{{adminUsers.totalPages}},共{{adminUsers.totalElements}}条记录,每页显示{{adminUsers.numberOfElements}}条数据
+                        当前显示:{{pageInfo.number+1}}/{{pageInfo.totalPages}},共{{pageInfo.totalElements}}条记录,每页显示{{pageInfo.numberOfElements}}条数据
                     </div>
                 </div>
             </div>

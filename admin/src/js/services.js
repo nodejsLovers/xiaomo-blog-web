@@ -60,6 +60,7 @@ angular.module("myServiceModule", [])
             function ($rootScope, $http, $q) {
                 var result = {};
                 result.operate = function (userName, password, authLevel) {
+                    console.log(authLevel);
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -72,7 +73,7 @@ angular.module("myServiceModule", [])
                             operator: 'xiaomo',
                             userName: userName,
                             password: password,
-                            authLevel: authLevel.id
+                            authLevel: authLevel
                         }
                     })
                         .success(function (data) {

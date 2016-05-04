@@ -7,9 +7,10 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$state',
+            '$timeout',
             'getAdminUserService',
             'deleteAdminService',
-            function ($scope, $state, getAdminUserService, deleteAdminService) {
+            function ($scope, $state, $timeout, getAdminUserService, deleteAdminService) {
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "欢迎来到管理员列表页！！";
                 /* ===========================================================我是分割线===========================================================================*/
@@ -18,8 +19,10 @@ angular.module("myControllerModule", [])
                  */
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
-                    $scope.adminUsers = data.adminUsers;
+                    $scope.adminUsers = data.adminUsers.content;
+                    $scope.pageInfo = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
+                    console.log($scope.adminUsers);
                 });
                 /* ===========================================================我是分割线===========================================================================*/
                 /**
@@ -28,7 +31,9 @@ angular.module("myControllerModule", [])
                 $scope.onAdminUserPageChange = function () {
                     var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
                     adminOnPagePromise.then(function (data) {
-                        $scope.adminUsers = data.adminUsers;
+                        $scope.adminUsers = data.adminUsers.content;
+                        $scope.pageInfo = data.adminUsers;
+                        $scope.pageCount = $scope.adminUsers.totalPages;
                     });
                 };
                 /* ===========================================================我是分割线===========================================================================*/
@@ -41,7 +46,8 @@ angular.module("myControllerModule", [])
                         if (data.status == 200) {
                             var promise = getAdminUserService.operate($scope.currentPage);
                             promise.then(function (data) {
-                                $scope.adminUsers = data.adminUsers;
+                                $scope.adminUsers = data.adminUsers.content;
+                                $scope.pageInfo = data.adminUsers;
                                 $scope.pageCount = $scope.adminUsers.totalPages;
                             });
                         }
@@ -82,12 +88,12 @@ angular.module("myControllerModule", [])
             '$scope',
             '$state',
             'addAdminService',
-            function ($scope, $state, addAdminService) {
+            'getAdminUserService',
+            function ($scope, $state, addAdminService, getAdminUserService) {
                 /**
                  * 增加后台用户
                  */
                 $scope.addAdminUser = function (userName, password, authLevel) {
-                    console.log(authLevel);
                     var addPromise = addAdminService.operate(userName, password, authLevel);
                     addPromise.then(function (data) {
                         if (data.status == 200) {

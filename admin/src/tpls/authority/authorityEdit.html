@@ -13,47 +13,7 @@
                             帐号：
                         </label>
                         <div class="col-md-10">
-                            <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
-                            <!-- 错误信息 -->
-                            <div class="error"
-                                 ng-show="updateAdminUserForm.userName.$dirty && updateAdminUserForm.userName.$invalid">
-                                <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="updateAdminUserForm.userName.$error.required">请输入用户名
-                                </small>
-                                <small class="error" ng-show="updateAdminUserForm.userName.$error.minlength">用户名最少长度为3
-                                </small>
-                                <small class="error" ng-show="updateAdminUserForm.userName.$error.maxlength">用户名最大长度为64
-                                </small>
-                                <small class="error" ng-show="updateAdminUserForm.userName.$error.unique">
-                                    这个用户名己经用过了，请换一个吧
-                                </small>
-                            </div>
-                            <!-- end -->
-                            <input type="text" name="userName" class="form-control" placeholder="最多12个字符"
-                                   ng-model="adminUser.userName" required ng-minlength="3" ng-maxlength="12"
-                                   ensure-admin-user-unique="userName">
-                        </div>
-                    </div>
-                    <!-- 密码 -->
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            密 码：
-                        </label>
-                        <div class="col-md-10">
-                            <!-- 错误信息 -->
-                            <div class="error"
-                                 ng-show="updateAdminUserForm.password.$dirty && updateAdminUserForm.password.$invalid">
-                                <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="updateAdminUserForm.password.$error.required">请输入密码
-                                </small>
-                                <small class="error" ng-show="updateAdminUserForm.password.$error.minlength">密码最少长度为3
-                                </small>
-                                <small class="error" ng-show="updateAdminUserForm.password.$error.maxlength">密码最大长度为64
-                                </small>
-                            </div>
-                            <!-- end -->
-                            <input type="password" name="password" class="form-control" placeholder="最多12个字符"
-                                   ng-model="adminUser.password" required ng-minlength="3" ng-maxlength="12">
+                            <span class="form-control">{{adminUser.userName}}</span>
                         </div>
                     </div>
                     <!-- 权限 -->
@@ -85,6 +45,7 @@
                                 <button ng-click="showAdminUserList()" class="btn btn-default">取消</button>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
