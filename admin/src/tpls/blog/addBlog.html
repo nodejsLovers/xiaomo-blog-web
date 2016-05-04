@@ -63,9 +63,9 @@
                         <div class="col-md-10">
                             <!-- 内容错误信息 -->
                             <div class="error " ng-show="addBlogForm.content.$dirty && addBlogForm.content.$invalid">
-                                <small class="error " ng-show="addBlogForm.content.$error.required">请输入简介内容</small>
-                                <small class="error " ng-show="addBlogForm.content.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error " ng-show="addBlogForm.content.$error.maxlength">简介最大长度为64</small>
+                                <small class="error " ng-show="addBlogForm.content.$error.required">请输入博客内容</small>
+                                <small class="error " ng-show="addBlogForm.content.$error.minlength">博客内容最少长度为3</small>
+                                <small class="error " ng-show="addBlogForm.content.$error.maxlength">博客内容最大长度为64</small>
                             </div>
                             <!-- end -->
                             <textarea class="form-control" id="textarea-1" rows="16" placeholder="最多640个字符"
@@ -107,7 +107,7 @@
                             <div class="error " ng-show="addBlogForm.author.$dirty && addBlogForm.author.$invalid">
                                 <small class="error " ng-show="addBlogForm.author.$error.required">请输入简介内容</small>
                                 <small class="error " ng-show="addBlogForm.author.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error " ng-show="addBlogForm.author.$error.maxlength">简介最大长度为64</small>
+                                <small class="error " ng-show="addBlogForm.author.$error.maxlength">简介最大长度为8</small>
                             </div>
                             <!-- end -->
                             <input type="text" class="form-control" name="author" placeholder="最多8个字符"
