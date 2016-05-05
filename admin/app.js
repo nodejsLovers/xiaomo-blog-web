@@ -10,8 +10,8 @@ var myApp = angular.module('myApp', ['ui.router', 'ngAnimate', 'myControllerModu
 myApp.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    $rootScope.$baseUrl = "http://localhost:8889";
-    // $rootScope.$baseUrl = "http://api.xiaomo.info:8080";
+    // $rootScope.$baseUrl = "http://localhost:8889";
+    $rootScope.$baseUrl = "http://api.xiaomo.info:8889";
 });
 
 
