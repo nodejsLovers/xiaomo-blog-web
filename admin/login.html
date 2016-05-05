@@ -12,8 +12,8 @@
                     <div class="col-md-12">
                         <form class="form-horizontal" role="form" novalidate name="loginForm">
                             <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    用户名：
+                                <label class="col-md-2 control-label" for="userName">
+                                    帐 号：
                                 </label>
                                 <div class="col-md-10">
                                     <!-- 内容错误信息 -->
@@ -26,13 +26,13 @@
                                         </small>
                                     </div>
                                     <!-- end -->
-                                    <input type="text" class="form-control" name="userName" placeholder="帐号"
+                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="帐号" ng-focus
                                            ng-model="userInfo.userName" required ng-minlength="3" ng-maxlength="15">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2 control-label">
-                                    密码：
+                                <label class="col-md-2 control-label" for="password">
+                                    密 码：
                                 </label>
                                 <div class="col-md-10">
                                     <!-- 内容错误信息 -->
@@ -46,7 +46,7 @@
                                     </div>
                                     <!-- end -->
                                     <input type="password" class="form-control" placeholder="只能是数字、字母、下划线"
-                                           ng-model="userInfo.password" name="password" required ng-minlength="3"
+                                           ng-model="userInfo.password" id="password" name="password" required ng-minlength="3"
                                            ng-maxlength="12">
                                 </div>
                             </div>

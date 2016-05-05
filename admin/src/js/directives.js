@@ -197,7 +197,7 @@ angular.module("myDirectiveModule", [])
     .directive('ngFocus', function () {
         var FOCUS_CLASS = "ng-focused";
         return {
-            restrict: 'A',
+            restrict: 'AE',
             require: 'ngModel',
             link: function (scope, element, attrs, ctrl) {
                 ctrl.$focused = false;
