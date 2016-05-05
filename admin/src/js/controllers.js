@@ -19,9 +19,11 @@ angular.module("myControllerModule", [])
                  */
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
-                    $scope.adminUsers = data.adminUsers.content;
                     //在这里对adminUsers的数据进行排序。排完后再赋值。。排序我就不写了哈。
-
+                    var temp = data.adminUsers.content;
+                    $scope.adminUsers = temp.sort(function (a, b) {
+                        return a.authLevel - b.authLevel;
+                    });
                     $scope.pageInfo = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                     console.log($scope.adminUsers);
@@ -33,7 +35,10 @@ angular.module("myControllerModule", [])
                 $scope.onAdminUserPageChange = function () {
                     var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
                     adminOnPagePromise.then(function (data) {
-                        $scope.adminUsers = data.adminUsers.content;
+                        var temp = data.adminUsers.content;
+                        $scope.adminUsers = temp.sort(function (a, b) {
+                            return a.authLevel - b.authLevel;
+                        });
                         $scope.pageInfo = data.adminUsers;
                         $scope.pageCount = $scope.adminUsers.totalPages;
                     });
