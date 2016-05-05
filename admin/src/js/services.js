@@ -60,6 +60,7 @@ angular.module("myServiceModule", [])
             function ($rootScope, $http, $q) {
                 var result = {};
                 result.operate = function (userName, password, authLevel) {
+                    console.log(authLevel);
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -72,7 +73,7 @@ angular.module("myServiceModule", [])
                             operator: 'xiaomo',
                             userName: userName,
                             password: password,
-                            authLevel: authLevel.id
+                            authLevel: authLevel
                         }
                     })
                         .success(function (data) {
@@ -82,6 +83,40 @@ angular.module("myServiceModule", [])
                         .error(function () {
                             deferred.reject();
                             alert("添加失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('updateAdminService',//修改管理员账户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (userName, authLevel) {
+                    console.log(authLevel);
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/adminUser/update",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            operator: 'xiaomo',
+                            userName: userName,
+                            authLevel: authLevel
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
                         });
                     return deferred.promise;
                 };
@@ -177,12 +212,41 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('findBlogService',//博客记录
+        [
+            '$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (blogId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                        url: $rootScope.$baseUrl + "/admin/blog/findById",
+                        params: {
+                            id: blogId
+                        },
+                        method: 'GET'
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                        })
+                        .error(function () {
+                            deferred.reject();
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('addBlogService',//添加博客
         ['$rootScope',
             '$http',
-            function ($rootScope, $http) {
+            '$q',
+            function ($rootScope, $http,$q) {
                 var result = {};
                 result.operate = function (blog) {
+                  var deferred = $q.defer();
                     $http({
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                         url: $rootScope.$baseUrl + "/admin/blog/add",
@@ -190,19 +254,55 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             title: blog.title,
+                            nickName: blog.author,
                             summary: blog.summary,
                             content: blog.content,
-                            nickName: blog.author,
-                            blogType: blog.blogType,
                             tagIds: blog.tagIds
                         }
                     })
-                        .success(function () {
+                        .success(function (data) {
+                          deferred.resolve(data);
                             console.log("添加成功！");
                         })
                         .error(function () {
+                            deferred.reject();
                             alert("添加失败！")
                         })
+                        return deferred.promise;
+                };
+                return result;
+            }])
+    .service('updateBlogService',//更新博客
+        [
+            '$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http,$q) {
+                var result = {};
+                result.operate = function (title, summary, content, author, tagIds) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                        url: $rootScope.$baseUrl + "/admin/blog/update",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            title: title,
+                            summary: summary,
+                            content: content,
+                            nickName: author,
+                            tagIds: tagIds
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
+                        })
+                    return deferred.promise;
                 };
                 return result;
             }])
@@ -237,7 +337,7 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-    .service('userService',//前台用户列表
+    .service('userListService',//前台用户列表
         ['$rootScope',
             '$http',
             '$q',
@@ -263,32 +363,102 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('addUserService',//添加用户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (email, nickName, phone, address, gender) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/user/addUser",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            email: email,
+                            nickName: nickName,
+                            phone: phone,
+                            address: address,
+                            gender: gender
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("添加成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("添加失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('findUserService',//查找指定用户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (id) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/user/findById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: id
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("查找成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("查找失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteUserService',//删除用户
         ['$rootScope',
             '$http',
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (userId) {
+                result.operate = function (user) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        url: $rootScope.$baseUrl + "/admin/user/deleteById",
-                        method: 'GET',
+                        url: $rootScope.$baseUrl + "/admin/user/addUser",
+                        method: 'POST',
                         dataType: 'json',
                         params: {
-                            id: userId
+                            email: user.email,
+                            nickName: user.nickName,
+                            phone: user.phone,
+                            address: user.address,
+                            gender: user.gender
                         }
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("删除成功！");
+                            console.log("添加成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("删除失败！")
+                            alert("添加失败！")
                         });
                     return deferred.promise;
                 };
@@ -491,5 +661,3 @@ angular.module("myServiceModule", [])
         }
         ]
     );
-
-

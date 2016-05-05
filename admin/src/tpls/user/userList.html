@@ -24,7 +24,6 @@
                         <th>性别</th>
                         <th>图像</th>
                         <th>验证码</th>
-                        <th>状态</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
                         <th colspan="2">操作</th>
@@ -39,16 +38,15 @@
                         <td>{{user.address}}</td>
                         <td>{{user.gender | transformGenderFilter}}</td>
                         <td><img src="{{user.imgUrl}}" alt="" style="width: 30px;height:30px;"></td>
-                        <td>{{user.validateCode}}</td>
                         <td class="alert"
                             ng-class="{'alert-success':user.validateStatus==1,'alert-danger':user.validateStatus==2}">
                             {{user.validateStatus |transformStatusFilter}}
                         </td>
-                        <td>{{user.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
-                        <td>{{user.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
+                        <td>{{user.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td>{{user.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                         <td>
-                            <button class="btn btn-success">修改</button>
-                            <button class="btn btn-default">删除</button>
+                            <button class="btn btn-success" ui-sref="main.editUser({id:user.id})">修改</button>
+                            <button class="btn btn-default" ng-click="deleteUser(user.id)">删除</button>
                         </td>
                     </tr>
                     </tbody>
@@ -57,9 +55,6 @@
                 <div class="pager">
                     <pager page-count="pageCount" current-page="currentPage" on-page-change="onUserPageChange()"
                            first-text="首页" next-text="下一页" prev-text="上一页" last-text="尾页"></pager>
-                    <div>
-                        当前显示:{{users.number+1}}/{{users.totalPages}},共{{users.totalElements}}条记录,每页显示{{users.numberOfElements}}条数据
-                    </div>
                 </div>
             </div>
         </div>

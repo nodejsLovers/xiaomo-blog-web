@@ -39,7 +39,7 @@ angular.module("myFilterModule", [])
         } else if (content == 2) {
             return '普通管理员';
         } else {
-            return '临时游客';
+            return '默认观察者';
         }
     }
 });

@@ -10,7 +10,8 @@ var myApp = angular.module('myApp', ['ui.router', 'ngAnimate', 'myControllerModu
 myApp.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    $rootScope.$baseUrl = "http://api.xiaomo.info:8080";
+    $rootScope.$baseUrl = "http://localhost:8889";
+    // $rootScope.$baseUrl = "http://api.xiaomo.info:8080";
 });
 
 
@@ -20,6 +21,13 @@ myApp.run(function ($rootScope, $state, $stateParams) {
 myApp.config(function ($httpProvider) {
     $httpProvider.interceptors.push('myInterceptor');
 });
+
+/**
+ * 装饰器(类似于Spring的aop)
+ */
+// myApp.config(function ($provide) {
+//     $provide.decorator('adminLoginService', githubDecorator);
+// });
 
 /**
  * 配置路由。
@@ -36,81 +44,114 @@ myApp.config(function ($httpProvider) {
 myApp.config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/login');
     $stateProvider
+    /* ===========================================================登录===========================================================================*/
         .state('login', {//登录
             url: '/login',
             templateUrl: './login.html',
-            controller: 'AdminController'
+            controller: 'AdminLoginController'
         })
         .state('main', {//主界面
             url: '/main',
             templateUrl: './src/tpls/common/home.html',
             controller: 'BasicInfoController'
         })
+        /* ===========================================================博客===========================================================================*/
         .state('main.blog', {//博客列表
             url: '/blog',
             templateUrl: './src/tpls/blog/blogList.html',
-            controller: 'BlogController'
+            controller: 'BlogListController'
         })
         .state('main.addBlog', {//添加博客
             url: '/addBlog',
             templateUrl: './src/tpls/blog/addBlog.html',
-            controller: 'BlogController'
+            controller: 'BlogAddController'
         })
-        .state('main.authority', {//权限
+        .state('main.editBlog', {//编辑博客
+            url: '/editBlog/:id',
+            templateUrl: './src/tpls/blog/editBlog.html',
+            controller: 'BlogEditController'
+        })
+        /* ===========================================================权限===========================================================================*/
+        .state('main.authority', {//权限列表
             url: '/authority',
             templateUrl: './src/tpls/authority/authorityList.html',
-            controller: 'AdminController'
+            controller: 'AdminListController'
         })
-        .state('main.addAuthority', {//权限
+        .state('main.addAuthority', {//添加权限
             url: '/addAuthority',
             templateUrl: './src/tpls/authority/AddAuthority.html',
-            controller: 'AdminController'
+            controller: 'AdminAddController'
         })
-        .state('main.toUpdateAuthority', {//权限
-            url: '/toUpdateAuthority',
+        .state('main.editAuthority', {//编辑权限
+            url: '/editAuthority/:id',
             templateUrl: './src/tpls/authority/authorityEdit.html',
-            controller: 'AdminController'
+            controller: 'AdminEditController'
         })
+        /* ===========================================================用户===========================================================================*/
         .state('main.user', {//用户列表
             url: '/user',
             templateUrl: './src/tpls/user/userList.html',
-            controller: 'UserController'
+            controller: 'UserListController'
         })
         .state('main.addUser', {//添加用户
             url: '/addUser',
             templateUrl: './src/tpls/user/addUser.html',
-            controller: 'UserController'
+            controller: 'UserAddController'
         })
+        .state('main.editUser', {//编辑用户
+            url: '/editUser/:id',
+            templateUrl: './src/tpls/user/editUser.html',
+            controller: 'UserEditController'
+        })
+        /* ===========================================================标签===========================================================================*/
         .state('main.tag', {//标签列表
             url: '/tag',
             templateUrl: './src/tpls/tag/tagList.html',
-            controller: 'TagController'
+            controller: 'TagListController'
         })
         .state('main.addTag', {//添加标签
             url: '/addTag',
             templateUrl: './src/tpls/tag/addTag.html',
-            controller: 'TagController'
+            controller: 'TagAddController'
         })
-        .state('main.changeLog', {//更新日志列表
-            url: '/changeLog',
-            templateUrl: './src/tpls/changeLog/changeLog.html',
-            controller: 'ChangeLogController'
+        .state('main.editTag', {//编辑标签
+            url: '/editTag',
+            templateUrl: './src/tpls/tag/editTag.html',
+            controller: 'TagEditController'
         })
-        .state('main.addChangeLog', {//添加更新日志
-            url: '/addChangeLog',
-            templateUrl: './src/tpls/changeLog/addChangeLog.html',
-            controller: 'ChangeLogController'
-        })
+        /* ===========================================================友链===========================================================================*/
         .state('main.links', {//友情链接列表
             url: '/links',
             templateUrl: './src/tpls/links/linkList.html',
-            controller: 'LinkController'
+            controller: 'LinkListController'
         })
         .state('main.addLink', {//添加友情链接
             url: '/addLink',
             templateUrl: './src/tpls/links/addLink.html',
-            controller: 'LinkController'
+            controller: 'LinkAddController'
         })
+        .state('main.editLink', {//编辑友情链接
+            url: '/editLink',
+            templateUrl: './src/tpls/links/editLink.html',
+            controller: 'LinkEditController'
+        })
+        /* ===========================================================日志===========================================================================*/
+        .state('main.changeLog', {//更新日志列表
+            url: '/changeLog',
+            templateUrl: './src/tpls/changeLog/changeLog.html',
+            controller: 'ChangeLogListController'
+        })
+        .state('main.addChangeLog', {//添加更新日志
+            url: '/addChangeLog',
+            templateUrl: './src/tpls/changeLog/addChangeLog.html',
+            controller: 'ChangeLogAddController'
+        })
+        .state('main.editChangeLog', {//编辑更新日志
+            url: '/editChangeLog',
+            templateUrl: './src/tpls/changeLog/editChangeLog.html',
+            controller: 'ChangeLogEditController'
+        })
+        /* ===========================================================系统===========================================================================*/
         .state('main.systemSet', {//系统设置
             url: '/systemSet',
             templateUrl: './src/tpls/systemSet/systemSet.html'

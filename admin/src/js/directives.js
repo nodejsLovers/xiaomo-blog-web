@@ -12,7 +12,8 @@ angular.module("myDirectiveModule", [])
         showFirstLastText: true,
         gotoText: 'Goto Page',
         showGoto: false
-    }).directive("pager", ['ngPaginationConfig', function (ngPaginationConfig) {
+    })
+    .directive("pager", ['ngPaginationConfig', function (ngPaginationConfig) {
         return {
             link: function (scope, element, attrs) {
                 var visiblePageCount = angular.isDefined(attrs.visiblePageCount) ? attrs.visiblePageCount : ngPaginationConfig.visiblePageCount;
@@ -196,7 +197,7 @@ angular.module("myDirectiveModule", [])
     .directive('ngFocus', function () {
         var FOCUS_CLASS = "ng-focused";
         return {
-            restrict: 'A',
+            restrict: 'AE',
             require: 'ngModel',
             link: function (scope, element, attrs, ctrl) {
                 ctrl.$focused = false;
@@ -212,5 +213,17 @@ angular.module("myDirectiveModule", [])
                     });
                 });
             }
+        };
+    })
+    .directive('ngEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind("keydown keypress", function (event) {
+                if (event.which === 13) {
+                    scope.$apply(function () {
+                        scope.$eval(attrs.ngEnter);
+                    });
+                    event.preventDefault();
+                }
+            });
         };
     });

@@ -21,7 +21,7 @@
                                 <small class="error" ng-show="addAdminUserForm.userName.$error.required">请输入用户名</small>
                                 <small class="error" ng-show="addAdminUserForm.userName.$error.minlength">用户名最少长度为3
                                 </small>
-                                <small class="error" ng-show="addAdminUserForm.userName.$error.maxlength">用户名最大长度为64
+                                <small class="error" ng-show="addAdminUserForm.userName.$error.maxlength">用户名最大长度为12
                                 </small>
                                 <small class="error" ng-show="addAdminUserForm.userName.$error.unique">
                                     这个用户名己经用过了，请换一个吧
@@ -44,14 +44,14 @@
                                  ng-show="addAdminUserForm.password.$dirty && addAdminUserForm.password.$invalid">
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
                                 <small class="error" ng-show="addAdminUserForm.password.$error.required">请输入密码</small>
-                                <small class="error" ng-show="addAdminUserForm.password.$error.minlength">密码最少长度为3
+                                <small class="error" ng-show="addAdminUserForm.password.$error.minlength">密码最少长度为2
                                 </small>
-                                <small class="error" ng-show="addAdminUserForm.password.$error.maxlength">密码最大长度为64
+                                <small class="error" ng-show="addAdminUserForm.password.$error.maxlength">密码最大长度为12
                                 </small>
                             </div>
                             <!-- end -->
                             <input type="password" name="password" class="form-control" placeholder="最多12个字符"
-                                   ng-model="adminUser.password" required ng-minlength="3" ng-maxlength="12"
+                                   ng-model="adminUser.password" required ng-minlength="2" ng-maxlength="12"
                                    ng-init="adminUser.password=123456">
                         </div>
                     </div>
@@ -60,22 +60,29 @@
                         <label class="col-md-2 control-label">
                             权限：
                         </label>
-                        <div class="col-md-10">
-                            <select title="权限" ng-model="adminUser.authLevel"
-                                    ng-options="authLevel.name for authLevel in adminUser.authLevels">
-                                <option value="">-- 请选择 --</option>
-                            </select>
-                            {{adminUser.authLevel}}
+                        <div class="col-md-10 radio-class">
+                            超级管理员
+                            <input type="radio" name="gender"
+                                   ng-model="adminUser.authLevel" value="1"
+                                   title="超级管理员"><br/>
+                            普通管理员
+                            <input type="radio" name="gender"
+                                   ng-model="adminUser.authLevel" value="2"
+                                   title="普通管理员"><br/>
+                            默认观察者
+                            <input type="radio" name="gender"
+                                   ng-model="adminUser.authLevel" value="0"
+                                   title="默认观察者"><br/>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
-                            <button ng-click="addAdminUser(adminUser.userName,adminUser.password,adminUser.authLevel)"
-                                    class="btn btn-info"
-                                    ng-disabled="addAdminUserForm.$invalid">添加管理员账户
-                            </button>
-                            <button ng-click="showAdminUserList()" class="btn btn-default">取消</button>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
+                                <button ng-click="addAdminUser(adminUser.userName,adminUser.password,adminUser.authLevel)"
+                                        class="btn btn-info"
+                                        ng-disabled="addAdminUserForm.$invalid">添加管理员账户
+                                </button>
+                                <button ng-click="showAdminUserList()" class="btn btn-default">取消</button>
+                            </div>
                         </div>
                     </div>
                 </form>
