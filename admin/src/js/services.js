@@ -88,6 +88,40 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('updateAdminService',//修改管理员账户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (userName, authLevel) {
+                    console.log(authLevel);
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/adminUser/update",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            operator: 'xiaomo',
+                            userName: userName,
+                            authLevel: authLevel
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteAdminService',//删除管理员账户
         ['$rootScope',
             '$http',

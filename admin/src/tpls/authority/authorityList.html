@@ -32,7 +32,7 @@
                         <td>{{adminUser.id}}</td>
                         <td>{{adminUser.userName}}</td>
                         <td class="alert"
-                            ng-class="{'alert-success':adminUser.authLevel==1,'alert-danger':adminUser.authLevel==0,'alert-default':adminUser.authLevel==0}">
+                            ng-class="{'alert-success':adminUser.authLevel==1,'alert-info':adminUser.authLevel==2,'alert-default':adminUser.authLevel==0}">
                             {{adminUser.authLevel | transformAdminLevelFilter}}
                         </td>
                         <td>{{adminUser.operator}}</td>

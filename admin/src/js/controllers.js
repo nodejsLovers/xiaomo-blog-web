@@ -116,7 +116,8 @@ angular.module("myControllerModule", [])
             '$scope',
             '$state',
             'findAdminUserService',
-            function ($scope, $state, findAdminUserService) {
+            'updateAdminService',
+            function ($scope, $state, findAdminUserService, updateAdminService) {
                 /**
                  * 编辑后台用户
                  * @param adminUserId
@@ -130,6 +131,16 @@ angular.module("myControllerModule", [])
                         console.log($scope.adminUser);
                     }
                 });
+
+                $scope.updateAdminUser = function (userName, authLevel) {
+                    var promise = updateAdminService.operate(userName, authLevel);
+                    promise.then(function (data) {
+                        if (data.status == 200) {
+                            $state.go('main.authority');
+                        }
+                    });
+                };
+
                 /**
                  * 处理跳转
                  */
