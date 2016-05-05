@@ -510,10 +510,10 @@ angular.module("myControllerModule", [])
                 $scope.deleteTag = function (tagId) {
                     var deletePromise = deleteTagService.operate(tagId);
                     deletePromise.then(function (data) {
+                      if(data==null){
+                        alert("服务器挂B了....");
+                      }
                         if (data.status == 200) {
-                          if(data==null){
-                            alert("服务器挂B了....");
-                          }
                             var promise = getTagListService.operate($scope.currentPage);
                             promise.then(function (data) {
                               if(data==null){
