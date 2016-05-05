@@ -119,22 +119,6 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/tag/editTag.html',
             controller: 'TagEditController'
         })
-        /* ===========================================================日志===========================================================================*/
-        .state('main.changeLog', {//更新日志列表
-            url: '/changeLog',
-            templateUrl: './src/tpls/changeLog/changeLog.html',
-            controller: 'ChangeLogListController'
-        })
-        .state('main.addChangeLog', {//添加更新日志
-            url: '/addChangeLog',
-            templateUrl: './src/tpls/changeLog/addChangeLog.html',
-            controller: 'ChangeLogAddController'
-        })
-        .state('main.editChangeLog', {//编辑更新日志
-            url: '/editChangeLog',
-            templateUrl: './src/tpls/changeLog/editChangeLog.html',
-            controller: 'ChangeLogEditController'
-        })
         /* ===========================================================友链===========================================================================*/
         .state('main.links', {//友情链接列表
             url: '/links',
@@ -150,6 +134,22 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/editLink',
             templateUrl: './src/tpls/links/editLink.html',
             controller: 'LinkEditController'
+        })
+        /* ===========================================================日志===========================================================================*/
+        .state('main.changeLog', {//更新日志列表
+            url: '/changeLog',
+            templateUrl: './src/tpls/changeLog/changeLog.html',
+            controller: 'ChangeLogListController'
+        })
+        .state('main.addChangeLog', {//添加更新日志
+            url: '/addChangeLog',
+            templateUrl: './src/tpls/changeLog/addChangeLog.html',
+            controller: 'ChangeLogAddController'
+        })
+        .state('main.editChangeLog', {//编辑更新日志
+            url: '/editChangeLog',
+            templateUrl: './src/tpls/changeLog/editChangeLog.html',
+            controller: 'ChangeLogEditController'
         })
         /* ===========================================================系统===========================================================================*/
         .state('main.systemSet', {//系统设置

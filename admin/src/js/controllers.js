@@ -49,13 +49,13 @@ angular.module("myControllerModule", [])
                  */
                 $scope.deleteAdmin = function ($index) {
                     var currentData = $scope.adminUsers[$index];
-                    console.log(currentData);
+                    $scope.adminUsers.splice($index, 1);
                     var deletePromise = deleteAdminService.operate(currentData.id);
-                    deletePromise.then(function (data) {
-                        if (data.status == 200) {
-                            $scope.adminUsers.splice($index, 1);
-                        }
-                    });
+                    // deletePromise.then(function (data) {
+                    //     if (data.status == 200) {
+                    //         $scope.adminUsers.splice($index, 1);
+                    //     }
+                    // });
                 };
 
                 /* ===========================================================我是分割线===========================================================================*/
@@ -447,7 +447,7 @@ angular.module("myControllerModule", [])
             }
         ]
     )
-    .controller('LinkController',
+    .controller('LinkListController',
         [
             '$scope',
             '$state',
@@ -493,17 +493,35 @@ angular.module("myControllerModule", [])
                     })
                 };
                 /* ===========================================================我是分割线===========================================================================*/
+
+            }
+        ]
+    )
+    .controller('LinkAddController',
+        [
+            '$scope',
+            '$state',
+            function ($scope, $state) {
                 /**
                  * 处理跳转
                  */
                 $scope.showLinkList = function () {
                     $state.go('main.link');
                 };
-                /* ===========================================================我是分割线===========================================================================*/
-            }
-        ]
-    )
-    .controller('ChangeLogController',
+            }])
+    .controller('LinkEditController',
+        [
+            '$scope',
+            '$state',
+            function ($scope, $state) {
+                /**
+                 * 处理跳转
+                 */
+                $scope.showLinkList = function () {
+                    $state.go('main.link');
+                };
+            }])
+    .controller('ChangeLogListController',
         [
             '$scope',
             '$state',
@@ -549,17 +567,33 @@ angular.module("myControllerModule", [])
                         }
                     })
                 };
-                /* ===========================================================我是分割线===========================================================================*/
+            }
+        ]
+    )
+    .controller('ChangeLogAddController',
+        [
+            '$scope',
+            '$state',
+            function ($scope, $state) {
                 /**
                  * 处理跳转
                  */
                 $scope.showChangeLogList = function () {
                     $state.go('main.changeLog');
                 };
-                /* ===========================================================我是分割线===========================================================================*/
-            }
-        ]
-    )
+            }])
+    .controller('ChangeLogEditController',
+        [
+            '$scope',
+            '$state',
+            function ($scope, $state) {
+                /**
+                 * 处理跳转
+                 */
+                $scope.showChangeLogList = function () {
+                    $state.go('main.changeLog');
+                };
+            }])
     .controller('BasicInfoController',
         [
             '$scope',
