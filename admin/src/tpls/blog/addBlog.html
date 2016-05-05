@@ -78,13 +78,6 @@
                             标签：
                         </label>
                         <div class="col-md-10">
-                            <!-- 标签错误信息 -->
-                            <div class="error " ng-show="addBlogForm.tag.$dirty && addBlogForm.tag.$invalid">
-                                <small class="error " ng-show="addBlogForm.tag.$error.required">请输入简介内容</small>
-                                <small class="error " ng-show="addBlogForm.tag.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error " ng-show="addBlogForm.tag.$error.maxlength">简介最大长度为64</small>
-                            </div>
-                            <!-- end -->
                             <div ng-repeat="tag in tags.content track by $index ">
                                     <input type="checkbox"
                                            title="标签"

@@ -22,7 +22,6 @@ angular.module("myControllerModule", [])
                     $scope.adminUsers = temp.sort(function (a, b) {
                         return a.authLevel - b.authLevel;
                     });
-                    $scope.pageInfo = data.adminUsers;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                     console.log($scope.adminUsers);
                 });
@@ -36,7 +35,6 @@ angular.module("myControllerModule", [])
                         $scope.adminUsers = temp.sort(function (a, b) {
                             return a.authLevel - b.authLevel;
                         });
-                        $scope.pageInfo = data.adminUsers;
                         $scope.pageCount = $scope.adminUsers.totalPages;
                     });
                 };
@@ -164,8 +162,13 @@ angular.module("myControllerModule", [])
                  */
                 var promise = getBlogListService.operate($scope.currentPage);
                 promise.then(function (data) {
-                    $scope.blogs = data.blogs;
+                  if(data.status==200){
+                    var temp = data.blogs.content;
+                    $scope.blogs = temp.sort(function(a,b){
+                      return b.vote-a.vote;
+                    })
                     $scope.pageCount = $scope.blogs.totalPages;
+                  }
                 });
                 /**
                  * 博客翻页
@@ -173,22 +176,25 @@ angular.module("myControllerModule", [])
                 $scope.onPageChange = function () {
                     var promise = getBlogListService.operate($scope.currentPage);
                     promise.then(function (data) {
-                        $scope.blogs = data.blogs;
+                      if(data.status==200){
+                        var temp = data.blogs.content;
+                        $scope.blogs = temp.sort(function(a,b){
+                          return b.vote-a.vote;
+                        })
+                        $scope.pageCount = $scope.blogs.totalPages;
+                      }
                     });
                 };
 
                 /**
                  * 删除博客
                  */
-                $scope.deleteBlog = function (blogId) {
-                    var deletePromise = deleteBlogService.operate(blogId);
+                $scope.deleteBlog = function ($index) {
+                  var currentData = $scope.blogs[$index];
+                    var deletePromise = deleteBlogService.operate(currentData.id);
                     deletePromise.then(function (data) {
                         if (data.status == 200) {
-                            var promise = getBlogListService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                $scope.blogs = data.blogs;
-                                $scope.pageCount = $scope.blogs.totalPages;
-                            });
+                            $scope.blogs.splice($index,1);
                         }
                     });
                 };
@@ -263,7 +269,9 @@ angular.module("myControllerModule", [])
             '$scope',
             '$state',
             'findBlogService',
-            function ($scope, $state, findBlogService) {
+            'updateBlogService',
+            'getTagListService',
+            function ($scope, $state, findBlogService,updateBlogService,getTagListService) {
                 var findBlogPromise = findBlogService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
                     if (data.status == 200) {
@@ -271,6 +279,44 @@ angular.module("myControllerModule", [])
                         console.log($scope.blog);
                     }
                 });
+                var tagPromise = getTagListService.operate($scope.currentPage);
+                tagPromise.then(function (data) {
+                    $scope.tags = data.tags;
+                    console.log($scope.tags);
+                });
+                $scope.selected = [];
+                $scope.selectedTags = [];
+
+                var updateSelected = function (action, id, name) {
+                    if (action == 'add' && $scope.selected.indexOf(id) == -1) {
+                        $scope.selected.push(id);
+                        $scope.selectedTags.push(name);
+                    }
+                    if (action == 'remove' && $scope.selected.indexOf(id) != -1) {
+                        var idx = $scope.selected.indexOf(id);
+                        $scope.selected.splice(idx, 1);
+                        $scope.selectedTags.splice(idx, 1);
+                    }
+                    console.log($scope.selected);
+                };
+
+                $scope.updateSelection = function ($event, id) {
+                    var checkbox = $event.target;
+                    var action = (checkbox.checked ? 'add' : 'remove');
+                    updateSelected(action, id, checkbox.name);
+                };
+
+                $scope.isSelected = function (id) {
+                    return $scope.selected.indexOf(id) >= 0;
+                };
+                $scope.updateBlog = function (title, summary,content,author) {
+                    var promise = updateBlogService.operate(title, summary,content,author,$scope.selected);
+                    promise.then(function (data) {
+                        if (data.status == 200) {
+                            $state.go('main.blog');
+                        }
+                    });
+                };
                 /**
                  * 处理跳转
                  */

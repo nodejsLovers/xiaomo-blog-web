@@ -242,9 +242,11 @@ angular.module("myServiceModule", [])
     .service('addBlogService',//添加博客
         ['$rootScope',
             '$http',
-            function ($rootScope, $http) {
+            '$q',
+            function ($rootScope, $http,$q) {
                 var result = {};
                 result.operate = function (blog) {
+                  var deferred = $q.defer();
                     $http({
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                         url: $rootScope.$baseUrl + "/admin/blog/add",
@@ -252,18 +254,55 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             title: blog.title,
+                            nickName: blog.author,
                             summary: blog.summary,
                             content: blog.content,
-                            nickName: blog.author,
                             tagIds: blog.tagIds
                         }
                     })
-                        .success(function () {
+                        .success(function (data) {
+                          deferred.resolve(data);
                             console.log("添加成功！");
                         })
                         .error(function () {
+                            deferred.reject();
                             alert("添加失败！")
                         })
+                        return deferred.promise;
+                };
+                return result;
+            }])
+    .service('updateBlogService',//更新博客
+        [
+            '$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http,$q) {
+                var result = {};
+                result.operate = function (title, summary, content, author, tagIds) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                        url: $rootScope.$baseUrl + "/admin/blog/update",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            title: title,
+                            summary: summary,
+                            content: content,
+                            nickName: author,
+                            tagIds: tagIds
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
+                        })
+                    return deferred.promise;
                 };
                 return result;
             }])
@@ -622,5 +661,3 @@ angular.module("myServiceModule", [])
         }
         ]
     );
-
-
