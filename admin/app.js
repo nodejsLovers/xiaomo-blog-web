@@ -82,6 +82,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/authority/AddAuthority.html',
             controller: 'AdminAddController'
         })
+        .state('main.updatePassword', {//添加权限
+            url: '/updatePassword/:id',
+            templateUrl: './src/tpls/authority/updatePassword.html',
+            controller: 'AdminChangePasswordController'
+        })
         .state('main.editAuthority', {//编辑权限
             url: '/editAuthority/:id',
             templateUrl: './src/tpls/authority/authorityEdit.html',

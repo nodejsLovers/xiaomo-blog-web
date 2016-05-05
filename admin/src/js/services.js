@@ -122,6 +122,39 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+            .service('changePasswordAdminService',//修改后台管理员密码
+                ['$rootScope',
+                    '$http',
+                    '$q',
+                    function ($rootScope, $http, $q) {
+                        var result = {};
+                        result.operate = function (userName, password) {
+                            console.log(password);
+                            var deferred = $q.defer();
+                            $http({
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                                },
+                                url: $rootScope.$baseUrl + "/admin/adminUser/changePassword",
+                                method: 'POST',
+                                dataType: 'json',
+                                params: {
+                                    userName: userName,
+                                    password: password
+                                }
+                            })
+                                .success(function (data) {
+                                    deferred.resolve(data);
+                                    console.log("修改成功！");
+                                })
+                                .error(function () {
+                                    deferred.reject();
+                                    alert("修改失败！")
+                                });
+                            return deferred.promise;
+                        };
+                        return result;
+                    }])
     .service('deleteAdminService',//删除管理员账户
         ['$rootScope',
             '$http',
@@ -267,7 +300,7 @@ angular.module("myServiceModule", [])
                         .error(function () {
                             deferred.reject();
                             alert("添加失败！")
-                        })
+                        });
                         return deferred.promise;
                 };
                 return result;

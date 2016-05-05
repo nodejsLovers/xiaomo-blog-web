@@ -46,9 +46,9 @@ angular.module("myControllerModule", [])
                     $scope.adminUsers.splice($index, 1);
                     var deletePromise = deleteAdminService.operate(currentData.id);
                     deletePromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             $scope.adminUsers.splice($index, 1);
                         }
@@ -72,8 +72,8 @@ angular.module("myControllerModule", [])
                 $scope.login = function () {
                     var promise = adminLoginService.operate($scope.userInfo.userName, $scope.userInfo.password);
                     promise.then(function (data) {
-                        if(data==null){
-                          alert("服务器挂B了....");
+                        if (data == null) {
+                            alert("服务器挂B了....");
                         }
                         if (data.status !== 200) {
                             alert(data.status);
@@ -98,9 +98,9 @@ angular.module("myControllerModule", [])
                 $scope.addAdminUser = function (userName, password, authLevel) {
                     var addPromise = addAdminService.operate(userName, password, authLevel);
                     addPromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             var promise = getAdminUserService.operate($scope.currentPage);
                             promise.then(function (data) {
@@ -133,9 +133,9 @@ angular.module("myControllerModule", [])
                 $scope.adminUser.authLevels = [{'id': 1, 'name': '超级管理员'}, {'id': 2, 'name': '普通管理员'}];
                 var findAdminUserPromise = findAdminUserService.operate($state.params.id);
                 findAdminUserPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     if (data.status == 200) {
                         $scope.adminUser = data.adminUser;
                         console.log($scope.adminUser);
@@ -145,9 +145,52 @@ angular.module("myControllerModule", [])
                 $scope.updateAdminUser = function (userName, authLevel) {
                     var promise = updateAdminService.operate(userName, authLevel);
                     promise.then(function (data) {
-                      if(data==null){
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.authority');
+                        }
+                    });
+                };
+
+                /**
+                 * 处理跳转
+                 */
+                $scope.showAdminUserList = function () {
+                    $state.go('main.authority');
+                };
+            }
+        ])
+    .controller('AdminChangePasswordController',//修改后台用户密码
+        [
+            '$scope',
+            '$state',
+            'findAdminUserService',
+            'changePasswordAdminService',
+            function ($scope, $state, findAdminUserService, changePasswordAdminService) {
+                /**
+                 * 编辑后台用户
+                 * @param adminUserId
+                 */
+                var findAdminUserPromise = findAdminUserService.operate($state.params.id);
+                findAdminUserPromise.then(function (data) {
+                    if (data == null) {
                         alert("服务器挂B了....");
-                      }
+                    }
+                    if (data.status == 200) {
+                        $scope.adminUser = data.adminUser;
+                        $scope.adminUser.password = "";
+                        console.log($scope.adminUser);
+                    }
+                });
+
+                $scope.updatePassword = function (userName, password) {
+                    var promise = changePasswordAdminService.operate(userName, password);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             $state.go('main.authority');
                         }
@@ -177,16 +220,16 @@ angular.module("myControllerModule", [])
                  */
                 var promise = getBlogListService.operate($scope.currentPage);
                 promise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
-                  if(data.status==200){
-                    var temp = data.blogs.content;
-                    $scope.blogs = temp.sort(function(a,b){
-                      return b.vote-a.vote;
-                    })
-                    $scope.pageCount = $scope.blogs.totalPages;
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
+                    if (data.status == 200) {
+                        var temp = data.blogs.content;
+                        $scope.blogs = temp.sort(function (a, b) {
+                            return b.vote - a.vote;
+                        })
+                        $scope.pageCount = $scope.blogs.totalPages;
+                    }
                 });
                 /**
                  * 博客翻页
@@ -194,16 +237,16 @@ angular.module("myControllerModule", [])
                 $scope.onPageChange = function () {
                     var promise = getBlogListService.operate($scope.currentPage);
                     promise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
-                      if(data.status==200){
-                        var temp = data.blogs.content;
-                        $scope.blogs = temp.sort(function(a,b){
-                          return b.vote-a.vote;
-                        })
-                        $scope.pageCount = $scope.blogs.totalPages;
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
+                        if (data.status == 200) {
+                            var temp = data.blogs.content;
+                            $scope.blogs = temp.sort(function (a, b) {
+                                return b.vote - a.vote;
+                            })
+                            $scope.pageCount = $scope.blogs.totalPages;
+                        }
                     });
                 };
 
@@ -211,14 +254,14 @@ angular.module("myControllerModule", [])
                  * 删除博客
                  */
                 $scope.deleteBlog = function ($index) {
-                  var currentData = $scope.blogs[$index];
+                    var currentData = $scope.blogs[$index];
                     var deletePromise = deleteBlogService.operate(currentData.id);
                     deletePromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
-                            $scope.blogs.splice($index,1);
+                            $scope.blogs.splice($index, 1);
                         }
                     });
                 };
@@ -237,9 +280,9 @@ angular.module("myControllerModule", [])
                  */
                 var tagPromise = getTagListService.operate($scope.currentPage);
                 tagPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     $scope.tags = data.tags;
                     console.log($scope.tags);
                 });
@@ -276,9 +319,9 @@ angular.module("myControllerModule", [])
                     console.log($scope.blog);
                     var promise = addBlogService.operate($scope.blog);
                     promise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             $state.go('main.blog');
                         } else {
@@ -301,12 +344,12 @@ angular.module("myControllerModule", [])
             'findBlogService',
             'updateBlogService',
             'getTagListService',
-            function ($scope, $state, findBlogService,updateBlogService,getTagListService) {
+            function ($scope, $state, findBlogService, updateBlogService, getTagListService) {
                 var findBlogPromise = findBlogService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     if (data.status == 200) {
                         $scope.blog = data.blog;
                         console.log($scope.blog);
@@ -342,12 +385,12 @@ angular.module("myControllerModule", [])
                 $scope.isSelected = function (id) {
                     return $scope.selected.indexOf(id) >= 0;
                 };
-                $scope.updateBlog = function (title, summary,content,author) {
-                    var promise = updateBlogService.operate(title, summary,content,author,$scope.selected);
+                $scope.updateBlog = function (title, summary, content, author) {
+                    var promise = updateBlogService.operate(title, summary, content, author, $scope.selected);
                     promise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             $state.go('main.blog');
                         }
@@ -374,9 +417,9 @@ angular.module("myControllerModule", [])
                  */
                 var userPromise = userListService.operate($scope.currentPage);
                 userPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     $scope.users = data.users;
                     $scope.pageCount = $scope.users.totalPages;
                 });
@@ -396,9 +439,9 @@ angular.module("myControllerModule", [])
                 $scope.deleteUser = function (userId) {
                     var deletePromise = deleteUserService.operate(userId);
                     deletePromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             var promise = userListService.operate($scope.currentPage);
                             promise.then(function (data) {
@@ -426,9 +469,9 @@ angular.module("myControllerModule", [])
                     console.log(email);
                     var addPromise = addUserService.operate(email, nickName, phone, address, gender);
                     addPromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             var promise = userListService.operate($scope.currentPage);
                             promise.then(function (data) {
@@ -454,9 +497,9 @@ angular.module("myControllerModule", [])
             function ($scope, $state, findUserService) {
                 var findBlogPromise = findUserService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     if (data.status == 200) {
                         $scope.user = data.user;
                         console.log($scope.user);
@@ -486,9 +529,9 @@ angular.module("myControllerModule", [])
                  */
                 var tagPromise = getTagListService.operate($scope.currentPage);
                 tagPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     $scope.tags = data.tags;
                 });
                 /**
@@ -497,9 +540,9 @@ angular.module("myControllerModule", [])
                 $scope.onTagPageChange = function () {
                     var promise = getTagListService.operate($scope.currentPage);
                     promise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         $scope.tags = data.tags;
                         $scope.pageCount = $scope.tags.totalPages;
                     });
@@ -510,15 +553,15 @@ angular.module("myControllerModule", [])
                 $scope.deleteTag = function (tagId) {
                     var deletePromise = deleteTagService.operate(tagId);
                     deletePromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             var promise = getTagListService.operate($scope.currentPage);
                             promise.then(function (data) {
-                              if(data==null){
-                                alert("服务器挂B了....");
-                              }
+                                if (data == null) {
+                                    alert("服务器挂B了....");
+                                }
                                 $scope.tags = data.tags;
                                 $scope.pageCount = $scope.tags.totalPages;
                             });
@@ -551,9 +594,9 @@ angular.module("myControllerModule", [])
                  */
                 var linkPromise = linkListService.operate($scope.currentPage);
                 linkPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     $scope.links = data.links;
                     $scope.pageCount = $scope.links.totalPages;
                 });
@@ -563,9 +606,9 @@ angular.module("myControllerModule", [])
                 $scope.onTagPageChange = function () {
                     var promise = linkListService.operate($scope.currentPage);
                     promise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         $scope.links = data.links;
                         $scope.pageCount = $scope.links.totalPages;
                     });
@@ -573,15 +616,15 @@ angular.module("myControllerModule", [])
                 $scope.deleteLink = function (linkId) {
                     var deletePromise = deleteLinkService.operate(linkId);
                     deletePromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             var promise = linkListService.operate($scope.currentPage);
                             promise.then(function (data) {
-                              if(data==null){
-                                alert("服务器挂B了....");
-                              }
+                                if (data == null) {
+                                    alert("服务器挂B了....");
+                                }
                                 $scope.links = data.links;
                                 $scope.pageCount = $scope.links.totalPages;
                             });
@@ -633,9 +676,9 @@ angular.module("myControllerModule", [])
                 $scope.commonInfo.msg = "欢迎来到更新日志列表页！！";
                 var linkPromise = changeLogListService.operate($scope.currentPage);
                 linkPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     $scope.changeLogs = data.changeLogs;
                     $scope.pageCount = $scope.changeLogs.totalPages;
                 });
@@ -645,9 +688,9 @@ angular.module("myControllerModule", [])
                 $scope.onTagPageChange = function () {
                     var promise = changeLogListService.operate($scope.currentPage);
                     promise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         $scope.changeLogs = data.changeLogs;
                         $scope.pageCount = $scope.changeLogs.totalPages;
                     });
@@ -655,9 +698,9 @@ angular.module("myControllerModule", [])
                 $scope.deleteChangeLog = function (changeLogId) {
                     var deletePromise = deleteChangeLogService.operate(changeLogId);
                     deletePromise.then(function (data) {
-                      if(data==null){
-                        alert("服务器挂B了....");
-                      }
+                        if (data == null) {
+                            alert("服务器挂B了....");
+                        }
                         if (data.status == 200) {
                             var promise = changeLogListService.operate($scope.currentPage);
                             promise.then(function (data) {
@@ -706,9 +749,9 @@ angular.module("myControllerModule", [])
                 $scope.commonInfo.msg = "服务系统信息！！";
                 var systemPromise = basicInfoService.operate();
                 systemPromise.then(function (data) {
-                  if(data==null){
-                    alert("服务器挂B了....");
-                  }
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
                     $scope.systems = data.systems;
                 });
             }
