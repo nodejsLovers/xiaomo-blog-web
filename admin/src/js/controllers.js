@@ -583,6 +583,7 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     $scope.tags = data.tags.content;
+                    console.log($scope.tags);
                     $scope.pageCount = $scope.tags.totalPages;
                 });
                 /**
@@ -782,7 +783,24 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$state',
-            function ($scope, $state) {
+            'addChangeLogService',
+            function ($scope, $state, addChangeLogService) {
+                var now = new Date();
+                $scope.changeLog = {};
+                $scope.changeLog.onlineTime = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
+                $scope.addChangeLog = function (name, onlineTime) {
+                    var promise = addChangeLogService.operate(name, onlineTime);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert('服务器挂B了...');
+                            return;
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.changeLog');
+                        }
+                    })
+                };
+
                 /**
                  * 处理跳转
                  */
