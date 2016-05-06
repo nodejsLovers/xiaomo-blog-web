@@ -582,7 +582,8 @@ angular.module("myControllerModule", [])
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
-                    $scope.tags = data.tags;
+                    $scope.tags = data.tags.content;
+                    $scope.pageCount = $scope.tags.totalPages;
                 });
                 /**
                  * 标签翻页
@@ -593,28 +594,22 @@ angular.module("myControllerModule", [])
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
-                        $scope.tags = data.tags;
+                        $scope.tags = data.tags.content;
                         $scope.pageCount = $scope.tags.totalPages;
                     });
                 };
                 /**
                  * 删除标签
                  */
-                $scope.deleteTag = function (tagId) {
-                    var deletePromise = deleteTagService.operate(tagId);
+                $scope.deleteTag = function ($index) {
+                    var currentData = $scope.tags[$index];
+                    var deletePromise = deleteTagService.operate(currentData.id);
                     deletePromise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
                         if (data.status == 200) {
-                            var promise = getTagListService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                if (data == null) {
-                                    alert("服务器挂B了....");
-                                }
-                                $scope.tags = data.tags;
-                                $scope.pageCount = $scope.tags.totalPages;
-                            });
+                            $scope.tags.splice($index, 1);
                         }
                     });
                 };

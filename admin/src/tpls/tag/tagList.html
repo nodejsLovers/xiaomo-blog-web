@@ -25,7 +25,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="tag in tags.content" class="animated fadeInRight">
+                    <tr ng-repeat="tag in tags" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{tag.id}}</td>
                         <td>{{tag.name}}</td>
@@ -33,7 +33,7 @@
                         <td>{{tag.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
                             <button class="btn btn-success">修改</button>
-                            <button class="btn btn-default" ng-click="deleteTag(tag.id)">删除</button>
+                            <button class="btn btn-default" ng-click="deleteTag($index)">删除</button>
                         </td>
                     </tr>
                     </tbody>
