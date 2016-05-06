@@ -13,25 +13,7 @@
                             邮箱：
                         </label>
                         <div class="col-md-10">
-                            <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
-                            <!-- 错误信息 -->
-                            <div class="error"
-                                 ng-show="editUserForm.email.$dirty && editUserForm.email.$invalid">
-                                <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
-                                <small class="error" ng-show="editUserForm.email.$error.required">请输入邮箱
-                                </small>
-                                <small class="error" ng-show="editUserForm.email.$error.minlength">邮箱最少长度为3
-                                </small>
-                                <small class="error" ng-show="editUserForm.email.$error.maxlength">邮箱最大长度为18
-                                </small>
-                                <small class="error" ng-show="editUserForm.email.$error.unique">
-                                    这个邮箱己经用过了，请换一个吧
-                                </small>
-                            </div>
-                            <!-- end -->
-                            <input type="email" name="email" class="form-control" placeholder="最多18个字符"
-                                   ng-model="user.email" required ng-minlength="3" ng-maxlength="18"
-                            >
+                            <span class="form-control">{{user.email}}</span>
                         </div>
                     </div>
 
@@ -55,7 +37,7 @@
                             <!-- end -->
                             <input type="text" name="nickName" class="form-control" placeholder="最多12个字符"
                                    ng-model="user.nickName" required ng-minlength="3" ng-maxlength="12"
-                                   >
+                            >
                         </div>
                     </div>
 
@@ -106,7 +88,6 @@
                             >
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             性别：
@@ -130,7 +111,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
-                            <button ng-click=""
+                            <button ng-click="updateUser(user.email,user.nickName,user.phone,user.address,user.gender)"
                                     class="btn btn-info"
                                     ng-disabled="editUserForm.$invalid">保存用户
                             </button>

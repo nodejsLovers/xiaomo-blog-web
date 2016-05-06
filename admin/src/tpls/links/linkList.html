@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a ui-sref="main.addLink" class="btn btn-primary">新增链接纪录</a>
+            <a ui-sref="main.addLink" class="btn btn-primary">友情连接列表</a>
         </div>
     </div>
     <div class="row">
@@ -17,6 +17,7 @@
                     <thead>
                     <tr>
                         <th>编号</th>
+                        <th>id</th>
                         <th>名字</th>
                         <th>链接地址</th>
                         <th>创建时间</th>
@@ -25,15 +26,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="link in links.content|orderBy:'createTime':true" class="animated fadeInRight">
+                    <tr ng-repeat="link in links" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
+                        <td>{{link.id}}</td>
                         <td>{{link.name}}</td>
-                        <td>{{link.url}}</td>
+                        <td><a href="{{link.url}}">{{link.url}}</a></td>
                         <td>{{link.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>{{link.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
-                            <button class="btn btn-success">修改</button>
-                            <button class="btn btn-default" ng-click="deleteLink(link.id)">删除</button>
+                            <button class="btn btn-success" ui-sref="main.editLink({id:link.id})">修改</button>
+                            <button class="btn btn-default" ng-click="deleteLink($index)">删除</button>
                         </td>
                     </tr>
                     </tbody>

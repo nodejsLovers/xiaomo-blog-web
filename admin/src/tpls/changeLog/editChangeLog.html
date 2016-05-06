@@ -1,1 +1,55 @@
-编辑更新日志
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">添加标签</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- fixme 要点1：给form起一个名字,并禁掉原生的验证  -->
+                <form class="form-horizontal" name="updateChangeLogForm" role="form" novalidate>
+                    <!-- 用户名 -->
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            标签名字：
+                        </label>
+                        <div class="col-md-10">
+                           <span class="form-control">{{changeLog.name}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            上线时间：
+                        </label>
+                        <div class="col-md-10">
+                            <!--  fixme 要点2：这个div是要在内容发生变化且不合法才会显示-->
+                            <!-- 错误信息 -->
+                            <div class="error"
+                                 ng-show="updateChangeLogForm.onlineTime.$dirty && updateChangeLogForm.onlineTime.$invalid">
+                                <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
+                                <small class="error" ng-show="updateChangeLogForm.onlineTime.$error.required">请输入名字</small>
+                                <small class="error" ng-show="updateChangeLogForm.onlineTime.$error.minlength">名字最少长度为2
+                                </small>
+                                <small class="error" ng-show="updateChangeLogForm.onlineTime.$error.maxlength">名字最大长度为12
+                                </small>
+                            </div>
+                            <!-- end -->
+                            <input type="text" name="onlineTime" class="form-control" placeholder="最多12个字符"
+                                   ng-model="changeLog.onlineTime" required ng-minlength="2" ng-maxlength="12" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
+                            <button ng-click="updateChangeLog(changeLog.name,changeLog.onlineTime)"
+                                    class="btn btn-info"
+                                    ng-disabled="updateChangeLogForm.$invalid">提交
+                            </button>
+                            <button ng-click="showChangeLogList()" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

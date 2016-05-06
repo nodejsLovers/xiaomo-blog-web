@@ -17,20 +17,25 @@
                     <thead>
                     <tr>
                         <th>编号</th>
+                        <th>id</th>
                         <th>名字</th>
+                        <th>上线时间</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
                         <th colspan="2">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="changeLog in changeLogs.content|orderBy:'createTime':true" class="animated fadeInRight">
+                    <tr ng-repeat="changeLog in changeLogs.content|orderBy:'createTime':true"
+                        class="animated fadeInRight">
                         <td>{{$index+1}}</td>
+                        <td>{{changeLog.id}}</td>
                         <td>{{changeLog.name}}</td>
+                        <td>{{changeLog.onlineTime}}</td>
                         <td>{{changeLog.createTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>{{changeLog.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
-                            <button class="btn btn-success">修改</button>
+                            <button class="btn btn-success" ui-sref="main.editChangeLog({id:changeLog.id})">修改</button>
                             <button class="btn btn-default" ng-click="deleteChangeLog(changeLog.id)">删除</button>
                         </td>
                     </tr>

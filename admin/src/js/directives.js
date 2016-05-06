@@ -1,6 +1,6 @@
 angular.module("myDirectiveModule", [])
     .constant('baseUrlConfig', {
-        baseUrl: 'http://api.xiaomo.info:8080'
+        baseUrl: 'http://api.xiaomo.info:8889'
     })
     .constant('ngPaginationConfig', {
         visiblePageCount: 10,
@@ -188,7 +188,44 @@ angular.module("myDirectiveModule", [])
                                 }).error(function () {
                                     alert("error");
                                 })
-                            }, 2000)
+                            }, 1000)
+                        });
+
+                    }
+                }
+            }])
+    .directive('ensureTagUnique',
+        [
+            '$http',
+            '$timeout',
+            'baseUrlConfig',
+            function ($http, $timeout, baseUrlConfig) {
+                return {
+                    require: 'ngModel',
+                    link: function (scope, ele, attrs, c) {
+                        scope.$watch(attrs.ngModel, function (name) {
+                            $timeout(function () {
+                                if (!name) {
+                                    return;
+                                }
+                                console.log(scope.tag.name);
+                                $http({
+                                    method: 'GET',
+                                    url: baseUrlConfig.baseUrl + '/admin/tag/findByName',
+                                    params: {
+                                        name: name
+                                    }
+                                }).success(function (data) {
+                                    if (data.status != 200) {//不重复
+                                        console.log("当前状态:" + data.status);
+                                        c.$setValidity('unique', true);
+                                    } else {
+                                        c.$setValidity('unique', false);
+                                    }
+                                }).error(function () {
+                                    alert("error");
+                                })
+                            }, 1000)
                         });
 
                     }

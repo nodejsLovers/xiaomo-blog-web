@@ -21,6 +21,7 @@
                         <th>简介</th>
                         <th>作者</th>
                         <th>内容</th>
+                        <th>标签</th>
                         <th>点击数</th>
                         <th colspan="2">操作</th>
                     </tr>
@@ -32,6 +33,7 @@
                         <td>{{blog.summary}}</td>
                         <td>{{blog.author}}</td>
                         <td>{{blog.content | contentFilter}}</td>
+                        <td>{{blog.tagIds }}</td>
                         <td class="alert" ng-class="{'alert-success':blog.vote>10}">{{blog.vote}}</td>
                         <td>
                             <button class="btn btn-success" ui-sref="main.editBlog({id:blog.id})">修改</button>

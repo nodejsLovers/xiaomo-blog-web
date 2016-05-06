@@ -23,7 +23,6 @@
                         <th>地址</th>
                         <th>性别</th>
                         <th>图像</th>
-                        <th>验证码</th>
                         <th>创建时间</th>
                         <th>更新时间</th>
                         <th colspan="2">操作</th>
@@ -38,14 +37,11 @@
                         <td>{{user.address}}</td>
                         <td>{{user.gender | transformGenderFilter}}</td>
                         <td><img src="{{user.imgUrl}}" alt="" style="width: 30px;height:30px;"></td>
-                        <td class="alert"
-                            ng-class="{'alert-success':user.validateStatus==1,'alert-danger':user.validateStatus==2}">
-                            {{user.validateStatus |transformStatusFilter}}
-                        </td>
                         <td>{{user.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                         <td>{{user.updateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                         <td>
                             <button class="btn btn-success" ui-sref="main.editUser({id:user.id})">修改</button>
+                            <button class="btn btn-success" ui-sref="main.updateUserPassword({id:user.id})">改密</button>
                             <button class="btn btn-default" ng-click="deleteUser(user.id)">删除</button>
                         </td>
                     </tr>

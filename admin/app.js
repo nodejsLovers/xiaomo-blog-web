@@ -10,8 +10,8 @@ var myApp = angular.module('myApp', ['ui.router', 'ngAnimate', 'myControllerModu
 myApp.run(function ($rootScope, $state, $stateParams) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
-    $rootScope.$baseUrl = "http://localhost:8889";
-    // $rootScope.$baseUrl = "http://api.xiaomo.info:8080";
+    // $rootScope.$baseUrl = "http://localhost:8889";
+    $rootScope.$baseUrl = "http://api.xiaomo.info:8889";
 });
 
 
@@ -82,6 +82,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/authority/AddAuthority.html',
             controller: 'AdminAddController'
         })
+        .state('main.updatePassword', {//修改后台用户密码
+            url: '/updatePassword/:id',
+            templateUrl: './src/tpls/authority/updatePassword.html',
+            controller: 'AdminChangePasswordController'
+        })
         .state('main.editAuthority', {//编辑权限
             url: '/editAuthority/:id',
             templateUrl: './src/tpls/authority/authorityEdit.html',
@@ -102,6 +107,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/editUser/:id',
             templateUrl: './src/tpls/user/editUser.html',
             controller: 'UserEditController'
+        })
+        .state('main.updateUserPassword', {//修改前台用户密码
+            url: '/updateUserPassword/:id',
+            templateUrl: './src/tpls/user/changeUserPassword.html',
+            controller: 'UserChangePasswordController'
         })
         /* ===========================================================标签===========================================================================*/
         .state('main.tag', {//标签列表
@@ -131,7 +141,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'LinkAddController'
         })
         .state('main.editLink', {//编辑友情链接
-            url: '/editLink',
+            url: '/editLink/:id',
             templateUrl: './src/tpls/links/editLink.html',
             controller: 'LinkEditController'
         })
@@ -147,13 +157,14 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'ChangeLogAddController'
         })
         .state('main.editChangeLog', {//编辑更新日志
-            url: '/editChangeLog',
+            url: '/editChangeLog/:id',
             templateUrl: './src/tpls/changeLog/editChangeLog.html',
             controller: 'ChangeLogEditController'
         })
         /* ===========================================================系统===========================================================================*/
         .state('main.systemSet', {//系统设置
             url: '/systemSet',
-            templateUrl: './src/tpls/systemSet/systemSet.html'
+            templateUrl: './src/tpls/systemSet/systemSet.html',
+            controller:'WebSetController'
         })
 });
