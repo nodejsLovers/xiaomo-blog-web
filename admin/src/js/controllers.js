@@ -227,7 +227,7 @@ angular.module("myControllerModule", [])
                         var temp = data.blogs.content;
                         $scope.blogs = temp.sort(function (a, b) {
                             return b.vote - a.vote;
-                        })
+                        });
                         $scope.pageCount = $scope.blogs.totalPages;
                     }
                 });
@@ -244,7 +244,7 @@ angular.module("myControllerModule", [])
                             var temp = data.blogs.content;
                             $scope.blogs = temp.sort(function (a, b) {
                                 return b.vote - a.vote;
-                            })
+                            });
                             $scope.pageCount = $scope.blogs.totalPages;
                         }
                     });
@@ -494,17 +494,67 @@ angular.module("myControllerModule", [])
             '$scope',
             '$state',
             'findUserService',
-            function ($scope, $state, findUserService) {
+            'updateUserService',
+            function ($scope, $state, findUserService, updateUserService) {
                 var findBlogPromise = findUserService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
+                    console.log(data);
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
                     if (data.status == 200) {
                         $scope.user = data.user;
-                        console.log($scope.user);
                     }
                 });
+                $scope.updateUser = function (email, nickName, phone, address, gender) {
+                    var promise = updateUserService.operate(email, nickName, phone, address, gender);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert("服务器挂B了...");
+                            return;
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.user');
+                        }
+                    })
+                };
+                /**
+                 * 处理跳转
+                 */
+                $scope.showUserList = function () {
+                    $state.go('main.user');
+                };
+            }])
+    .controller('UserChangePasswordController',
+        [
+            '$scope',
+            '$state',
+            'changeUserPasswordService',
+            'findUserService',
+            function ($scope, $state, changeUserPasswordService,findUserService) {
+                var findBlogPromise = findUserService.operate($state.params.id);
+                findBlogPromise.then(function (data) {
+                    console.log(data);
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
+                    if (data.status == 200) {
+                        $scope.user = data.user;
+                        $scope.user.password = '';
+                    }
+                });
+                $scope.updateUserPassword = function (email, nickName, password) {
+                    var promise = changeUserPasswordService.operate(email, nickName, password);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert("服务器挂B了...");
+                            return;
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.user');
+                        }
+                    })
+                };
                 /**
                  * 处理跳转
                  */
