@@ -592,7 +592,7 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-    .service('deleteTagService',//删除友情连接
+    .service('deleteTagService',//删除标签
         ['$rootScope',
             '$http',
             '$q',
@@ -618,6 +618,37 @@ angular.module("myServiceModule", [])
                         .error(function () {
                             deferred.reject();
                             alert("删除失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('addTagService',//添加标签
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (name) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/tag/add",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            name: name
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("添加成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("添加失败！")
                         });
                     return deferred.promise;
                 };
