@@ -832,6 +832,32 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('findLinkService',//友情链接
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (linkId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                        url: $rootScope.$baseUrl + "/admin/link/findById",
+                        params: {
+                            id: linkId
+                        },
+                        method: 'GET'
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                        })
+                        .error(function () {
+                            deferred.reject();
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('addLinkService',//增加友情连接
         ['$rootScope',
             '$http',
@@ -876,7 +902,7 @@ angular.module("myServiceModule", [])
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        url: $rootScope.$baseUrl + "/admin/link/delete",
+                        url: $rootScope.$baseUrl + "/admin/link/update",
                         method: 'POST',
                         dataType: 'json',
                         params: {
@@ -951,4 +977,62 @@ angular.module("myServiceModule", [])
             return result;
         }
         ]
-    );
+    )
+    .service('findWebSetService',
+        ['$rootScope',
+            '$http',
+            '$q'
+            , function ($rootScope, $http, $q) {
+            var result = {};
+            result.operate = function () {
+                var deferred = $q.defer();
+                $http({
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                    url: $rootScope.$baseUrl + "/admin/webSet/findAll",
+                    method: 'GET'
+                })
+                    .success(function (data) {
+                        deferred.resolve(data);
+                    })
+                    .error(function () {
+                        deferred.reject();
+                    });
+                return deferred.promise;
+            };
+            return result;
+        }
+        ]
+    ).service('updateWebSetService',
+    ['$rootScope',
+        '$http',
+        '$q'
+        , function ($rootScope, $http, $q) {
+        var result = {};
+        result.operate = function (webSet) {
+            var deferred = $q.defer();
+            $http({
+                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                url: $rootScope.$baseUrl + "/admin/webSet/update",
+                params: {
+                    id: webSet.id,
+                    siteName: webSet.siteName,
+                    icon: webSet.icon,
+                    fromYear: webSet.fromYear,
+                    toYear: webSet.toYear,
+                    beianNumber: webSet.beianNumber,
+                    beianUrl: webSet.beianUrl
+                },
+                method: 'POST'
+            })
+                .success(function (data) {
+                    deferred.resolve(data);
+                })
+                .error(function () {
+                    deferred.reject();
+                });
+            return deferred.promise;
+        };
+        return result;
+    }
+    ]
+);
