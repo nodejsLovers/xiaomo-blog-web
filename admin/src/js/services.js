@@ -686,7 +686,7 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (name,onlineTime) {
+                result.operate = function (name, onlineTime) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -697,7 +697,7 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             name: name,
-                            onlineTime:onlineTime
+                            onlineTime: onlineTime
                         }
                     })
                         .success(function (data) {
@@ -738,6 +738,69 @@ angular.module("myServiceModule", [])
                         .error(function () {
                             deferred.reject();
                             alert("删除失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('findChangeLogService',//查找更新日志
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (changeLogId) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/changeLog/findById",
+                        method: 'GET',
+                        dataType: 'json',
+                        params: {
+                            id: changeLogId
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("查找成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("查找失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('updateChangeLogService',//查找更新日志
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (name, onlineTime) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/changeLog/update",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            name: name,
+                            onlineTime: onlineTime
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
                         });
                     return deferred.promise;
                 };
