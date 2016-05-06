@@ -42,4 +42,8 @@ angular.module("myFilterModule", [])
             return '默认观察者';
         }
     }
+}).filter('tagIdsFilter', function () {
+    return function (tagIds) {
+        
+    }
 });
