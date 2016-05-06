@@ -1,1 +1,33 @@
-编辑标签
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="panel-title">添加标签</div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- fixme 要点1：给form起一个名字,并禁掉原生的验证  -->
+                <form class="form-horizontal" name="addTagForm" role="form" novalidate>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            名字：
+                        </label>
+                        <div class="col-md-10">
+                            <span class="form-control">{{tag.name}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
+                            <button ng-click="updateAdminUser(adminUser.userName,adminUser.authLevel)"
+                                    class="btn btn-info"
+                                    ng-disabled="addTagForm.$invalid">添加标签
+                            </button>
+                            <button ng-click="showTagList()" class="btn btn-default">取消</button>
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
