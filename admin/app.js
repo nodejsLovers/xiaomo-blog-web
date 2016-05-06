@@ -141,7 +141,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'LinkAddController'
         })
         .state('main.editLink', {//编辑友情链接
-            url: '/editLink',
+            url: '/editLink/:id',
             templateUrl: './src/tpls/links/editLink.html',
             controller: 'LinkEditController'
         })
@@ -157,13 +157,14 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             controller: 'ChangeLogAddController'
         })
         .state('main.editChangeLog', {//编辑更新日志
-            url: '/editChangeLog',
+            url: '/editChangeLog/:id',
             templateUrl: './src/tpls/changeLog/editChangeLog.html',
             controller: 'ChangeLogEditController'
         })
         /* ===========================================================系统===========================================================================*/
         .state('main.systemSet', {//系统设置
             url: '/systemSet',
-            templateUrl: './src/tpls/systemSet/systemSet.html'
+            templateUrl: './src/tpls/systemSet/systemSet.html',
+            controller:'WebSetController'
         })
 });
