@@ -122,39 +122,39 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
-            .service('changePasswordAdminService',//修改后台管理员密码
-                ['$rootScope',
-                    '$http',
-                    '$q',
-                    function ($rootScope, $http, $q) {
-                        var result = {};
-                        result.operate = function (userName, password) {
-                            console.log(password);
-                            var deferred = $q.defer();
-                            $http({
-                                headers: {
-                                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                                },
-                                url: $rootScope.$baseUrl + "/admin/adminUser/changePassword",
-                                method: 'POST',
-                                dataType: 'json',
-                                params: {
-                                    userName: userName,
-                                    password: password
-                                }
-                            })
-                                .success(function (data) {
-                                    deferred.resolve(data);
-                                    console.log("修改成功！");
-                                })
-                                .error(function () {
-                                    deferred.reject();
-                                    alert("修改失败！")
-                                });
-                            return deferred.promise;
-                        };
-                        return result;
-                    }])
+    .service('changePasswordAdminService',//修改后台管理员密码
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (userName, password) {
+                    console.log(password);
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/adminUser/changePassword",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            userName: userName,
+                            password: password
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteAdminService',//删除管理员账户
         ['$rootScope',
             '$http',
@@ -276,10 +276,10 @@ angular.module("myServiceModule", [])
         ['$rootScope',
             '$http',
             '$q',
-            function ($rootScope, $http,$q) {
+            function ($rootScope, $http, $q) {
                 var result = {};
                 result.operate = function (blog) {
-                  var deferred = $q.defer();
+                    var deferred = $q.defer();
                     $http({
                         headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
                         url: $rootScope.$baseUrl + "/admin/blog/add",
@@ -294,14 +294,14 @@ angular.module("myServiceModule", [])
                         }
                     })
                         .success(function (data) {
-                          deferred.resolve(data);
+                            deferred.resolve(data);
                             console.log("添加成功！");
                         })
                         .error(function () {
                             deferred.reject();
                             alert("添加失败！")
                         });
-                        return deferred.promise;
+                    return deferred.promise;
                 };
                 return result;
             }])
@@ -310,7 +310,7 @@ angular.module("myServiceModule", [])
             '$rootScope',
             '$http',
             '$q',
-            function ($rootScope, $http,$q) {
+            function ($rootScope, $http, $q) {
                 var result = {};
                 result.operate = function (title, summary, content, author, tagIds) {
                     var deferred = $q.defer();
@@ -457,6 +457,74 @@ angular.module("myServiceModule", [])
                         .error(function () {
                             deferred.reject();
                             alert("查找失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('updateUserService',//更新用户
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (email, nickName, phone, address, gender) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/user/update",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            email: email,
+                            nickName: nickName,
+                            phone: phone,
+                            address: address,
+                            gender: gender
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('changeUserPasswordService',//修改用户密码
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (email, nickName, password) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/user/changePassword",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            email: email,
+                            nickName: nickName,
+                            password: password
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
                         });
                     return deferred.promise;
                 };
