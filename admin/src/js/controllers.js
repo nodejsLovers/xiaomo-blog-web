@@ -663,7 +663,7 @@ angular.module("myControllerModule", [])
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
-                    $scope.links = data.links;
+                    $scope.links = data.links.content;
                     $scope.pageCount = $scope.links.totalPages;
                 });
                 /**
@@ -675,25 +675,19 @@ angular.module("myControllerModule", [])
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
-                        $scope.links = data.links;
+                        $scope.links = data.links.content;
                         $scope.pageCount = $scope.links.totalPages;
                     });
                 };
-                $scope.deleteLink = function (linkId) {
-                    var deletePromise = deleteLinkService.operate(linkId);
+                $scope.deleteLink = function ($index) {
+                    var currentData = $scope.links[$index];
+                    var deletePromise = deleteLinkService.operate(currentData.id);
                     deletePromise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
                         if (data.status == 200) {
-                            var promise = linkListService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                if (data == null) {
-                                    alert("服务器挂B了....");
-                                }
-                                $scope.links = data.links;
-                                $scope.pageCount = $scope.links.totalPages;
-                            });
+                            $scope.links.splice($index, 1);
                         }
                     })
                 };
@@ -705,7 +699,24 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$state',
-            function ($scope, $state) {
+            'addLinkService',
+            function ($scope, $state, addLinkService) {
+                $scope.link = {};
+                $scope.link.url = 'http://';
+                $scope.addLink = function (name, url) {
+                    var promise = addLinkService.operate(name, url);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert('服务器挂B了...');
+                            return;
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.links');
+                        }
+                    })
+                };
+
+
                 /**
                  * 处理跳转
                  */
