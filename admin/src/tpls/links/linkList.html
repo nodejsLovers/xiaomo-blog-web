@@ -6,8 +6,11 @@
         <strong>提示：</strong> {{commonInfo.msg}}
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <a ui-sref="main.addLink" class="btn btn-primary">友情连接列表</a>
+        </div>
+        <div class="col-md-2">
+            <input type="text" ng-model="vm.filter.$" title="search" placeholder="筛选条件">
         </div>
     </div>
     <div class="row">
@@ -26,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="link in links" class="animated fadeInRight">
+                    <tr ng-repeat="link in links | filter:vm.filter" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{link.id}}</td>
                         <td>{{link.name}}</td>

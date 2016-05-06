@@ -6,8 +6,11 @@
         <strong>提示：</strong> {{commonInfo.msg}}
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <a ui-sref="main.addUser" class="btn btn-primary">新增用户</a>
+        </div>
+        <div class="col-md-2">
+            <input type="text" ng-model="vm.filter.$" title="search" placeholder="筛选条件">
         </div>
     </div>
     <div class="row">
@@ -29,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="user in users.content|orderBy:'createTime':true" class="animated fadeInRight">
+                    <tr ng-repeat="user in users |filter:vm.filter" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.nickName}}</td>
@@ -42,7 +45,7 @@
                         <td>
                             <button class="btn btn-success" ui-sref="main.editUser({id:user.id})">修改</button>
                             <button class="btn btn-success" ui-sref="main.updateUserPassword({id:user.id})">改密</button>
-                            <button class="btn btn-default" ng-click="deleteUser(user.id)">删除</button>
+                            <button class="btn btn-default" ng-click="deleteUser($index)">删除</button>
                         </td>
                     </tr>
                     </tbody>

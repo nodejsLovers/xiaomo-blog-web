@@ -6,8 +6,11 @@
         <strong>提示：</strong> {{commonInfo.msg}}
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <a ui-sref="main.addTag" class="btn btn-primary">新增标签</a>
+        </div>
+        <div class="col-md-2">
+            <input type="text" ng-model="vm.filter.$" title="search" placeholder="筛选条件">
         </div>
     </div>
     <div class="row">
@@ -25,7 +28,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="tag in tags" class="animated fadeInRight">
+                    <tr ng-repeat="tag in tags | filter: vm.filter" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{tag.id}}</td>
                         <td>{{tag.name}}</td>
