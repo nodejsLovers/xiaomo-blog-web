@@ -715,25 +715,47 @@ angular.module("myControllerModule", [])
                         }
                     })
                 };
-
-
                 /**
                  * 处理跳转
                  */
                 $scope.showLinkList = function () {
-                    $state.go('main.link');
+                    $state.go('main.links');
                 };
             }])
     .controller('LinkEditController',
         [
             '$scope',
             '$state',
-            function ($scope, $state) {
+            'findLinkService',
+            'updateLinkService',
+            function ($scope, $state, findLinkService, updateLinkService) {
+                var findLinkPromise = findLinkService.operate($state.params.id);
+                findLinkPromise.then(function (data) {
+                    console.log(data);
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
+                    if (data.status == 200) {
+                        $scope.link = data.link;
+                    }
+                });
+                $scope.updateLink = function (name, url) {
+                    var promise = updateLinkService.operate(name, url);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert("服务器挂B了...");
+                            return;
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.links');
+                        }
+                    })
+                };
                 /**
                  * 处理跳转
                  */
                 $scope.showLinkList = function () {
-                    $state.go('main.link');
+                    $state.go('main.links');
                 };
             }])
     .controller('ChangeLogListController',
@@ -875,4 +897,31 @@ angular.module("myControllerModule", [])
                 });
             }
         ]
-    );
+    )
+    .controller('WebSetController', [
+        '$scope',
+        '$state',
+        'findWebSetService',
+        'updateWebSetService',
+        function ($scope, $state, findWebSetService, updateWebSetService) {
+            $scope.commonInfo = {};
+            $scope.commonInfo.msg = "欢迎来到站点信息设置页面！！";
+            var promise = findWebSetService.operate();
+            promise.then(function (data) {
+                $scope.webSet = data.webSets[0];
+                console.log($scope.webSet);
+            });
+            $scope.updateWebSet = function (webSet) {
+                var operate = updateWebSetService.operate(webSet);
+                operate.then(function (data) {
+                    if (data == null) {
+                        alert("服务器挂B了...");
+                        return;
+                    }
+                    if (data.status == 200) {
+                        alert("更新成功！")
+                    }
+                })
+            }
+        }
+    ]);
