@@ -82,7 +82,7 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: './src/tpls/authority/AddAuthority.html',
             controller: 'AdminAddController'
         })
-        .state('main.updatePassword', {//添加权限
+        .state('main.updatePassword', {//修改后台用户密码
             url: '/updatePassword/:id',
             templateUrl: './src/tpls/authority/updatePassword.html',
             controller: 'AdminChangePasswordController'
@@ -107,6 +107,11 @@ myApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/editUser/:id',
             templateUrl: './src/tpls/user/editUser.html',
             controller: 'UserEditController'
+        })
+        .state('main.updateUserPassword', {//修改前台用户密码
+            url: '/updateUserPassword/:id',
+            templateUrl: './src/tpls/user/changeUserPassword.html',
+            controller: 'UserChangePasswordController'
         })
         /* ===========================================================标签===========================================================================*/
         .state('main.tag', {//标签列表
