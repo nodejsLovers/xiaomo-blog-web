@@ -680,6 +680,38 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('addChangeLogService',//添加标签
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (name,onlineTime) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/changeLog/add",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            name: name,
+                            onlineTime:onlineTime
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("添加成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("添加失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteChangeLogService',//删除更新日志
         ['$rootScope',
             '$http',
