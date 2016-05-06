@@ -18,10 +18,7 @@ angular.module("myControllerModule", [])
                  */
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
-                    var temp = data.adminUsers.content;
-                    $scope.adminUsers = temp.sort(function (a, b) {
-                        return a.authLevel - b.authLevel;
-                    });
+                    $scope.adminUsers = data.adminUsers.content;
                     $scope.pageCount = $scope.adminUsers.totalPages;
                 });
                 /**
@@ -30,10 +27,7 @@ angular.module("myControllerModule", [])
                 $scope.onAdminUserPageChange = function () {
                     var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
                     adminOnPagePromise.then(function (data) {
-                        var temp = data.adminUsers.content;
-                        $scope.adminUsers = temp.sort(function (a, b) {
-                            return a.authLevel - b.authLevel;
-                        });
+                        $scope.adminUsers =data.adminUsers.content;
                         $scope.pageCount = $scope.adminUsers.totalPages;
                     });
                 };
@@ -221,10 +215,7 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     if (data.status == 200) {
-                        var temp = data.blogs.content;
-                        $scope.blogs = temp.sort(function (a, b) {
-                            return b.vote - a.vote;
-                        });
+                        $scope.blogs = data.blogs.content;
                         $scope.pageCount = $scope.blogs.totalPages;
                     }
                 });
@@ -238,10 +229,7 @@ angular.module("myControllerModule", [])
                             alert("服务器挂B了....");
                         }
                         if (data.status == 200) {
-                            var temp = data.blogs.content;
-                            $scope.blogs = temp.sort(function (a, b) {
-                                return b.vote - a.vote;
-                            });
+                            $scope.blogs = data.blogs.content;
                             $scope.pageCount = $scope.blogs.totalPages;
                         }
                     });
