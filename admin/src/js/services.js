@@ -832,6 +832,70 @@ angular.module("myServiceModule", [])
                 };
                 return result;
             }])
+    .service('addLinkService',//增加友情连接
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (name, url) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/link/add",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            name: name,
+                            url: url
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("增加成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("增加失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
+    .service('updateLinkService',//修改友情连接
+        ['$rootScope',
+            '$http',
+            '$q',
+            function ($rootScope, $http, $q) {
+                var result = {};
+                result.operate = function (name, url) {
+                    var deferred = $q.defer();
+                    $http({
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        },
+                        url: $rootScope.$baseUrl + "/admin/link/delete",
+                        method: 'POST',
+                        dataType: 'json',
+                        params: {
+                            name: name,
+                            url: url
+                        }
+                    })
+                        .success(function (data) {
+                            deferred.resolve(data);
+                            console.log("修改成功！");
+                        })
+                        .error(function () {
+                            deferred.reject();
+                            alert("修改失败！")
+                        });
+                    return deferred.promise;
+                };
+                return result;
+            }])
     .service('deleteLinkService',//删除友情连接
         ['$rootScope',
             '$http',
