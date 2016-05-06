@@ -531,7 +531,7 @@ angular.module("myControllerModule", [])
             '$state',
             'changeUserPasswordService',
             'findUserService',
-            function ($scope, $state, changeUserPasswordService,findUserService) {
+            function ($scope, $state, changeUserPasswordService, findUserService) {
                 var findBlogPromise = findUserService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
                     console.log(data);
@@ -626,6 +626,26 @@ angular.module("myControllerModule", [])
                 };
             }
         ]
+    )
+    .controller('TagAddController',
+        [
+            '$scope',
+            '$state',
+            'addTagService',
+            function ($scope, $state, addTagService) {
+                $scope.addTag = function (tagName) {
+                    var promise = addTagService.operate(tagName);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert("服务器挂B了...");
+                            return;
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.tag');
+                        }
+                    })
+                }
+            }]
     )
     .controller('LinkListController',
         [
