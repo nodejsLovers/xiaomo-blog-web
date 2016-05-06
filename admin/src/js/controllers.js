@@ -812,7 +812,32 @@ angular.module("myControllerModule", [])
         [
             '$scope',
             '$state',
-            function ($scope, $state) {
+            'findChangeLogService',
+            'updateChangeLogService',
+            function ($scope, $state, findChangeLogService, updateChangeLogService) {
+                var promise = findChangeLogService.operate($state.params.id);
+                promise.then(function (data) {
+                    console.log(data);
+                    if (data == null) {
+                        alert("服务器挂B了....");
+                    }
+                    if (data.status == 200) {
+                        $scope.changeLog = data.changeLog;
+                    }
+                });
+                $scope.updateChangeLog = function (name, onlineTime) {
+                    var promise = updateChangeLogService.operate(name, onlineTime);
+                    promise.then(function (data) {
+                        if (data == null) {
+                            alert("服务器挂B了...");
+                            return;
+                        }
+                        if (data.status == 200) {
+                            $state.go('main.changeLog');
+                        }
+                    })
+
+                };
                 /**
                  * 处理跳转
                  */
