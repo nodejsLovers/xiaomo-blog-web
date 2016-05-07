@@ -32,12 +32,13 @@
                             <!-- 简介错误信息 -->
                             <div class="error " ng-show="addBlogForm.summary.$dirty && addBlogForm.summary.$invalid">
                                 <small class="error " ng-show="addBlogForm.summary.$error.required">请输入简介内容</small>
-                                <small class="error " ng-show="addBlogForm.summary.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error " ng-show="addBlogForm.summary.$error.minlength">简介内容最少长度为2</small>
                                 <small class="error " ng-show="addBlogForm.summary.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
-                            <input type="text" name="summary" class="form-control" placeholder="最多64个字符"
-                                   ng-model="blog.summary" required ng-minlength="3" ng-maxlength="64">
+                            <textarea rows="5" name="summary" class="form-control" placeholder="最多64个字符"
+                                      ng-model="blog.summary" required ng-minlength="2" ng-maxlength="64"
+                                      title=""></textarea>
                         </div>
 
                     </div>
@@ -48,13 +49,12 @@
                         <div class="col-md-10">
                             <!-- 内容错误信息 -->
                             <div class="error " ng-show="addBlogForm.content.$dirty && addBlogForm.content.$invalid">
-                                <small class="error " ng-show="addBlogForm.content.$error.required">请输入简介内容</small>
+                                <small class="error " ng-show="addBlogForm.content.$error.required">请输入内容</small>
                                 <small class="error " ng-show="addBlogForm.content.$error.minlength">简介内容最少长度为3</small>
-                                <small class="error " ng-show="addBlogForm.content.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
                             <textarea class="form-control" id="textarea-1"  rows="16" placeholder="最多640个字符" name="content"
-                                      ng-model="blog.content" required ng-minlength="3" ng-maxlength="640"></textarea>
+                                      ng-model="blog.content" required ng-minlength="3"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
