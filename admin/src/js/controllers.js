@@ -677,8 +677,8 @@ angular.module("myControllerModule", [])
             function ($scope, $state, addLinkService) {
                 $scope.link = {};
                 $scope.link.url = 'http://';
-                $scope.addLink = function (name, url) {
-                    var promise = addLinkService.operate(name, url);
+                $scope.addLink = function (name, url, level) {
+                    var promise = addLinkService.operate(name, url, level);
                     promise.then(function (data) {
                         if (data == null) {
                             alert('服务器挂B了...');
@@ -712,8 +712,8 @@ angular.module("myControllerModule", [])
                         $scope.link = data.link;
                     }
                 });
-                $scope.updateLink = function (name, url) {
-                    var promise = updateLinkService.operate(name, url);
+                $scope.updateLink = function (name, url, level) {
+                    var promise = updateLinkService.operate(name, url, level);
                     promise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了...");
