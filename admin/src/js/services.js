@@ -860,7 +860,7 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (name, url) {
+                result.operate = function (name, url,level) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -871,7 +871,8 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             name: name,
-                            url: url
+                            url: url,
+                            level:level
                         }
                     })
                         .success(function (data) {
@@ -892,7 +893,7 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (name, url) {
+                result.operate = function (name, url,level) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -903,7 +904,8 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             name: name,
-                            url: url
+                            url: url,
+                            level:level
                         }
                     })
                         .success(function (data) {
