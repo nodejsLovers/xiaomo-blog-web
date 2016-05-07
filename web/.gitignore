@@ -5,7 +5,10 @@
 .idea
 *.iml
 out
+node_modules
 gen
 # Created by .ignore support plugin (hsz.mobi)
 target
 framework
+dist
+bower_components
