@@ -19,7 +19,7 @@ angular.module("myControllerModule", [])
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
                     $scope.adminUsers = data.adminUsers.content;
-                    $scope.pageCount = $scope.adminUsers.totalPages;
+                    $scope.pageCount = data.adminUsers.totalPages;
                 });
                 /**
                  * 后台用户管理信息翻页
@@ -28,7 +28,7 @@ angular.module("myControllerModule", [])
                     var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
                     adminOnPagePromise.then(function (data) {
                         $scope.adminUsers = data.adminUsers.content;
-                        $scope.pageCount = $scope.adminUsers.totalPages;
+                        $scope.pageCount = data.adminUsers.totalPages;
                     });
                 };
                 /**
@@ -97,8 +97,8 @@ angular.module("myControllerModule", [])
                         if (data.status == 200) {
                             var promise = getAdminUserService.operate($scope.currentPage);
                             promise.then(function (data) {
-                                $scope.adminUsers = data.adminUsers;
-                                $scope.pageCount = $scope.adminUsers.totalPages;
+                                $scope.adminUsers = data.adminUsers.content;
+                                $scope.pageCount = data.adminUsers.totalPages;
                                 $state.go('main.authority');
                             });
                         }
@@ -216,7 +216,7 @@ angular.module("myControllerModule", [])
                     }
                     if (data.status == 200) {
                         $scope.blogs = data.blogs.content;
-                        $scope.pageCount = $scope.blogs.totalPages;
+                        $scope.pageCount = data.blogs.totalPages;
                     }
                 });
                 /**
@@ -230,7 +230,7 @@ angular.module("myControllerModule", [])
                         }
                         if (data.status == 200) {
                             $scope.blogs = data.blogs.content;
-                            $scope.pageCount = $scope.blogs.totalPages;
+                            $scope.pageCount = data.blogs.totalPages;
                         }
                     });
                 };
@@ -402,7 +402,7 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     $scope.users = data.users.content;
-                    $scope.pageCount = $scope.users.totalPages;
+                    $scope.pageCount = data.users.totalPages;
                 });
                 /**
                  * 用户管理信息翻页
@@ -453,7 +453,7 @@ angular.module("myControllerModule", [])
                             var promise = userListService.operate($scope.currentPage);
                             promise.then(function (data) {
                                 $scope.users = data.users;
-                                $scope.pageCount = $scope.users.totalPages;
+                                $scope.pageCount = data.users.totalPages;
                                 $state.go('main.user');
                             });
                         }
@@ -558,7 +558,7 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     $scope.tags = data.tags.content;
-                    $scope.pageCount = $scope.tags.totalPages;
+                    $scope.pageCount = data.tags.totalPages;
                 });
                 /**
                  * 标签翻页
@@ -570,7 +570,7 @@ angular.module("myControllerModule", [])
                             alert("服务器挂B了....");
                         }
                         $scope.tags = data.tags.content;
-                        $scope.pageCount = $scope.tags.totalPages;
+                        $scope.pageCount = data.tags.totalPages;
                     });
                 };
                 /**
@@ -633,24 +633,26 @@ angular.module("myControllerModule", [])
                  * 默认友情链接标签信息
                  */
                 var linkPromise = linkListService.operate($scope.currentPage);
+                console.log($scope.currentPage);
                 linkPromise.then(function (data) {
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
                     $scope.links = data.links.content;
-                    $scope.pageCount = $scope.links.totalPages;
+                    $scope.pageCount = data.links.totalPages;
                 });
                 /**
                  * 友情链接标签信息翻页
                  */
-                $scope.onTagPageChange = function () {
+                $scope.onLinkPageChange = function () {
                     var promise = linkListService.operate($scope.currentPage);
+                    console.log($scope.currentPage);
                     promise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
                         $scope.links = data.links.content;
-                        $scope.pageCount = $scope.links.totalPages;
+                        $scope.pageCount = data.links.totalPages;
                     });
                 };
                 $scope.deleteLink = function ($index) {
@@ -752,19 +754,19 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     $scope.changeLogs = data.changeLogs.content;
-                    $scope.pageCount = $scope.changeLogs.totalPages;
+                    $scope.pageCount = data.changeLogs.totalPages;
                 });
                 /**
                  * 更新日志翻页
                  */
-                $scope.onTagPageChange = function () {
+                $scope.onChangeLogPageChange = function () {
                     var promise = changeLogListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
                         $scope.changeLogs = data.changeLogs.content;
-                        $scope.pageCount = $scope.changeLogs.totalPages;
+                        $scope.pageCount = data.changeLogs.totalPages;
                     });
                 };
                 $scope.deleteChangeLog = function ($index) {
