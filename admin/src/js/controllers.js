@@ -27,7 +27,7 @@ angular.module("myControllerModule", [])
                 $scope.onAdminUserPageChange = function () {
                     var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
                     adminOnPagePromise.then(function (data) {
-                        $scope.adminUsers =data.adminUsers.content;
+                        $scope.adminUsers = data.adminUsers.content;
                         $scope.pageCount = $scope.adminUsers.totalPages;
                     });
                 };
@@ -847,12 +847,16 @@ angular.module("myControllerModule", [])
             }])
     .controller('BasicInfoController',
         [
+            '$rootScope',
             '$scope',
             '$state',
             'basicInfoService',
-            function ($scope,
+            'findWebSetService',
+            function ($rootScope,
+                      $scope,
                       $state,
-                      basicInfoService) {
+                      basicInfoService,
+                      findWebSetService) {
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "服务系统信息！！";
                 var systemPromise = basicInfoService.operate();
@@ -861,6 +865,10 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     $scope.systems = data.systems;
+                });
+                var webSetPromise = findWebSetService.operate();
+                webSetPromise.then(function (data) {
+                    $rootScope.webSet = data.webSets[0];
                 });
             }
         ]
