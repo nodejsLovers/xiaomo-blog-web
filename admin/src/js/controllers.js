@@ -588,12 +588,6 @@ angular.module("myControllerModule", [])
                         }
                     });
                 };
-                /**
-                 * 处理跳转
-                 */
-                $scope.showTagList = function () {
-                    $state.go('main.tag');
-                };
             }
         ]
     )
@@ -614,7 +608,13 @@ angular.module("myControllerModule", [])
                             $state.go('main.tag');
                         }
                     })
-                }
+                };
+                /**
+                 * 处理跳转
+                 */
+                $scope.showTagList = function () {
+                    $state.go('main.tag');
+                };
             }]
     )
     .controller('LinkListController',
