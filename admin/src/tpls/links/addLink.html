@@ -21,7 +21,7 @@
                                 <small class="error" ng-show="addLinkForm.name.$error.required">请输入名字</small>
                                 <small class="error" ng-show="addLinkForm.name.$error.minlength">名字最少长度为2
                                 </small>
-                                <small class="error" ng-show="addLinkForm.name.$error.maxlength">名字最大长度为12
+                                <small class="error" ng-show="addLinkForm.name.$error.maxlength">名字最大长度为40
                                 </small>
                                 <small class="error" ng-show="addLinkForm.name.$error.unique">
                                     这个名字己经用过了，请换一个吧
@@ -29,7 +29,7 @@
                             </div>
                             <!-- end -->
                             <input type="text" name="name" class="form-control" placeholder="最多12个字符"
-                                   ng-model="link.name" required ng-minlength="2" ng-maxlength="12"
+                                   ng-model="link.name" required ng-minlength="2" ng-maxlength="40"
                                    ensure-link-unique="name">
                         </div>
                     </div>
