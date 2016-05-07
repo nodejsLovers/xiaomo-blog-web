@@ -327,6 +327,8 @@ angular.module("myControllerModule", [])
             'updateBlogService',
             'getTagListService',
             function ($scope, $state, findBlogService, updateBlogService, getTagListService) {
+                $scope.selected = [];
+                $scope.selectedTags = [];
                 var findBlogPromise = findBlogService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
                     if (data == null) {
@@ -334,14 +336,13 @@ angular.module("myControllerModule", [])
                     }
                     if (data.status == 200) {
                         $scope.blog = data.blog;
+                        $scope.selected = $scope.blog.tagIds;
                     }
                 });
                 var tagPromise = getTagListService.operate($scope.currentPage);
                 tagPromise.then(function (data) {
                     $scope.tags = data.tags.content;
                 });
-                $scope.selected = [];
-                $scope.selectedTags = [];
 
                 var updateSelected = function (action, id, name) {
                     if (action == 'add' && $scope.selected.indexOf(id) == -1) {
@@ -353,6 +354,7 @@ angular.module("myControllerModule", [])
                         $scope.selected.splice(idx, 1);
                         $scope.selectedTags.splice(idx, 1);
                     }
+                    console.log($scope.selected);
                 };
 
                 $scope.updateSelection = function ($event, id) {
