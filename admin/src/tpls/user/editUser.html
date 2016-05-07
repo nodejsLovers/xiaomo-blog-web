@@ -29,14 +29,14 @@
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
                                 <small class="error" ng-show="editUserForm.nickName.$error.required">请输入昵称
                                 </small>
-                                <small class="error" ng-show="editUserForm.nickName.$error.minlength">昵称最少长度为3
+                                <small class="error" ng-show="editUserForm.nickName.$error.minlength">昵称最少长度为2
                                 </small>
                                 <small class="error" ng-show="editUserForm.nickName.$error.maxlength">昵称最大长度为12
                                 </small>
                             </div>
                             <!-- end -->
                             <input type="text" name="nickName" class="form-control" placeholder="最多12个字符"
-                                   ng-model="user.nickName" required ng-minlength="3" ng-maxlength="12"
+                                   ng-model="user.nickName" required ng-minlength="2" ng-maxlength="12"
                             >
                         </div>
                     </div>
@@ -53,14 +53,14 @@
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
                                 <small class="error" ng-show="editUserForm.phone.$error.required">请输入用户名
                                 </small>
-                                <small class="error" ng-show="editUserForm.phone.$error.minlength">用户名最少长度为3
+                                <small class="error" ng-show="editUserForm.phone.$error.minlength">用户名最少长度为2
                                 </small>
                                 <small class="error" ng-show="editUserForm.phone.$error.maxlength">用户名最大长度为12
                                 </small>
                             </div>
                             <!-- end -->
                             <input type="tel" name="phone" class="form-control" placeholder="最多12个字符"
-                                   ng-model="user.phone" required ng-minlength="3" ng-maxlength="12"
+                                   ng-model="user.phone" required ng-minlength="2" ng-maxlength="12"
                             >
                         </div>
                     </div>
@@ -77,14 +77,14 @@
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
                                 <small class="error" ng-show="editUserForm.address.$error.required">请输入地址
                                 </small>
-                                <small class="error" ng-show="editUserForm.address.$error.minlength">地址最少长度为3
+                                <small class="error" ng-show="editUserForm.address.$error.minlength">地址最少长度为2
                                 </small>
                                 <small class="error" ng-show="editUserForm.address.$error.maxlength">地址最大长度为64
                                 </small>
                             </div>
                             <!-- end -->
                             <input type="text" name="address" class="form-control" placeholder="最多64个字符"
-                                   ng-model="user.address" required ng-minlength="3" ng-maxlength="64"
+                                   ng-model="user.address" required ng-minlength="2" ng-maxlength="64"
                             >
                         </div>
                     </div>

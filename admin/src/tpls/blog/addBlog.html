@@ -25,7 +25,7 @@
                             <div class="error " ng-show="addBlogForm.title.$dirty && addBlogForm.title.$invalid">
                                 <!-- fixme 要点3：格式为fromName.inputName.$error.xxx  -->
                                 <small class="error " ng-show="addBlogForm.title.$error.required">请输入标题内容</small>
-                                <small class="error " ng-show="addBlogForm.title.$error.minlength">标题内容最少长度为3</small>
+                                <small class="error " ng-show="addBlogForm.title.$error.minlength">标题内容最少长度为2</small>
                                 <small class="error " ng-show="addBlogForm.title.$error.maxlength">标题最大长度为64</small>
                                 <small class="error " ng-show="addBlogForm.title.$error.unique">
                                     这个标题己经被用过了，请换一个标题吧
@@ -33,7 +33,7 @@
                             </div>
                             <!-- end -->
                             <input type="text" name="title" class="form-control" placeholder="最多64个字符"
-                                   ng-model="blog.title" required ng-minlength="3" ng-maxlength="64"
+                                   ng-model="blog.title" required ng-minlength="2" ng-maxlength="64"
                                    ensure-unique="title">
                         </div>
 
@@ -46,12 +46,12 @@
                             <!-- 简介错误信息 -->
                             <div class="error " ng-show="addBlogForm.summary.$dirty && addBlogForm.summary.$invalid">
                                 <small class="error " ng-show="addBlogForm.summary.$error.required">请输入简介内容</small>
-                                <small class="error " ng-show="addBlogForm.summary.$error.minlength">简介内容最少长度为3</small>
+                                <small class="error " ng-show="addBlogForm.summary.$error.minlength">简介内容最少长度为2</small>
                                 <small class="error " ng-show="addBlogForm.summary.$error.maxlength">简介最大长度为64</small>
                             </div>
                             <!-- end -->
-                            <textarea cols="3" name="summary" class="form-control" placeholder="最多64个字符"
-                                      ng-model="blog.summary" required ng-minlength="3" ng-maxlength="64"
+                            <textarea rows="5" name="summary" class="form-control" placeholder="最多64个字符"
+                                      ng-model="blog.summary" required ng-minlength="2" ng-maxlength="64"
                                       title=""></textarea>
                         </div>
 
@@ -64,13 +64,12 @@
                             <!-- 内容错误信息 -->
                             <div class="error " ng-show="addBlogForm.content.$dirty && addBlogForm.content.$invalid">
                                 <small class="error " ng-show="addBlogForm.content.$error.required">请输入博客内容</small>
-                                <small class="error " ng-show="addBlogForm.content.$error.minlength">博客内容最少长度为3</small>
-                                <small class="error " ng-show="addBlogForm.content.$error.maxlength">博客内容最大长度为64</small>
+                                <small class="error " ng-show="addBlogForm.content.$error.minlength">博客内容最少长度为2</small>
                             </div>
                             <!-- end -->
                             <textarea class="form-control" id="textarea-1" rows="16" placeholder="最多640个字符"
                                       name="content"
-                                      ng-model="blog.content" required ng-minlength="3" ng-maxlength="640"></textarea>
+                                      ng-model="blog.content" required ng-minlength="2"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -78,7 +77,7 @@
                             标签：
                         </label>
                         <div class="col-md-10">
-                            <div ng-repeat="tag in tags.content track by $index ">
+                            <div ng-repeat="tag in tags track by $index ">
                                     <input type="checkbox"
                                            title="标签"
                                            class="btn "
@@ -87,7 +86,7 @@
                                            ng-checked="isSelected(tag.id)"
                                            ng-click="updateSelection($event,tag.id)"
                                            ng-model="tags">
-                                    {{tag.name}}
+                                    {{tag.id}}:{{tag.name}}
                             </div>
                         </div>
                     </div>

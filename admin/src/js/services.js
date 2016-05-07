@@ -78,11 +78,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("添加成功！");
+                            console.log("添加管理员账户" + userName + "成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("添加失败！")
+                            alert("添加" + userName + "失败！")
                         });
                     return deferred.promise;
                 };
@@ -112,11 +112,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("修改成功！");
+                            console.log("修改管理员用户" + userName + "成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("修改失败！")
+                            alert("修改管理员用户" + userName + "失败！")
                         });
                     return deferred.promise;
                 };
@@ -145,7 +145,7 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("修改成功！");
+                            console.log("修改管理员用户" + userName + "密码：成功！");
                         })
                         .error(function () {
                             deferred.reject();
@@ -177,7 +177,7 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("删除成功！");
+                            console.log("删除管理员帐号" + adminId + "成功！");
                         })
                         .error(function () {
                             deferred.reject();
@@ -208,7 +208,7 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("查找成功！");
+                            console.log("查找管理员用户成功！");
                         })
                         .error(function () {
                             deferred.reject();
@@ -295,11 +295,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("添加成功！");
+                            console.log("添加博客成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("添加失败！")
+                            alert("添加博客失败！")
                         });
                     return deferred.promise;
                 };
@@ -329,11 +329,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("修改成功！");
+                            console.log("修改博客成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("修改失败！")
+                            alert("修改博客失败！")
                         })
                     return deferred.promise;
                 };
@@ -360,11 +360,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("删除成功！");
+                            console.log("删除博客成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("删除失败！")
+                            alert("删除博客失败！")
                         });
                     return deferred.promise;
                 };
@@ -421,11 +421,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("添加成功！");
+                            console.log("添加用户成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("添加失败！")
+                            alert("添加用户失败！")
                         });
                     return deferred.promise;
                 };
@@ -452,11 +452,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("查找成功！");
+                            console.log("查找用户成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("查找失败！")
+                            alert("查找用户失败！")
                         });
                     return deferred.promise;
                 };
@@ -487,11 +487,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("修改成功！");
+                            console.log("修改用户成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("修改失败！")
+                            alert("修改用户失败！")
                         });
                     return deferred.promise;
                 };
@@ -520,11 +520,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("修改成功！");
+                            console.log("修改用户密码成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("修改失败！")
+                            alert("修改用户密码失败！")
                         });
                     return deferred.promise;
                 };
@@ -536,30 +536,26 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (user) {
+                result.operate = function (userId) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         },
-                        url: $rootScope.$baseUrl + "/admin/user/addUser",
-                        method: 'POST',
+                        url: $rootScope.$baseUrl + "/admin/user/deleteById",
+                        method: 'GET',
                         dataType: 'json',
                         params: {
-                            email: user.email,
-                            nickName: user.nickName,
-                            phone: user.phone,
-                            address: user.address,
-                            gender: user.gender
+                            id: userId
                         }
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("添加成功！");
+                            console.log("删除用户成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("添加失败！")
+                            alert("删除用户失败！")
                         });
                     return deferred.promise;
                 };
@@ -613,11 +609,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("删除成功！");
+                            console.log("删除标签成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("删除失败！")
+                            alert("删除标签失败！")
                         });
                     return deferred.promise;
                 };
@@ -644,11 +640,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("添加成功！");
+                            console.log("添加标签成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("添加失败！")
+                            alert("添加标签失败！")
                         });
                     return deferred.promise;
                 };
@@ -702,11 +698,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("添加成功！");
+                            console.log("添加标签成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("添加失败！")
+                            alert("添加标签失败！")
                         });
                     return deferred.promise;
                 };
@@ -733,11 +729,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("删除成功！");
+                            console.log("删除更新日志成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("删除失败！")
+                            alert("删除更新日志失败！")
                         });
                     return deferred.promise;
                 };
@@ -764,11 +760,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("查找成功！");
+                            console.log("查找更新日志成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("查找失败！")
+                            alert("查找更新日志失败！")
                         });
                     return deferred.promise;
                 };
@@ -796,11 +792,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("修改成功！");
+                            console.log("修改更新日志成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("修改失败！")
+                            alert("修改更新日志失败！")
                         });
                     return deferred.promise;
                 };
@@ -864,7 +860,7 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (name, url) {
+                result.operate = function (name, url,level) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -875,16 +871,17 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             name: name,
-                            url: url
+                            url: url,
+                            level:level
                         }
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("增加成功！");
+                            console.log("增加友情链接成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("增加失败！")
+                            alert("增加友情链接失败！")
                         });
                     return deferred.promise;
                 };
@@ -896,7 +893,7 @@ angular.module("myServiceModule", [])
             '$q',
             function ($rootScope, $http, $q) {
                 var result = {};
-                result.operate = function (name, url) {
+                result.operate = function (name, url,level) {
                     var deferred = $q.defer();
                     $http({
                         headers: {
@@ -907,16 +904,17 @@ angular.module("myServiceModule", [])
                         dataType: 'json',
                         params: {
                             name: name,
-                            url: url
+                            url: url,
+                            level:level
                         }
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("修改成功！");
+                            console.log("修改友情链接成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("修改失败！")
+                            alert("修改友情链接失败！")
                         });
                     return deferred.promise;
                 };
@@ -943,11 +941,11 @@ angular.module("myServiceModule", [])
                     })
                         .success(function (data) {
                             deferred.resolve(data);
-                            console.log("删除成功！");
+                            console.log("删除友情链接成功！");
                         })
                         .error(function () {
                             deferred.reject();
-                            alert("删除失败！")
+                            alert("删除友情链接失败！")
                         });
                     return deferred.promise;
                 };

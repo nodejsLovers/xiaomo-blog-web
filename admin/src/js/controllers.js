@@ -18,12 +18,8 @@ angular.module("myControllerModule", [])
                  */
                 var adminPromise = getAdminUserService.operate($scope.currentPage);
                 adminPromise.then(function (data) {
-                    var temp = data.adminUsers.content;
-                    $scope.adminUsers = temp.sort(function (a, b) {
-                        return a.authLevel - b.authLevel;
-                    });
-                    $scope.pageCount = $scope.adminUsers.totalPages;
-                    console.log($scope.adminUsers);
+                    $scope.adminUsers = data.adminUsers.content;
+                    $scope.pageCount = data.adminUsers.totalPages;
                 });
                 /**
                  * 后台用户管理信息翻页
@@ -31,11 +27,8 @@ angular.module("myControllerModule", [])
                 $scope.onAdminUserPageChange = function () {
                     var adminOnPagePromise = getAdminUserService.operate($scope.currentPage);
                     adminOnPagePromise.then(function (data) {
-                        var temp = data.adminUsers.content;
-                        $scope.adminUsers = temp.sort(function (a, b) {
-                            return a.authLevel - b.authLevel;
-                        });
-                        $scope.pageCount = $scope.adminUsers.totalPages;
+                        $scope.adminUsers = data.adminUsers.content;
+                        $scope.pageCount = data.adminUsers.totalPages;
                     });
                 };
                 /**
@@ -104,8 +97,8 @@ angular.module("myControllerModule", [])
                         if (data.status == 200) {
                             var promise = getAdminUserService.operate($scope.currentPage);
                             promise.then(function (data) {
-                                $scope.adminUsers = data.adminUsers;
-                                $scope.pageCount = $scope.adminUsers.totalPages;
+                                $scope.adminUsers = data.adminUsers.content;
+                                $scope.pageCount = data.adminUsers.totalPages;
                                 $state.go('main.authority');
                             });
                         }
@@ -138,7 +131,6 @@ angular.module("myControllerModule", [])
                     }
                     if (data.status == 200) {
                         $scope.adminUser = data.adminUser;
-                        console.log($scope.adminUser);
                     }
                 });
 
@@ -181,7 +173,6 @@ angular.module("myControllerModule", [])
                     if (data.status == 200) {
                         $scope.adminUser = data.adminUser;
                         $scope.adminUser.password = "";
-                        console.log($scope.adminUser);
                     }
                 });
 
@@ -224,11 +215,8 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     if (data.status == 200) {
-                        var temp = data.blogs.content;
-                        $scope.blogs = temp.sort(function (a, b) {
-                            return b.vote - a.vote;
-                        });
-                        $scope.pageCount = $scope.blogs.totalPages;
+                        $scope.blogs = data.blogs.content;
+                        $scope.pageCount = data.blogs.totalPages;
                     }
                 });
                 /**
@@ -241,11 +229,8 @@ angular.module("myControllerModule", [])
                             alert("服务器挂B了....");
                         }
                         if (data.status == 200) {
-                            var temp = data.blogs.content;
-                            $scope.blogs = temp.sort(function (a, b) {
-                                return b.vote - a.vote;
-                            });
-                            $scope.pageCount = $scope.blogs.totalPages;
+                            $scope.blogs = data.blogs.content;
+                            $scope.pageCount = data.blogs.totalPages;
                         }
                     });
                 };
@@ -283,8 +268,7 @@ angular.module("myControllerModule", [])
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
-                    $scope.tags = data.tags;
-                    console.log($scope.tags);
+                    $scope.tags = data.tags.content;
                 });
                 $scope.selected = [];
                 $scope.selectedTags = [];
@@ -299,7 +283,6 @@ angular.module("myControllerModule", [])
                         $scope.selected.splice(idx, 1);
                         $scope.selectedTags.splice(idx, 1);
                     }
-                    console.log($scope.selected);
                 };
 
                 $scope.updateSelection = function ($event, id) {
@@ -316,7 +299,6 @@ angular.module("myControllerModule", [])
                  */
                 $scope.addBlog = function () {
                     $scope.blog.tagIds = $scope.selected;
-                    console.log($scope.blog);
                     var promise = addBlogService.operate($scope.blog);
                     promise.then(function (data) {
                         if (data == null) {
@@ -345,6 +327,8 @@ angular.module("myControllerModule", [])
             'updateBlogService',
             'getTagListService',
             function ($scope, $state, findBlogService, updateBlogService, getTagListService) {
+                $scope.selected = [];
+                $scope.selectedTags = [];
                 var findBlogPromise = findBlogService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
                     if (data == null) {
@@ -352,16 +336,13 @@ angular.module("myControllerModule", [])
                     }
                     if (data.status == 200) {
                         $scope.blog = data.blog;
-                        console.log($scope.blog);
+                        $scope.selected = $scope.blog.tagIds;
                     }
                 });
                 var tagPromise = getTagListService.operate($scope.currentPage);
                 tagPromise.then(function (data) {
-                    $scope.tags = data.tags;
-                    console.log($scope.tags);
+                    $scope.tags = data.tags.content;
                 });
-                $scope.selected = [];
-                $scope.selectedTags = [];
 
                 var updateSelected = function (action, id, name) {
                     if (action == 'add' && $scope.selected.indexOf(id) == -1) {
@@ -420,8 +401,8 @@ angular.module("myControllerModule", [])
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
-                    $scope.users = data.users;
-                    $scope.pageCount = $scope.users.totalPages;
+                    $scope.users = data.users.content;
+                    $scope.pageCount = data.users.totalPages;
                 });
                 /**
                  * 用户管理信息翻页
@@ -429,25 +410,22 @@ angular.module("myControllerModule", [])
                 $scope.onUserPageChange = function () {
                     var userOnPagePromise = userService.operate($scope.currentPage);
                     userOnPagePromise.then(function (data) {
-                        $scope.users = data.users;
+                        $scope.users = data.users.content;
                     });
                 };
                 /**
                  * 删除用户
-                 * @param userId
+                 * @param $index
                  */
-                $scope.deleteUser = function (userId) {
-                    var deletePromise = deleteUserService.operate(userId);
+                $scope.deleteUser = function ($index) {
+                    var currentData = $scope.users[$index];
+                    var deletePromise = deleteUserService.operate(currentData.id);
                     deletePromise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
                         if (data.status == 200) {
-                            var promise = userListService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                $scope.users = data.users;
-                                $scope.pageCount = $scope.users.totalPages;
-                            });
+                            $scope.users.splice($index, 1);
                         }
                     });
                 };
@@ -466,7 +444,6 @@ angular.module("myControllerModule", [])
                  * 增加前台用户
                  */
                 $scope.addUser = function (email, nickName, phone, address, gender) {
-                    console.log(email);
                     var addPromise = addUserService.operate(email, nickName, phone, address, gender);
                     addPromise.then(function (data) {
                         if (data == null) {
@@ -476,7 +453,7 @@ angular.module("myControllerModule", [])
                             var promise = userListService.operate($scope.currentPage);
                             promise.then(function (data) {
                                 $scope.users = data.users;
-                                $scope.pageCount = $scope.users.totalPages;
+                                $scope.pageCount = data.users.totalPages;
                                 $state.go('main.user');
                             });
                         }
@@ -498,7 +475,6 @@ angular.module("myControllerModule", [])
             function ($scope, $state, findUserService, updateUserService) {
                 var findBlogPromise = findUserService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
-                    console.log(data);
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
@@ -534,7 +510,6 @@ angular.module("myControllerModule", [])
             function ($scope, $state, changeUserPasswordService, findUserService) {
                 var findBlogPromise = findUserService.operate($state.params.id);
                 findBlogPromise.then(function (data) {
-                    console.log(data);
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
@@ -583,8 +558,7 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     $scope.tags = data.tags.content;
-                    console.log($scope.tags);
-                    $scope.pageCount = $scope.tags.totalPages;
+                    $scope.pageCount = data.tags.totalPages;
                 });
                 /**
                  * 标签翻页
@@ -596,7 +570,7 @@ angular.module("myControllerModule", [])
                             alert("服务器挂B了....");
                         }
                         $scope.tags = data.tags.content;
-                        $scope.pageCount = $scope.tags.totalPages;
+                        $scope.pageCount = data.tags.totalPages;
                     });
                 };
                 /**
@@ -613,12 +587,6 @@ angular.module("myControllerModule", [])
                             $scope.tags.splice($index, 1);
                         }
                     });
-                };
-                /**
-                 * 处理跳转
-                 */
-                $scope.showTagList = function () {
-                    $state.go('main.tag');
                 };
             }
         ]
@@ -640,7 +608,13 @@ angular.module("myControllerModule", [])
                             $state.go('main.tag');
                         }
                     })
-                }
+                };
+                /**
+                 * 处理跳转
+                 */
+                $scope.showTagList = function () {
+                    $state.go('main.tag');
+                };
             }]
     )
     .controller('LinkListController',
@@ -659,24 +633,26 @@ angular.module("myControllerModule", [])
                  * 默认友情链接标签信息
                  */
                 var linkPromise = linkListService.operate($scope.currentPage);
+                console.log($scope.currentPage);
                 linkPromise.then(function (data) {
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
                     $scope.links = data.links.content;
-                    $scope.pageCount = $scope.links.totalPages;
+                    $scope.pageCount = data.links.totalPages;
                 });
                 /**
                  * 友情链接标签信息翻页
                  */
-                $scope.onTagPageChange = function () {
+                $scope.onLinkPageChange = function () {
                     var promise = linkListService.operate($scope.currentPage);
+                    console.log($scope.currentPage);
                     promise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
                         $scope.links = data.links.content;
-                        $scope.pageCount = $scope.links.totalPages;
+                        $scope.pageCount = data.links.totalPages;
                     });
                 };
                 $scope.deleteLink = function ($index) {
@@ -703,8 +679,8 @@ angular.module("myControllerModule", [])
             function ($scope, $state, addLinkService) {
                 $scope.link = {};
                 $scope.link.url = 'http://';
-                $scope.addLink = function (name, url) {
-                    var promise = addLinkService.operate(name, url);
+                $scope.addLink = function (name, url, level) {
+                    var promise = addLinkService.operate(name, url, level);
                     promise.then(function (data) {
                         if (data == null) {
                             alert('服务器挂B了...');
@@ -731,7 +707,6 @@ angular.module("myControllerModule", [])
             function ($scope, $state, findLinkService, updateLinkService) {
                 var findLinkPromise = findLinkService.operate($state.params.id);
                 findLinkPromise.then(function (data) {
-                    console.log(data);
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
@@ -739,8 +714,8 @@ angular.module("myControllerModule", [])
                         $scope.link = data.link;
                     }
                 });
-                $scope.updateLink = function (name, url) {
-                    var promise = updateLinkService.operate(name, url);
+                $scope.updateLink = function (name, url, level) {
+                    var promise = updateLinkService.operate(name, url, level);
                     promise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了...");
@@ -778,34 +753,31 @@ angular.module("myControllerModule", [])
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
-                    $scope.changeLogs = data.changeLogs;
-                    $scope.pageCount = $scope.changeLogs.totalPages;
+                    $scope.changeLogs = data.changeLogs.content;
+                    $scope.pageCount = data.changeLogs.totalPages;
                 });
                 /**
                  * 更新日志翻页
                  */
-                $scope.onTagPageChange = function () {
+                $scope.onChangeLogPageChange = function () {
                     var promise = changeLogListService.operate($scope.currentPage);
                     promise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
-                        $scope.changeLogs = data.changeLogs;
-                        $scope.pageCount = $scope.changeLogs.totalPages;
+                        $scope.changeLogs = data.changeLogs.content;
+                        $scope.pageCount = data.changeLogs.totalPages;
                     });
                 };
-                $scope.deleteChangeLog = function (changeLogId) {
-                    var deletePromise = deleteChangeLogService.operate(changeLogId);
+                $scope.deleteChangeLog = function ($index) {
+                    var currentData = $scope.changeLogs[$index];
+                    var deletePromise = deleteChangeLogService.operate(currentData.id);
                     deletePromise.then(function (data) {
                         if (data == null) {
                             alert("服务器挂B了....");
                         }
                         if (data.status == 200) {
-                            var promise = changeLogListService.operate($scope.currentPage);
-                            promise.then(function (data) {
-                                $scope.changeLogs = data.changeLogs;
-                                $scope.pageCount = $scope.changeLogs.totalPages;
-                            });
+                            $scope.changeLogs.splice($index, 1);
                         }
                     })
                 };
@@ -850,7 +822,6 @@ angular.module("myControllerModule", [])
             function ($scope, $state, findChangeLogService, updateChangeLogService) {
                 var promise = findChangeLogService.operate($state.params.id);
                 promise.then(function (data) {
-                    console.log(data);
                     if (data == null) {
                         alert("服务器挂B了....");
                     }
@@ -880,12 +851,16 @@ angular.module("myControllerModule", [])
             }])
     .controller('BasicInfoController',
         [
+            '$rootScope',
             '$scope',
             '$state',
             'basicInfoService',
-            function ($scope,
+            'findWebSetService',
+            function ($rootScope,
+                      $scope,
                       $state,
-                      basicInfoService) {
+                      basicInfoService,
+                      findWebSetService) {
                 $scope.commonInfo = {};
                 $scope.commonInfo.msg = "服务系统信息！！";
                 var systemPromise = basicInfoService.operate();
@@ -894,6 +869,10 @@ angular.module("myControllerModule", [])
                         alert("服务器挂B了....");
                     }
                     $scope.systems = data.systems;
+                });
+                var webSetPromise = findWebSetService.operate();
+                webSetPromise.then(function (data) {
+                    $rootScope.webSet = data.webSets[0];
                 });
             }
         ]
@@ -909,7 +888,6 @@ angular.module("myControllerModule", [])
             var promise = findWebSetService.operate();
             promise.then(function (data) {
                 $scope.webSet = data.webSets[0];
-                console.log($scope.webSet);
             });
             $scope.updateWebSet = function (webSet) {
                 var operate = updateWebSetService.operate(webSet);

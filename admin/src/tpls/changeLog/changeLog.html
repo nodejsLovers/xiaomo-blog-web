@@ -1,12 +1,12 @@
 <div>
-    <div ng-class="{'alert-info':defaultClass,'alert-success':addClasss,'alert-warning':del,'alert-error':err}"
+    <div ng-class="{'alert-info':defaultClass,'alert-success':addClass,'alert-warning':del,'alert-error':err}"
          class="alert alert-info alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
         <strong>提示：</strong> {{commonInfo.msg}}
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <a ui-sref="main.addChangeLog" class="btn btn-primary">新增更新纪录</a>
         </div>
     </div>
@@ -26,8 +26,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="changeLog in changeLogs.content|orderBy:'createTime':true"
-                        class="animated fadeInRight">
+                    <tr ng-repeat="changeLog in changeLogs | filter: vm.filter" class="animated fadeInRight">
                         <td>{{$index+1}}</td>
                         <td>{{changeLog.id}}</td>
                         <td>{{changeLog.name}}</td>
@@ -36,7 +35,7 @@
                         <td>{{changeLog.updateTime | date:'yyyy:MM:dd HH:mm:ss'}}</td>
                         <td>
                             <button class="btn btn-success" ui-sref="main.editChangeLog({id:changeLog.id})">修改</button>
-                            <button class="btn btn-default" ng-click="deleteChangeLog(changeLog.id)">删除</button>
+                            <button class="btn btn-default" ng-click="deleteChangeLog($index)">删除</button>
                         </td>
                     </tr>
                     </tbody>

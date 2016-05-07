@@ -26,14 +26,27 @@
                                         </small>
                                     </div>
                                     <!-- end -->
-                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="帐号" ng-focus
-                                           ng-model="userInfo.userName" required ng-minlength="3" ng-maxlength="15">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div class="input-group">
+                <span class="input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+            </span>
+                                                <input type="text" class="form-control" id="userName" name="userName"
+                                                       placeholder="帐号" ng-focus
+                                                       ng-model="userInfo.userName" required ng-minlength="3"
+                                                       ng-maxlength="15">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="password">
                                     密 码：
                                 </label>
+
                                 <div class="col-md-10">
                                     <!-- 内容错误信息 -->
                                     <div class="error"
@@ -45,15 +58,27 @@
                                         </small>
                                     </div>
                                     <!-- end -->
-                                    <input type="password" class="form-control" placeholder="只能是数字、字母、下划线"
-                                           ng-model="userInfo.password" id="password" name="password" required ng-minlength="3"
-                                           ng-maxlength="12">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div class="input-group">
+                <span class="input-group-addon">
+                <span class="glyphicon glyphicon-ok-sign"></span>
+            </span>
+                                                <input type="password" class="form-control" placeholder="只能是数字、字母、下划线"
+                                                       ng-model="userInfo.password" id="password" name="password"
+                                                       required
+                                                       ng-minlength="3"
+                                                       ng-maxlength="12">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
                                     <button ng-click="login()" ng-enter="login()" class="btn btn-success btn-lg"
-                                       ng-disabled="loginForm.$invalid">登录</button>
+                                            ng-disabled="loginForm.$invalid">登录
+                                    </button>
                                 </div>
                             </div>
                         </form>

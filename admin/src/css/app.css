@@ -23,3 +23,16 @@ th, td {
     height: 30px !important;
     line-height: 30px !important;
 }
+
+.badge-danger{
+    background-color: #d9534f;
+}
+.badge-success{
+    background-color: #5cb85c;
+}
+.badge-warning{
+    background-color: #f0ad4e;
+}
+.badge-info{
+    background-color: #5bc0de;
+}
