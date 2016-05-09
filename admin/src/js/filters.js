@@ -32,18 +32,26 @@ angular.module("myFilterModule", [])
                 return '默认';
             }
         }
-    }).filter('transformAdminLevelFilter', function () {//转换后台帐号显示状态
-    return function (content) {
-        if (content == 1) {
-            return "超级管理员";
-        } else if (content == 2) {
-            return '普通管理员';
-        } else {
-            return '默认观察者';
+    })
+    .filter('transformAdminLevelFilter', function () {//转换后台帐号显示状态
+        return function (content) {
+            if (content == 1) {
+                return "超级管理员";
+            } else if (content == 2) {
+                return '普通管理员';
+            } else {
+                return '默认观察者';
+            }
         }
-    }
-}).filter('tagIdsFilter', function () {
-    return function (tagIds) {
-        
-    }
-});
+    })
+    .filter('tagIdsFilter', function () {
+        return function (tagIds) {
+        }
+    })
+    .filter('toHtml', ['$sce', function ($sce) {
+        return function (text) {
+            if (typeof text == 'string') {
+                return $sce.trustAsHtml(text)
+            }
+        }
+    }]);
