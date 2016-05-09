@@ -53,8 +53,10 @@
                                 <small class="error " ng-show="addBlogForm.content.$error.minlength">简介内容最少长度为3</small>
                             </div>
                             <!-- end -->
-                            <textarea class="form-control" id="textarea-1"  rows="16" placeholder="最多640个字符" name="content"
-                                      ng-model="blog.content" required ng-minlength="3"></textarea>
+                            <div class="ueditor" ng-model="blog.content"></div>
+                            <!--<div ueditor="editor" ng-required="true" ng-model="blog.content" id="editor"></div>-->
+                            <!--<textarea class="form-control" id="textarea-1"  rows="16" placeholder="最多640个字符" name="content"-->
+                                      <!--ng-model="blog.content" required ng-minlength="3"></textarea>-->
                         </div>
                     </div>
                     <div class="form-group">
