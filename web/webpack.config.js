@@ -114,8 +114,8 @@ module.exports = function makeWebpackConfig() {
             test: /\.json$/,
             loader: 'json'
         }, {
-            test: /\.sass/,
-            loader: 'style!css!autoprefixer!sass?sourceMap'
+            test: /\.scss/,
+            loader: 'style!css!sass'
         }, {
             // HTML LOADER
             // Reference: https://github.com/webpack/raw-loader
