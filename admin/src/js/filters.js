@@ -6,11 +6,13 @@ angular.module("myFilterModule", [])
             }
             return content;
         };
-    }).filter('IdFilter', function () {
-    return function (currentId, pointId) {
-        return currentId !== pointId;
-    };
-}).filter('transformGenderFilter', function () {//转换男女显示
+    })
+    .filter('IdFilter', function () {
+        return function (currentId, pointId) {
+            return currentId !== pointId;
+        };
+    })
+    .filter('transformGenderFilter', function () {//转换男女显示
         return function (content) {
             if (content == 1) {
                 return "男";
