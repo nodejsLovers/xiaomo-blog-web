@@ -12,7 +12,8 @@
                             标题：
                         </label>
                         <div class="col-md-10">
-                            <input type="text" ng-model="blog.title" name="title" class="form-control" placeholder="最多64个字符"  readonly="readonly">
+                            <input type="text" ng-model="blog.title" name="title" class="form-control"
+                                   placeholder="最多64个字符" readonly="readonly">
                         </div>
 
                     </div>
@@ -46,9 +47,6 @@
                             </div>
                             <!-- end -->
                             <div class="ueditor" ng-model="blog.content"></div>
-                            <!--<div ueditor="editor" ng-required="true" ng-model="blog.content" id="editor"></div>-->
-                            <!--<textarea class="form-control" id="textarea-1"  rows="16" placeholder="最多640个字符" name="content"-->
-                                      <!--ng-model="blog.content" required ng-minlength="3"></textarea>-->
                             <p class="panel-body" ng-bind-html="blog.content | toHtml">
                         </div>
                     </div>
@@ -58,15 +56,15 @@
                         </label>
                         <div class="col-md-10">
                             <div ng-repeat="tag in tags track by $index ">
-                                    <input type="checkbox"
-                                           title="标签"
-                                           class="btn "
-                                           id="{{tag.id}}"
-                                           name="{{tag.name}}"
-                                           ng-checked="isSelected(tag.id)"
-                                           ng-click="updateSelection($event,tag.id)"
-                                           ng-model="tags">
-                                    {{tag.id}}:{{tag.name}}
+                                <input type="checkbox"
+                                       title="标签"
+                                       class="btn "
+                                       id="{{tag.id}}"
+                                       name="{{tag.name}}"
+                                       ng-checked="isSelected(tag.id)"
+                                       ng-click="updateSelection($event,tag.id)"
+                                       ng-model="tags">
+                                {{tag.id}}:{{tag.name}}
                             </div>
                         </div>
                     </div>
@@ -90,7 +88,8 @@
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <!--  //fixme 要点4：将提交按钮是否可用交给ng来判断:合法的时候才可用 -->
-                            <button ng-click="updateBlog(blog.title,blog.summary,blog.content,blog.author)" class="btn btn-info" ng-disabled="addBlogForm.$invalid">修改博客
+                            <button ng-click="updateBlog(blog.title,blog.summary,blog.content,blog.author)"
+                                    class="btn btn-info" ng-disabled="addBlogForm.$invalid">修改博客
                             </button>
                             <button ng-click="showBlogList()" class="btn btn-default">取消</button>
                         </div>
