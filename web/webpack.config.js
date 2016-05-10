@@ -194,8 +194,12 @@ module.exports = function makeWebpackConfig() {
             // Reference: https://github.com/kevlened/copy-webpack-plugin
             new CopyWebpackPlugin([{
                 from: __dirname + '/src/public'
-            }])
-        )
+            }]),
+            new webpack.ProvidePlugin({
+                $: "jquery",
+                jQuery: "jquery",
+                "window.jQuery": "jquery"
+            }))
     }
 
     /**
