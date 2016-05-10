@@ -12,3 +12,4 @@ framework
 dist
 coverage
 bower_components
+npm*log*
