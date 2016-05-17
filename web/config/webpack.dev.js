@@ -70,7 +70,7 @@ module.exports = {
         }),
         new copyWebpackPlugin([
             {
-                from: __dirname + '/src/public'
+                from: __dirname + '/../src/public'
             }
         ]),
         new extraTextWebpackPlugin(

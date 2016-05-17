@@ -3,7 +3,7 @@ var prod = require('./config/webpack.prod.js');
 
 var env = process.platform;
 if (env.indexOf('win')) {
-    module.exports = dev;
-} else {
     module.exports = prod;
+} else {
+    module.exports = dev;
 }
