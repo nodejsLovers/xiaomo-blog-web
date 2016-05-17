@@ -19,9 +19,7 @@ var copyWebpackPlugin = require('copy-webpack-plugin');
 var extraTextWebpackPlugin = require('extract-text-webpack-plugin');
 //模块化的写化
 module.exports = {
-    //入口文件 有几个页面就写几个entry   webpack 从当前路径找要加个./ 不然找不到文件   现在可以了
     entry: './index.js',
-    //输出
     // 输出路径和输出文件的名字
     output: {
         path: __dirname + '/../dist',
