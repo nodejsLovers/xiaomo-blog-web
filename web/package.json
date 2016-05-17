@@ -4,7 +4,7 @@
   "description": "blog",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && webpack --bail --progress --profile",
+    "build": "rimraf dist && webpack --bail --progress --profile --colors",
     "server": "webpack-dev-server --history-api-fallback --inline --progress",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
