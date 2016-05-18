@@ -1,6 +1,5 @@
 import angular from 'angular';
-import 'bootstrap/dist/css/bootstrap.css';
-import '../style/main.scss';
+import "./../style/main.scss";
 
 let app = () => {
   return {
