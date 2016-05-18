@@ -53,7 +53,7 @@ module.exports = {
                 )
             }, {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                loaders: ['file-loader']
+                loaders: ['file-loader?limit=81920']
             }, {
                 test: /\.json$/,
                 loaders: ['json-loader']
