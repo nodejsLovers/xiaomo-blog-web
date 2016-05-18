@@ -3,7 +3,7 @@ import "./../style/main.scss";
 
 let app = () => {
   return {
-    template: require('./app.html'),
+    template: require('./template/app.html'),
     controller: 'AppController',
     controllerAs: 'app'
   }
