@@ -1,7 +1,7 @@
 var webpack               = require('webpack'),
     ReloadPlugin          = require('webpack-reload-plugin'),
     path                  = require('path'),
-    ChunkManifestPlugin   = require('chunk-manifest-webpack-plugin'),
+    // ChunkManifestPlugin   = require('chunk-manifest-webpack-plugin'),
     HtmlWebpackPlugin     = require('html-webpack-plugin'),
     WebpackNotifierPlugin = require('webpack-notifier'),
     ExtractTextPlugin     = require('extract-text-webpack-plugin');
@@ -20,7 +20,7 @@ var isDevServer = process.argv.join('').indexOf('webpack-dev-server') > -1;
 var version = require(path.resolve(cwd,'package.json')).version;
 var reloadHost = '0.0.0.0';
 var npmRoot = __dirname + '/node_modules';
-var vendorRoot = __dirname + '/app/js/vendor';
+// var vendorRoot = __dirname + '/app/js/vendor';
 var appDir = __dirname + '/app';
 
 var entry = ['app.ts'];
@@ -78,13 +78,13 @@ function makeConfig(options) {
         ENV: JSON.stringify(options.env)
       }),
       new HtmlWebpackPlugin({
-        template: path.join(appDir, 'index.html'),
+        template: path.join(appDir, 'index.html')
       }),
       new ReloadPlugin( isDevServer ? 'localhost' : ''),
       new WebpackNotifierPlugin({
-        title: 'ng-book',
+        title: 'ng-book'
         // contentImage: path.join(appDir, 'images/notifier.png')
-      }),
+      })
     ],
     resolveLoader: {
       root: path.join(__dirname, 'node_modules'),
@@ -99,7 +99,7 @@ function makeConfig(options) {
       extensions: ['', '.ts', '.js', '.json', '.css'],
       alias: {
         'app': 'app',
-        'scripts': npmRoot,
+        'scripts': npmRoot
       }
     },
     module: {
