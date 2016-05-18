@@ -66,7 +66,8 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            title: '学习webpack之路'
+            template: './src/public/index.html',
+            inject: 'body'
         }),
         new copyWebpackPlugin([
             {
@@ -85,5 +86,11 @@ module.exports = {
     postcss: [autoprefixer({
         browsers: ['last 2 version']
     })],
-    devtool: 'inline-source-map'
+    devtool: 'inline-source-map',
+    devServer: {
+        historyApiFallback: true,
+        hot: false,
+        inline: true,
+        grogress: true
+    }
 };

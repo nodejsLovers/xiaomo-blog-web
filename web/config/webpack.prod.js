@@ -66,7 +66,8 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            title: '学习webpack之路'
+                template: './src/public/index.html',
+                inject: 'body'
         }),
         new copyWebpackPlugin([
             {
