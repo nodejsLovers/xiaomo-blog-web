@@ -51,6 +51,7 @@
   "dependencies": {
     "antd": "^1.0.1",
     "bootstrap": "^3.3.6",
+    "classnames": "^2.2.5",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^2.2.3",
     "react": "^15.0.2",
