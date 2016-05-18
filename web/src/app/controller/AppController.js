@@ -13,8 +13,28 @@
  * @Copyright(©) 2015 by xiaomo.
  **/
 
-export default class AppController {
-    constructor() {
+class AppController {
+
+    /*@ngInject*/
+    constructor($scope, itemsService, thingFactory) {
         this.url = 'https://github.com/preboot/angular-webpack';
+        this.items = [];
+        this.selection = [];
+
+        itemsService.getItems().then(result => this.items = result);
+
+        $scope.$watch('vm.items', () => {
+            this.selection = this.items.filter(item => item.selected);
+        }, true);
+
+        this.makeThing = () => {
+            thingFactory.newThing()
+        };
+
+
+        this.$inject = ['$scope', 'itemService', 'Thing'];
     }
+
 }
+
+register('app').controller('AppController', AppController);
