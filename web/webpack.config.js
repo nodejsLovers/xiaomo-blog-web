@@ -124,7 +124,8 @@ module.exports = {
     },
     externals:{
         'react':'React',
-        'react-dom':'ReactDOM'
+        'react-dom':'ReactDOM',
+        'fetch': 'imports?this=>global!exports?global.fetch!isomorphic-fetch'
     },
     resolve: {
         extensions: ['', '.js', '.json']
