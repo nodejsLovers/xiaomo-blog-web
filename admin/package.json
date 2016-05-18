@@ -7,7 +7,7 @@
     "build": "rimraf dist && webpack --bail --progress --profile",
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run",
-    "start": "npm run server"
+    "start": "http-server"
   },
   "repository": {
     "type": "git",

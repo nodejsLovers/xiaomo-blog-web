@@ -19,7 +19,7 @@ var copyWebpackPlugin = require('copy-webpack-plugin');
 var extraTextWebpackPlugin = require('extract-text-webpack-plugin');
 //模块化的写化
 module.exports = {
-    entry: './index.js',
+    entry: './src/app/app.js',
     // 输出路径和输出文件的名字
     output: {
         path: __dirname + '/../dist',
@@ -53,7 +53,7 @@ module.exports = {
                 )
             }, {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                loaders: ['file-loader']
+                loaders: ['file-loader?limit=81920']
             }, {
                 test: /\.json$/,
                 loaders: ['json-loader']
@@ -66,11 +66,12 @@ module.exports = {
     },
     plugins: [
         new htmlWebpackPlugin({
-            title: '学习webpack之路'
+                template: './src/public/index.html',
+                inject: 'body'
         }),
         new copyWebpackPlugin([
             {
-                from: __dirname + '/src/public'
+                from: __dirname + '/../src/public'
             }
         ]),
         new extraTextWebpackPlugin(
