@@ -19,7 +19,7 @@ var copyWebpackPlugin = require('copy-webpack-plugin');
 var extraTextWebpackPlugin = require('extract-text-webpack-plugin');
 //模块化的写化
 module.exports = {
-    entry: './index.js',
+    entry: './src/app/app.js',
     // 输出路径和输出文件的名字
     output: {
         path: __dirname + '/../dist',
