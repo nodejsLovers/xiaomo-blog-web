@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import {Provider} from "react-redux";
 import {Router, Route, IndexRoute, browserHistory} from "react-router";
 import App from "./../app";
