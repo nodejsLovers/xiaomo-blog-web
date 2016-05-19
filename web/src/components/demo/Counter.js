@@ -8,11 +8,11 @@ export default class Counter extends Component {
     };
 
     render() {
-        const { increment, incrementIfOdd, decrement } = this.props.actions;
+        const { increment, decrement } = this.props.actions;
         const { counter } = this.props;
         return (
             <div>
-                <Progress type="line" percent={counter} status="active"/>
+                <Progress type="circle" percent={counter} status="active"/>
                 <hr/>
                 <button onClick={increment} className="btn btn-success">加</button>
                 {' '}
