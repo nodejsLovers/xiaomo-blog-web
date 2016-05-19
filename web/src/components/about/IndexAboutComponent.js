@@ -15,7 +15,7 @@
 
 import React, {Component} from 'react';
 
-export default class IndexAbout extends Component {
+export default class IndexAboutAbout extends Component {
 
     render() {
         return (

@@ -14,13 +14,12 @@
  **/
 
 import React, {Component} from "react";
-import ChangeLog from "./ChangeLogComponent";
 
 export default class IndexChangeLog extends Component {
     render() {
         return (
             <div class="container">
-                <ChangeLog source="/src/data/changeLog.json"/>
+                更新日志首页
             </div>
         )
     }

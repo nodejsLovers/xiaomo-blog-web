@@ -4,7 +4,7 @@ import {Router, Route, IndexRoute, browserHistory} from "react-router";
 import App from "./../app";
 import indexChangeLog from "../components/changeLog/IndexChangeLogComponent";
 import IndexBlog from "../components/blog/IndexBlogComponent";
-import indexAbout from "../components/about/IndexAboutComponent";
+import IndexAboutAbout from "../components/about/IndexAboutComponent";
 import IndexComponent from "../components/index/IndexComponent";
 import NotMatch from "../components/common/NotMatchComponent";
 import DevTools from "./DevTools";
@@ -18,7 +18,7 @@ export default class Root extends Component {
                     <IndexRoute component={IndexComponent}/>
                     <Route path='/blog' component={IndexBlog}/>
                     <Route path='/changeLog' component={indexChangeLog}/>
-                    <Route path='/about' component={indexAbout}/>
+                    <Route path='/about' component={IndexAboutAbout}/>
                     <Route path='/login' component={indexChangeLog}/>
                     <Route path='/register' component={IndexComponent}/>
                     <Route path="*" component={NotMatch}/>

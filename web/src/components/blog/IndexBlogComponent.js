@@ -13,8 +13,7 @@
  * @Copyright(©) 2015 by xiaomo.
  **/
 
-import React, {Component} from "react";
-import Blog from "../blog/BlogComponent";
+import {Component} from "react";
 import {Breadcrumb, Icon} from "antd";
 
 export default class IndexBlog extends Component {
@@ -34,9 +33,7 @@ export default class IndexBlog extends Component {
                         应用
                     </Breadcrumb.Item>
                 </Breadcrumb>
-                <Blog/>
             </div>
         )
     }
-
 }
