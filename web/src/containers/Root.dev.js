@@ -6,6 +6,8 @@ import indexChangeLog from "../components/changeLog/IndexChangeLogComponent";
 import IndexBlog from "../components/blog/IndexBlogComponent";
 import IndexAboutAbout from "../components/about/IndexAboutComponent";
 import IndexComponent from "../components/index/IndexComponent";
+import IndexLogin from "../components/login/IndexLoginComponent";
+import IndexRegister from "../components/register/IndexRegisterComponent";
 import NotMatch from "../components/common/NotMatchComponent";
 import DevTools from "./DevTools";
 
@@ -19,8 +21,8 @@ export default class Root extends Component {
                     <Route path='/blog' component={IndexBlog}/>
                     <Route path='/changeLog' component={indexChangeLog}/>
                     <Route path='/about' component={IndexAboutAbout}/>
-                    <Route path='/login' component={indexChangeLog}/>
-                    <Route path='/register' component={IndexComponent}/>
+                    <Route path='/login' component={IndexLogin}/>
+                    <Route path='/register' component={IndexRegister}/>
                     <Route path="*" component={NotMatch}/>
                 </Route>
             </Router>
