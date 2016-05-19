@@ -12,13 +12,15 @@
     * @Description:
     * @Copyright(©) 2015 by xiaomo.
     **/
-export default function counterReducer(state = 0, action) {
+import * as types from "../constants/ActionTypes";
+
+export default function counter(state = 0, action) {
     switch (action.type) {
-        case 'INCREMENT':
+        case types.INCREMENT_COUNTER:
             return state + 1;
-        case 'DECREMENT':
+        case types.DECREMENT_COUNTER:
             return state - 1;
         default:
-            return state
+            return state;
     }
 }

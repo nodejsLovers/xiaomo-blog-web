@@ -1,8 +1,13 @@
 import React, {Component} from "react";
 import {Provider} from "react-redux";
 import {Router, Route, IndexRoute, browserHistory} from "react-router";
+import App from "./../app";
+import indexChangeLog from "../components/changeLog/IndexChangeLogComponent";
+import IndexBlog from "../components/blog/IndexBlogComponent";
+import indexAbout from "../components/about/IndexAboutComponent";
+import IndexComponent from "../components/index/IndexComponent";
+import NotMatch from "../components/common/NotMatchComponent";
 import DevTools from "./DevTools";
-import App from "../app";
 
 export default class Root extends Component {
 
@@ -10,6 +15,12 @@ export default class Root extends Component {
         var components = (
             <Router history={browserHistory}>
                 <Route path="/" component={App}>
+                    <IndexRoute component={IndexComponent}/>
+                    <Route path='/blog' component={IndexBlog}/>
+                    <Route path='/changeLog' component={indexChangeLog}/>
+                    <Route path='/about' component={indexAbout}/>
+                    <Route path='/login' component={indexChangeLog}/>
+                    <Route path='/register' component={IndexComponent}/>
                     <Route path="*" component={NotMatch}/>
                 </Route>
             </Router>

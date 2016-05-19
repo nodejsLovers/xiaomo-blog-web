@@ -8,25 +8,22 @@
  * @github: https://github.com/qq83387856
  * @email: hupengbest@163.com
  * @QQ_NO: 83387856
- * @Date: 2016/5/18 16:30
- * @Description:
+ * @Date: 2016/3/8 17:55
+ * @Description: footer
  * @Copyright(©) 2015 by xiaomo.
  **/
+import React, { PropTypes, Component } from 'react';
 
-import {Component} from "react";
-import {Link, IndexLink} from "react-router";
-import "./styles/style.scss";
-import Navbar from "./components/common/NavbarComponent";
-
-export default class App extends Component {
+export default class NotMatch extends Component {
 
 
     render() {
         return (
             <div>
-                <Navbar source='/src/data/menu.json'/>
-                {this.props.children}
+                404
             </div>
         );
     }
+
+
 }

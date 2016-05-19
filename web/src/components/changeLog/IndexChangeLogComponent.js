@@ -8,25 +8,21 @@
  * @github: https://github.com/qq83387856
  * @email: hupengbest@163.com
  * @QQ_NO: 83387856
- * @Date: 2016/5/18 16:30
- * @Description:
+ * @Date: 2016/3/8 17:24
+ * @Description: 导航
  * @Copyright(©) 2015 by xiaomo.
  **/
 
-import {Component} from "react";
-import {Link, IndexLink} from "react-router";
-import "./styles/style.scss";
-import Navbar from "./components/common/NavbarComponent";
+import React, {Component} from "react";
+import ChangeLog from "./ChangeLogComponent";
 
-export default class App extends Component {
-
-
+export default class IndexChangeLog extends Component {
     render() {
         return (
-            <div>
-                <Navbar source='/src/data/menu.json'/>
-                {this.props.children}
+            <div class="container">
+                <ChangeLog source="/src/data/changeLog.json"/>
             </div>
-        );
+        )
     }
+
 }
