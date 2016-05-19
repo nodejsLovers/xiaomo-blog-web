@@ -14,7 +14,6 @@
  **/
 
 import {Component} from 'react';
-import "antd/dist/antd.css";
 import './styles/style.scss';
 import Root from './containers/Root';
 
