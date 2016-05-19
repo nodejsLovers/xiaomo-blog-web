@@ -16,13 +16,14 @@
 import {Component} from 'react';
 import "antd/dist/antd.css";
 import './styles/style.scss';
+import Root from './containers/Root';
 
 export default class App extends Component {
 
     render() {
         return (
             <div>
-                <button className="btn btn-info">小莫</button>
+                <Root/>
             </div>
         );
     }
