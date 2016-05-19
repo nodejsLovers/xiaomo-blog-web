@@ -27,6 +27,7 @@
  * @Copyright(©) 2015 by xiaomo.
  **/
 var webpack = require('webpack');
+var path = require('path');
 var htmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var copyWebpackPlugin = require('copy-webpack-plugin');
@@ -84,10 +85,10 @@ module.exports = {
     plugins: [
         new htmlWebpackPlugin({
             template: './src/public/index.html',
-            inject: 'body',
-            chunks:[
-                'react','react-dom'
-            ]
+            inject: 'body'
+            // chunks:[
+            //     'react','react-dom'
+            // ]
         }),
         new copyWebpackPlugin([
             {
@@ -124,4 +125,5 @@ module.exports = {
         extensions: ['', '.js', '.json']
     },
     devtool: false
-};
+}
+;
