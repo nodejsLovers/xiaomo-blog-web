@@ -93,23 +93,14 @@ module.exports = {
                 from: __dirname + '/src/static'
             }
         ]),
-        new copyWebpackPlugin([
-            {
-                from: __dirname + '/node_modules/react/dist/react.js'
-            }
-        ]),
-        new copyWebpackPlugin([
-            {
-                from: __dirname + '/node_modules/react-dom/dist/react-dom.js'
-            }
-        ]),
         new webpack.HotModuleReplacementPlugin(),
         new extraTextWebpackPlugin(
             '[hash].bundle.css'
         ),
         new webpack.ProvidePlugin({
-            react: 'react',
-            reactDOM: 'reactDOM'
+            React: 'react',
+            ReactDOM: 'react-dom',
+            fetch: 'imports?this=>global!exports?global.fetch!isomorphic-fetch'
         })
     ],
     postcss: [autoprefixer({
@@ -122,11 +113,10 @@ module.exports = {
         noInfo: false,
         inline: true
     },
-    externals:{
-        'react':'React',
-        'react-dom':'ReactDOM',
-        'fetch': 'imports?this=>global!exports?global.fetch!isomorphic-fetch'
-    },
+    // externals: {
+    //     'react': 'React',
+    //     'react-dom': 'ReactDOM'
+    // },
     resolve: {
         extensions: ['', '.js', '.json']
     }

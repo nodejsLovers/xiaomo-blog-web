@@ -13,15 +13,19 @@
  * @Copyright(©) 2015 by xiaomo.
  **/
 
-import React, {Component} from "react";
-import ReactDOM from "react-dom";
-
+import {Component} from 'react';
+import "antd/dist/antd.css";
 import './styles/style.scss';
 
-class MyApp extends Component {
+export default class App extends Component {
+
     render() {
-        return <button className="btn btn-success">So Beautiful</button>
+        return (
+            <div>
+                <button className="btn btn-info">小莫</button>
+            </div>
+        );
     }
 }
 
-ReactDOM.render(<MyApp/>, document.getElementById('app'));
+ReactDOM.render(<App/>, document.getElementById('app'));
