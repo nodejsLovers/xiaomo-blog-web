@@ -1,7 +1,7 @@
 {
   "name": "xiaomo-web",
   "version": "1.0.0",
-  "description": "",
+  "description": "小莫的博客",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
@@ -11,9 +11,9 @@
     "test": "karma start",
     "test-watch": "karma start --auto-watch --no-single-run"
   },
-  "keywords": [],
+  "keywords": ["blog","xiaomo","react"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.8.0",
